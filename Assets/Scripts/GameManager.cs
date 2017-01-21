@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
 		public float dividedPoints;
 	}
 	public int deathTime = 5;
+	public int invulnTime = 2;
 
 	public MatchResults redPointsScored(int pointsScored)
 	{
@@ -268,75 +269,102 @@ public class GameManager : MonoBehaviour
 
 	public IEnumerator deadPlayerIEnumerator(GameObject deadPlayer, int time)
 	{
-		
-		deadPlayer.SetActive (false);
+		if (deadPlayer.GetComponent<ShipColor> ().isInvulnerable == false) 
+		{
+			deadPlayer.SetActive (false);
 
-		//If player 1 is who died
-		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1) 
-		{
-			tempColor = p1Color;
-			p1Color = PlayerColor.Dead;
-		}
-		//If player 2
-		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2) 
-		{
-			tempColor = p2Color;
-			p2Color = PlayerColor.Dead;
-		}
-		//If player 3
-		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3) 
-		{
-			tempColor = p3Color;
-			p3Color = PlayerColor.Dead;
-		}
-		//If player 4
-		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4) 
-		{
-			tempColor = p4Color;
-			p4Color = PlayerColor.Dead;
-		}
-		//wait the timer
-		for(int i = time; i >= 0; i--)
-		{
-			//update time left on UI
-			yield return new WaitForSeconds (1); 
+			//If player 1 is who died
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1) {
+				tempColor = p1Color;
+				p1Color = PlayerColor.Dead;
+			}
+			//If player 2
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2) {
+				tempColor = p2Color;
+				p2Color = PlayerColor.Dead;
+			}
+			//If player 3
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3) {
+				tempColor = p3Color;
+				p3Color = PlayerColor.Dead;
+			}
+			//If player 4
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4) {
+				tempColor = p4Color;
+				p4Color = PlayerColor.Dead;
+			}
+			//wait the timer
+			for (int i = time; i >= 0; i--) {
+				//update time left on UI
+				yield return new WaitForSeconds (1); 
+			}
+
+			//If player 1 is who died
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1) {
+				deadPlayer.SetActive (true);
+				deadPlayer.GetComponent<Transform> ().position = northSpawnPoint.GetComponent<Transform> ().position;
+				p1Color = tempColor;
+				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
+				for (int i = invulnTime; i > 0; i--) 
+				{
+					yield return new WaitForSeconds (1); 
+				}
+				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
+			}
+
+			//If player 2
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2) {
+				deadPlayer.SetActive (true);
+				deadPlayer.GetComponent<Transform> ().position = eastSpawnPoint.GetComponent<Transform> ().position;
+				p2Color = tempColor;
+				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
+				for (int i = invulnTime; i > 0; i--) 
+				{
+					yield return new WaitForSeconds (1); 
+				}
+				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
+
+			}
+
+			//If player 3
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3) {
+				deadPlayer.SetActive (true);
+				deadPlayer.GetComponent<Transform> ().position = westSpawnPoint.GetComponent<Transform> ().position;
+				p3Color = tempColor;
+				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
+				for (int i = invulnTime; i > 0; i--) 
+				{
+					yield return new WaitForSeconds (1); 
+				}
+				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
+			}
+
+			//If player 4
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4) {
+				deadPlayer.SetActive (true);
+				deadPlayer.GetComponent<Transform> ().position = southSpawnPoint.GetComponent<Transform> ().position;
+				p4Color = tempColor;
+				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
+				for (int i = invulnTime; i > 0; i--) 
+				{
+					yield return new WaitForSeconds (1); 
+				}
+				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
+			}
+			//reactiviate the player and set their color back to what it was.
+
 		}
 
-		//If player 1 is who died
-		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1) 
-		{
-			deadPlayer.SetActive (true);
-			p1Color = tempColor;
-		}
 
-		//If player 2
-		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2) 
-		{
-			deadPlayer.SetActive (true);
-			p2Color = tempColor;
-		}
-
-		//If player 3
-		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3) 
-		{
-			deadPlayer.SetActive (true);
-			p3Color = tempColor;
-		}
-
-		//If player 4
-		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4) 
-		{
-			deadPlayer.SetActive (true);
-			p4Color = tempColor;
-		}
-		deadPlayer.SetActive (true);
-		//reactiviate the player and set their color back to what it was.
 
 
 
 
 	}
-
+	//public void testRadius(GameObject testObject)
+	//{
+		//Collider[] hitColliders = Physics.OverlapSphere(testObject.GetComponent<Transform>();
+	//}
 	public void KillPlayer(GameObject playerShip)
 	{
 		StartCoroutine(deadPlayerIEnumerator(playerShip, deathTime));
@@ -521,16 +549,19 @@ public class GameManager : MonoBehaviour
 			if (Input.GetKeyDown (KeyCode.Alpha2)) 
 			{
 				greenPointsScored (1200);
+				KillPlayer (p2Ship);
 			}
 
 			if (Input.GetKeyDown (KeyCode.Alpha3)) 
 			{
 				bluePointsScored (1200);
+				KillPlayer (p3Ship);
 			}
 
 			if (Input.GetKeyDown (KeyCode.Alpha4)) 
 			{
 				yellowPointsScored (1200);
+				KillPlayer (p4Ship);
 			}
 		}
 
