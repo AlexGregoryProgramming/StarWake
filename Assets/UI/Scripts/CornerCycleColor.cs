@@ -24,7 +24,7 @@ public class CornerCycleColor : MonoBehaviour {
 	{
 		cycleSpeed = speed;
 		SwitchColor (initial);
-		DisableParticles ();
+		//DisableParticles ();
 	}
 
 	public void DisableParticles()

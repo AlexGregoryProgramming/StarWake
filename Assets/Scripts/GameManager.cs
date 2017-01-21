@@ -335,8 +335,15 @@ public class GameManager : MonoBehaviour
 
 
 
-	}
 
+
+
+
+	}
+	//public void testRadius(GameObject testObject)
+	//{
+		//Collider[] hitColliders = Physics.OverlapSphere(testObject.GetComponent<Transform>();
+	//}
 	public void KillPlayer(GameObject playerShip)
 	{
 		StartCoroutine(deadPlayerIEnumerator(playerShip, deathTime));
