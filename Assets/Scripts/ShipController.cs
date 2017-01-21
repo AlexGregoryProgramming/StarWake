@@ -2,10 +2,14 @@
 
 public class ShipController : MonoBehaviour
 {
-    public float moveSensitivity = 3.0f;
+    public float movementSpeed = 1.5f;
 
-    string RightStickHorizontalAxis = "RightStickHorizontal";
-    string RightStickVerticalAxis = "RightStickVertical";
+    public float rotationSpeed = 3.0f;
+
+    private float lastHeading = 0.0f;
+
+    string LeftStickHorizontalAxis = "P1LeftStickHorizontal";
+    string LeftStickVerticalAxis = "P1LeftStickVertical";
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -13,10 +17,7 @@ public class ShipController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        if (Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor) {
-            RightStickHorizontalAxis = "RightStickHorizontalOSX";
-            RightStickVerticalAxis = "RightStickVerticalOSX";
-        }
+        transform.forward = Vector3.up;
     }
 
     /// <summary>
@@ -24,9 +25,12 @@ public class ShipController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        float lh = Input.GetAxis(RightStickHorizontalAxis);
-        float lv = Input.GetAxis(RightStickVerticalAxis);
+        float lh = Input.GetAxis(LeftStickHorizontalAxis);
+        float lv = Input.GetAxis(LeftStickVerticalAxis);
+        float heading = Mathf.Atan2(-lh, lv);
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, heading * Mathf.Rad2Deg);
 
-        transform.position += new Vector3(lh, lv, 0f).normalized * moveSensitivity * Time.deltaTime;
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        transform.position += transform.up * movementSpeed * Time.deltaTime;
     }
 }
