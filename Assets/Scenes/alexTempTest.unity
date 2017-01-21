@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 156562281}
   m_Layer: 0
   m_Name: SpawnPointEast
-  m_TagString: Untagged
+  m_TagString: eastSpawnPoint
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,13 +112,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 156562280}
-  m_LocalRotation: {x: 0.6532815, y: -0.27059805, z: 0.27059802, w: 0.6532815}
-  m_LocalPosition: {x: 0.5, y: -7.07, z: 1.9}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.16, y: -7.07, z: 3.43}
   m_LocalScale: {x: 25.283388, y: 25.283405, z: 0.5626828}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 180}
 --- !u!1 &169679056
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,15 +240,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490f4039d1fb28145b0fba76cd695216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  northSpawnPoint: {fileID: 1768972726}
-  westSpawnPoint: {fileID: 1429952255}
-  southSpawnPoint: {fileID: 1946929089}
-  eastSpawnPoint: {fileID: 156562280}
-  wavesSelected: 0
-  wavesLeft: 0
+  northSpawnPoint: {fileID: 0}
+  eastSpawnPoint: {fileID: 0}
+  southSpawnPoint: {fileID: 0}
+  westSpawnPoint: {fileID: 0}
+  p1Ship: {fileID: 0}
+  p2Ship: {fileID: 0}
+  p3Ship: {fileID: 0}
+  p4Ship: {fileID: 0}
+  spawnPointArray: []
+  p1Wins: 0
+  p2Wins: 0
+  p3Wins: 0
+  p4Wins: 0
+  winnerFound: 0
+  winsNeeded: 0
+  p1Color: 0
+  p2Color: 0
+  p3Color: 0
+  p4Color: 0
+  p1Score: 0
+  p2Score: 0
+  p3Score: 0
+  p4Score: 0
+  incrementalPoints: 12
+  matchResults:
+    p1Match: 0
+    p2Match: 0
+    p3Match: 0
+    p4Match: 0
+    dividedPoints: 0
   gameState: 0
   countDownTextObject: {fileID: 0}
-  countDownTimerStart: 5
+  countdownTimerLength: 5
   countDownTimer: 0
   gameTimeTextObject: {fileID: 0}
   roundTime: 5
@@ -487,7 +511,7 @@ GameObject:
   - component: {fileID: 1429952256}
   m_Layer: 0
   m_Name: SpawnPointWest
-  m_TagString: Untagged
+  m_TagString: westSpawnPoint
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -498,13 +522,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1429952255}
-  m_LocalRotation: {x: 0.6532815, y: -0.27059805, z: 0.27059802, w: 0.6532815}
-  m_LocalPosition: {x: 1, y: -7.1, z: -20.7}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.76, y: -7.1, z: -22.23}
   m_LocalScale: {x: 25.283388, y: 25.283405, z: 0.5626828}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 180}
 --- !u!1 &1720604133
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +770,7 @@ GameObject:
   - component: {fileID: 1768972727}
   m_Layer: 0
   m_Name: SpawnPointNorth
-  m_TagString: Untagged
+  m_TagString: northSpawnPoint
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -757,13 +781,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1768972726}
-  m_LocalRotation: {x: 0.6532815, y: -0.27059805, z: 0.27059802, w: 0.6532815}
-  m_LocalPosition: {x: -10.2, y: -7.1, z: -10.3}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: -13.04, y: -7.1, z: -10.7}
   m_LocalScale: {x: 25.283388, y: 25.283405, z: 0.5626828}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 180}
 --- !u!1 &1946929089
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +798,7 @@ GameObject:
   - component: {fileID: 1946929090}
   m_Layer: 0
   m_Name: SpawnPointSouth
-  m_TagString: Untagged
+  m_TagString: southSpawnPoint
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -785,10 +809,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1946929089}
-  m_LocalRotation: {x: 0.6532815, y: -0.27059805, z: 0.27059802, w: 0.6532815}
-  m_LocalPosition: {x: 13.6, y: -7.07, z: -10}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 12.97, y: -7.07, z: -9.57}
   m_LocalScale: {x: 25.283388, y: 25.283405, z: 0.5626828}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 180}

@@ -8,7 +8,17 @@ public class GameManager : MonoBehaviour
 
 	public static GameManager _GAMEMANAGER = null; 
 
+	public GameObject northSpawnPoint;
+	public GameObject eastSpawnPoint;
+	public GameObject southSpawnPoint;
+	public GameObject westSpawnPoint;
 
+	public GameObject p1Ship;
+	public GameObject p2Ship;
+	public GameObject p3Ship;
+	public GameObject p4Ship;
+
+	public GameObject[] spawnPointArray;
 
 	public int p1Wins;
 	public int p2Wins;
@@ -253,6 +263,12 @@ public class GameManager : MonoBehaviour
 		return matchResults;
 	}
 
+	//public IEnumerator deadPlayer(GameObject deadPlayer)
+//	{
+		
+//	}
+	//public void KillPlayer(GameObject playerShip)
+//	{}
 
 	public GameState gameState;
 
@@ -294,16 +310,32 @@ public class GameManager : MonoBehaviour
 	//The big middle screen countdown, also resets the round score
 	public IEnumerator CountdownStart(int time)
 	{
+		northSpawnPoint = GameObject.FindGameObjectWithTag ("northSpawnPoint");
+		eastSpawnPoint = GameObject.FindGameObjectWithTag ("eastSpawnPoint");
+		southSpawnPoint = GameObject.FindGameObjectWithTag ("southSpawnPoint");
+		westSpawnPoint = GameObject.FindGameObjectWithTag ("westSpawnPoint");
+		spawnPointArray [0] = GameObject.FindGameObjectWithTag ("northSpawnPoint");
+		spawnPointArray [1] = GameObject.FindGameObjectWithTag ("eastSpawnPoint");
+		spawnPointArray [2] = GameObject.FindGameObjectWithTag ("southSpawnPoint");
+		spawnPointArray [3] = GameObject.FindGameObjectWithTag ("westSpawnPoint");
 		p1Score = 0;
 		p2Score = 0;
 		p3Score = 0;
 		p4Score = 0;
+
+		Instantiate (p1Ship, northSpawnPoint.GetComponent<Transform> ().position, northSpawnPoint.GetComponent<Transform> ().rotation);
+		Instantiate (p2Ship, eastSpawnPoint.GetComponent<Transform> ().position, eastSpawnPoint.GetComponent<Transform> ().rotation);
+		Instantiate (p3Ship, southSpawnPoint.GetComponent<Transform> ().position, southSpawnPoint.GetComponent<Transform> ().rotation);
+		Instantiate (p4Ship, westSpawnPoint.GetComponent<Transform> ().position, westSpawnPoint.GetComponent<Transform> ().rotation);
+
+
 		for (int i = time; i >= 0; i--) 
 		{
 			countDownTextObject.text = i.ToString();
 			print (countDownTimer);
 			countDownTimer -= 1;
 			yield return new WaitForSeconds (1);
+
 		}
 		countDownTextObject.text = "";
 		gameState = GameState.CoinGameModeStart;
@@ -396,6 +428,7 @@ public class GameManager : MonoBehaviour
 		if (gameState == GameState.CoinGameModeStart) 
 		{
 			gameTimeTextObject = GameObject.FindGameObjectWithTag ("GameTimeText").GetComponent<Text>();
+
 			StartCoroutine (CoinGameModeStart (roundTime));
 
 			gameState = GameState.CoinGameMode;

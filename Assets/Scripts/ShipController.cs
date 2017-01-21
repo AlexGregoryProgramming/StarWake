@@ -2,6 +2,7 @@
 
 public class ShipController : MonoBehaviour
 {
+
     public float movementSpeed = 1.5f;
 
     public float rotationSpeed = 3.0f;
@@ -17,7 +18,13 @@ public class ShipController : MonoBehaviour
     /// </summary>
     void Start()
     {
+		float lh = Input.GetAxis (LeftStickHorizontalAxis);
+		float lv = Input.GetAxis (LeftStickVerticalAxis);
+		heading = Mathf.Atan2 (-lh, lv);
+		Quaternion targetRotation = Quaternion.Euler (0f, 0f, heading * Mathf.Rad2Deg);
+
         transform.forward = Vector3.up;
+		transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
 
     /// <summary>
