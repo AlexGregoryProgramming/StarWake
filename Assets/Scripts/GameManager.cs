@@ -1,11 +1,112 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour 
 {
 
 	public static GameManager _GAMEMANAGER = null; 
+
+	List<GameObject> spawnPointList = new List<GameObject>();
+	public GameObject northSpawnPoint;
+	public GameObject westSpawnPoint;
+	public GameObject southSpawnPoint;
+	public GameObject eastSpawnPoint;
+
+	public int p1Wins;
+	public int p2Wins;
+	public int p3Wins;
+	public int p4Wins;
+
+	//Game info
+	public int wavesSelected;
+	public int wavesLeft;
+
+	public enum GameState {MainMenu, CountdownStart, Countdown, CoinGameModeStart, CoinGameMode, EndOfRoundResults, EndOfGameResults}
+	public GameState gameState;
+
+	//Countdown stuff
+	public Text countDownTextObject;
+	public int countdownTimerLength = 5;
+	public int countDownTimer;
+
+	//Game time stuff
+	public Text gameTimeTextObject;
+	public int roundTime = 5;
+	public int playTimer;
+
+
+	public GameObject endRoundButton;
+
+	public void setCountdownStart()
+	{
+		gameState = GameState.CountdownStart;
+	}
+
+	public void resetScores()
+	{
+		p1Wins = 0;
+		p2Wins = 0;
+		p3Wins = 0;
+		p4Wins = 0;
+	}
+	public void endResults()
+	{
+		wavesLeft -= 1;
+		gameState = GameState.CountdownStart;
+		UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTempTest");
+	}
+
+	public IEnumerator CountdownStart(int time)
+	{
+
+		for (int i = time; i >= 0; i--) 
+		{
+			countDownTextObject.text = i.ToString();
+			print (countDownTimer);
+			countDownTimer -= 1;
+			yield return new WaitForSeconds (1);
+		}
+		countDownTextObject.text = "";
+		gameState = GameState.CoinGameModeStart;
+
+	}
+
+	public IEnumerator CoinGameModeStart(int time)
+	{
+		for(int i = time; i >= 0; i--)
+			{
+			gameTimeTextObject.text = i.ToString();
+			yield return new WaitForSeconds (1); 
+			}
+		//Temporary Random Player winning:
+
+		int tempWinner = Random.Range (1, 5);
+
+		if (tempWinner == 1) 
+		{
+			p1Wins++;
+		}
+
+		if (tempWinner == 2) 
+		{
+			p2Wins++;
+		}
+
+		if (tempWinner == 3) 
+		{
+			p3Wins++;
+		}
+
+		if (tempWinner == 4) 
+		{
+			p4Wins++;
+		}
+		gameState = GameState.EndOfRoundResults;
+	}
+
+
 
 	void Awake()
 	{
@@ -27,12 +128,83 @@ public class GameManager : MonoBehaviour
 	}
 
 
-		void Start () {
-		
+	void Start () 
+	{
+		spawnPointList.Add (northSpawnPoint);
+		spawnPointList.Add (westSpawnPoint);
+		spawnPointList.Add (southSpawnPoint);
+		spawnPointList.Add (eastSpawnPoint);
+		gameState = GameState.MainMenu;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update () 
+	{
+		if (gameState == GameState.MainMenu) 
+		{
+			
+		}
+
+		if (gameState == GameState.CountdownStart) 
+		{
+			countDownTextObject = GameObject.FindGameObjectWithTag ("CountdownText").GetComponent<Text>();
+			StartCoroutine (CountdownStart (countdownTimerLength));
+
+			gameState = GameState.Countdown;
+		}
+
+		if (gameState == GameState.CoinGameModeStart) 
+		{
+			gameTimeTextObject = GameObject.FindGameObjectWithTag ("GameTimeText").GetComponent<Text>();
+			StartCoroutine (CoinGameModeStart (roundTime));
+
+			gameState = GameState.CoinGameMode;
+		}
+
+		if (gameState == GameState.CoinGameMode) 
+		{
+
+		}
+
+		if (gameState == GameState.EndOfRoundResults) 
+		{
+			gameTimeTextObject.text = "P1: " + p1Wins + " P2: " + p2Wins + " P3: " + p3Wins + " P4: " + p4Wins;
+			if (wavesLeft != 0 && Input.GetKeyDown (KeyCode.Space)) 
+			{
+				endResults ();
+			}
+			if(wavesLeft == 0 && Input.GetKeyDown (KeyCode.Space)) 
+			{
+				gameState = GameState.EndOfGameResults;
+			}
+		}
+
+		if (gameState == GameState.EndOfGameResults) 
+		{
+			if (p1Wins > p2Wins && p1Wins > p3Wins && p1Wins > p4Wins) 
+			{
+				gameTimeTextObject.text = "Player 1 Wins!";
+			}
+
+			if (p2Wins > p1Wins && p2Wins > p3Wins && p2Wins > p4Wins) 
+			{
+				gameTimeTextObject.text = "Player 2 Wins!";
+			}
+
+			if (p3Wins > p2Wins && p3Wins > p1Wins && p3Wins > p4Wins) 
+			{
+				gameTimeTextObject.text = "Player 2 Wins!";
+			}
+
+			if (p4Wins > p2Wins && p4Wins > p3Wins && p4Wins > p1Wins) 
+			{
+				gameTimeTextObject.text = "Player 4 Wins!";
+			}
+
+			if(Input.GetKeyDown (KeyCode.Space)) 
+			{
+				UnityEngine.SceneManagement.SceneManager.LoadScene ("alexTestMainMenu");
+			}
+		}
 	}
 }
