@@ -8,11 +8,7 @@ public class GameManager : MonoBehaviour
 
 	public static GameManager _GAMEMANAGER = null; 
 
-	List<GameObject> spawnPointList = new List<GameObject>();
-	public GameObject northSpawnPoint;
-	public GameObject westSpawnPoint;
-	public GameObject southSpawnPoint;
-	public GameObject eastSpawnPoint;
+
 
 	public int p1Wins;
 	public int p2Wins;
@@ -22,7 +18,242 @@ public class GameManager : MonoBehaviour
 	//Game info
 	public int winsNeeded;
 
-	public enum GameState {MainMenu, CountdownStart, Countdown, CoinGameModeStart, CoinGameMode, EndOfRoundResults, EndOfGameResults}
+	public enum GameState {MainMenu, CountdownStart, Countdown, CoinGameModeStart, CoinGameMode, EndOfRoundResults, EndOfGameResultsStart, EndOfGameResults}
+
+	//Player color info
+	public enum PlayerColor {Red, Blue, Green, Yellow}
+	public PlayerColor p1Color;
+	public PlayerColor p2Color;
+	public PlayerColor p3Color;
+	public PlayerColor p4Color;
+
+	//The color of the points earned
+
+	//Player Score info
+	public float p1Score;
+	public float p2Score;
+	public float p3Score;
+	public float p4Score;
+	public int incrementalPoints = 12;
+	public MatchResults matchResults;
+	//Data for drawing the points split
+	[System.Serializable]
+	public class MatchResults
+	{
+		public bool p1Match;
+		public bool p2Match;
+		public bool p3Match;
+		public bool p4Match;
+		public float dividedPoints;
+	}
+
+
+
+
+	public MatchResults redPointsScored(int pointsScored)
+	{
+
+		int scoringPlayers = 0;
+
+		if (p1Color == PlayerColor.Red) 
+		{
+			scoringPlayers++;
+			matchResults.p1Match = true;
+		}
+		if (p2Color == PlayerColor.Red) 
+		{
+			scoringPlayers++;
+			matchResults.p2Match = true;
+		}
+		if (p3Color == PlayerColor.Red) 
+		{
+			scoringPlayers++;
+			matchResults.p3Match = true;
+		}
+		if (p4Color == PlayerColor.Red) 
+		{
+			scoringPlayers++;
+			matchResults.p4Match = true;
+		}
+
+		if (p1Color == PlayerColor.Red) 
+		{
+			p1Score += (pointsScored / scoringPlayers);
+		}
+		if (p2Color == PlayerColor.Red) 
+		{
+			p2Score += (pointsScored / scoringPlayers);
+		}
+		if (p3Color == PlayerColor.Red) 
+		{
+			p3Score += (pointsScored / scoringPlayers);
+		}
+		if (p4Color == PlayerColor.Red) 
+		{
+			p4Score += (pointsScored / scoringPlayers);
+		}
+
+		if (scoringPlayers != 0) 
+		{
+			matchResults.dividedPoints = pointsScored / scoringPlayers;
+		}
+
+		return matchResults;
+	}
+
+	public MatchResults greenPointsScored(int pointsScored)
+	{
+
+		int scoringPlayers = 0;
+
+		if (p1Color == PlayerColor.Green) 
+		{
+			scoringPlayers++;
+			matchResults.p1Match = true;
+		}
+		if (p2Color == PlayerColor.Green) 
+		{
+			scoringPlayers++;
+			matchResults.p2Match = true;
+		}
+		if (p3Color == PlayerColor.Green) 
+		{
+			scoringPlayers++;
+			matchResults.p3Match = true;
+		}
+		if (p4Color == PlayerColor.Green) 
+		{
+			scoringPlayers++;
+			matchResults.p4Match = true;
+		}
+
+		if (p1Color == PlayerColor.Green) 
+		{
+			p1Score += (pointsScored / scoringPlayers);
+		}
+		if (p2Color == PlayerColor.Green) 
+		{
+			p2Score += (pointsScored / scoringPlayers);
+		}
+		if (p3Color == PlayerColor.Green) 
+		{
+			p3Score += (pointsScored / scoringPlayers);
+		}
+		if (p4Color == PlayerColor.Green) 
+		{
+			p4Score += (pointsScored / scoringPlayers);
+		}
+
+		if (scoringPlayers != 0) 
+		{
+			matchResults.dividedPoints = pointsScored / scoringPlayers;
+		}
+		return matchResults;
+	}
+
+	public MatchResults bluePointsScored(int pointsScored)
+	{
+
+		int scoringPlayers = 0;
+
+		if (p1Color == PlayerColor.Blue) 
+		{
+			scoringPlayers++;
+			matchResults.p1Match = true;
+		}
+		if (p2Color == PlayerColor.Blue) 
+		{
+			scoringPlayers++;
+			matchResults.p2Match = true;
+		}
+		if (p3Color == PlayerColor.Blue) 
+		{
+			scoringPlayers++;
+			matchResults.p3Match = true;
+		}
+		if (p4Color == PlayerColor.Blue) 
+		{
+			scoringPlayers++;
+			matchResults.p4Match = true;
+		}
+
+		if (p1Color == PlayerColor.Blue) 
+		{
+			p1Score += (pointsScored / scoringPlayers);
+		}
+		if (p2Color == PlayerColor.Blue) 
+		{
+			p2Score += (pointsScored / scoringPlayers);
+		}
+		if (p3Color == PlayerColor.Blue) 
+		{
+			p3Score += (pointsScored / scoringPlayers);
+		}
+		if (p4Color == PlayerColor.Blue) 
+		{
+			p4Score += (pointsScored / scoringPlayers);
+		}
+
+		if (scoringPlayers != 0) 
+		{
+			matchResults.dividedPoints = pointsScored / scoringPlayers;
+		}
+		return matchResults;
+	}
+
+
+	public MatchResults yellowPointsScored(int pointsScored)
+	{
+
+		int scoringPlayers = 0;
+
+		if (p1Color == PlayerColor.Yellow) 
+		{
+			scoringPlayers++;
+			matchResults.p1Match = true;
+		}
+		if (p2Color == PlayerColor.Yellow) 
+		{
+			scoringPlayers++;
+			matchResults.p2Match = true;
+		}
+		if (p3Color == PlayerColor.Yellow) 
+		{
+			scoringPlayers++;
+			matchResults.p3Match = true;
+		}
+		if (p4Color == PlayerColor.Yellow) 
+		{
+			scoringPlayers++;
+			matchResults.p4Match = true;
+		}
+
+		if (p1Color == PlayerColor.Yellow) 
+		{
+			p1Score += (pointsScored / scoringPlayers);
+		}
+		if (p2Color == PlayerColor.Yellow) 
+		{
+			p2Score += (pointsScored / scoringPlayers);
+		}
+		if (p3Color == PlayerColor.Yellow) 
+		{
+			p3Score += (pointsScored / scoringPlayers);
+		}
+		if (p4Color == PlayerColor.Yellow) 
+		{
+			p4Score += (pointsScored / scoringPlayers);
+		}
+
+		if (scoringPlayers != 0) 
+		{
+			matchResults.dividedPoints = pointsScored / scoringPlayers;
+		}
+
+		return matchResults;
+	}
+
+
 	public GameState gameState;
 
 	//Countdown stuff
@@ -38,11 +269,13 @@ public class GameManager : MonoBehaviour
 
 	public GameObject endRoundButton;
 
+	//Sets the state to countdownStart
 	public void setCountdownStart()
 	{
 		gameState = GameState.CountdownStart;
 	}
 
+	//A function to reset the wins of all the players between games
 	public void resetScores()
 	{
 		p1Wins = 0;
@@ -50,15 +283,21 @@ public class GameManager : MonoBehaviour
 		p3Wins = 0;
 		p4Wins = 0;
 	}
+
+	//Reset to a new round after showing round results
 	public void endResults()
 	{
 		gameState = GameState.CountdownStart;
 		UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTempTest");
 	}
 
+	//The big middle screen countdown, also resets the round score
 	public IEnumerator CountdownStart(int time)
 	{
-
+		p1Score = 0;
+		p2Score = 0;
+		p3Score = 0;
+		p4Score = 0;
 		for (int i = time; i >= 0; i--) 
 		{
 			countDownTextObject.text = i.ToString();
@@ -71,40 +310,47 @@ public class GameManager : MonoBehaviour
 
 	}
 
+	//The game timer countdown
 	public IEnumerator CoinGameModeStart(int time)
 	{
 		for(int i = time; i >= 0; i--)
 			{
 			gameTimeTextObject.text = i.ToString();
+			redPointsScored (incrementalPoints);
+			bluePointsScored(incrementalPoints);
+			greenPointsScored(incrementalPoints);
+			yellowPointsScored(incrementalPoints);
 			yield return new WaitForSeconds (1); 
 			}
 		//Temporary Random Player winning:
 
-		int tempWinner = Random.Range (1, 5);
-
-		if (tempWinner == 1) 
+		if (p1Score > p2Score && p1Score > p3Score && p1Score > p4Score) 
 		{
 			p1Wins++;
 		}
 
-		if (tempWinner == 2) 
+		if (p2Score > p1Score && p2Score > p3Score && p2Score > p4Score) 
 		{
 			p2Wins++;
 		}
 
-		if (tempWinner == 3) 
+		if (p3Score > p2Score && p3Score > p1Score && p3Score > p4Score) 
 		{
 			p3Wins++;
 		}
 
-		if (tempWinner == 4) 
+		if (p4Score > p2Score && p4Score > p3Score && p4Score > p1Score) 
 		{
 			p4Wins++;
 		}
 		gameState = GameState.EndOfRoundResults;
 	}
 
-
+	public IEnumerator EndOfGameDelay()
+	{
+		yield return new WaitForSeconds (1);
+		gameState = GameState.EndOfGameResults;
+	}
 
 	void Awake()
 	{
@@ -128,10 +374,6 @@ public class GameManager : MonoBehaviour
 
 	void Start () 
 	{
-		spawnPointList.Add (northSpawnPoint);
-		spawnPointList.Add (westSpawnPoint);
-		spawnPointList.Add (southSpawnPoint);
-		spawnPointList.Add (eastSpawnPoint);
 		gameState = GameState.MainMenu;
 	}
 	
@@ -161,7 +403,25 @@ public class GameManager : MonoBehaviour
 
 		if (gameState == GameState.CoinGameMode) 
 		{
+			if (Input.GetKeyDown (KeyCode.Alpha1)) 
+			{
+				redPointsScored (1200);
+			}
 
+			if (Input.GetKeyDown (KeyCode.Alpha2)) 
+			{
+				greenPointsScored (1200);
+			}
+
+			if (Input.GetKeyDown (KeyCode.Alpha3)) 
+			{
+				bluePointsScored (1200);
+			}
+
+			if (Input.GetKeyDown (KeyCode.Alpha4)) 
+			{
+				yellowPointsScored (1200);
+			}
 		}
 
 		if (gameState == GameState.EndOfRoundResults) 
@@ -177,8 +437,14 @@ public class GameManager : MonoBehaviour
 			}
 			if(winnerFound == true && Input.GetKeyDown (KeyCode.Space)) 
 			{
-				gameState = GameState.EndOfGameResults;
+				gameState = GameState.EndOfGameResultsStart;
+				StartCoroutine(EndOfGameDelay());
 			}
+		}
+
+		if (gameState == GameState.EndOfGameResultsStart) 
+		{
+			
 		}
 
 		if (gameState == GameState.EndOfGameResults) 
