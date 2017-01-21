@@ -6,7 +6,7 @@ public class ShipController : MonoBehaviour
 
     public float rotationSpeed = 3.0f;
 
-    private float lastHeading = 0.0f;
+    private float heading = 0.0f;
 
     string LeftStickHorizontalAxis = "P1LeftStickHorizontal";
     string LeftStickVerticalAxis = "P1LeftStickVertical";
@@ -27,9 +27,11 @@ public class ShipController : MonoBehaviour
     {
         float lh = Input.GetAxis(LeftStickHorizontalAxis);
         float lv = Input.GetAxis(LeftStickVerticalAxis);
-        float heading = Mathf.Atan2(-lh, lv);
-        Quaternion targetRotation = Quaternion.Euler(0f, 0f, heading * Mathf.Rad2Deg);
+        if ((lh != 0) || (lv != 0)) {
+            heading = Mathf.Atan2(-lh, lv);
+        }
 
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, heading * Mathf.Rad2Deg);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         transform.position += transform.up * movementSpeed * Time.deltaTime;
     }
