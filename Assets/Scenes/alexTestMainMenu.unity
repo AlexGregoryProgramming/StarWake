@@ -1315,6 +1315,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490f4039d1fb28145b0fba76cd695216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northSpawnPoint: {fileID: 0}
+  eastSpawnPoint: {fileID: 0}
+  southSpawnPoint: {fileID: 0}
+  westSpawnPoint: {fileID: 0}
+  p1Ship: {fileID: 1115052283618870, guid: 1c3266fe4d63f1441aaa990542893a01, type: 2}
+  p2Ship: {fileID: 1297258521499668, guid: d1205da4be927c242b62a86b71bbe671, type: 2}
+  p3Ship: {fileID: 1948024899770760, guid: e5b2724165cf75d4e9ff5e0918edf003, type: 2}
+  p4Ship: {fileID: 1411809338686572, guid: a1faf6701caec08499876a3c2bd18f84, type: 2}
+  spawnPointArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   p1Wins: 0
   p2Wins: 0
   p3Wins: 0
