@@ -12,6 +12,7 @@ TagManager:
   - southSpawnPoint
   - westSpawnPoint
   - VectorGrid
+  - inGameUI
   layers:
   - Default
   - TransparentFX

@@ -18,10 +18,10 @@ public class GameUI : MonoBehaviour {
 	//Images for updating the UI
 	public void Awake()
 	{
-		corners [0].Initialize (red, cycleSpeed);
-		corners [1].Initialize (green, cycleSpeed);
+		corners [0].Initialize (yellow, cycleSpeed);
+		corners [1].Initialize (red, cycleSpeed);
 		corners [2].Initialize (blue, cycleSpeed);
-		corners [3].Initialize (yellow, cycleSpeed);
+		corners [3].Initialize (green, cycleSpeed);
 	}
 
 	public void UpdateColor(int player, GameManager.PlayerColor color)

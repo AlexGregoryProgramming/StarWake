@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 	private PlayerColor tempColor;
 	public static GameManager _GAMEMANAGER = null; 
 
+	public GameObject UIObject;
+
 	public GameObject northSpawnPoint;
 	public GameObject eastSpawnPoint;
 	public GameObject southSpawnPoint;
@@ -93,18 +95,22 @@ public class GameManager : MonoBehaviour
 		if (p1Color == PlayerColor.Red) 
 		{
 			p1Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
 		}
 		if (p2Color == PlayerColor.Red) 
 		{
 			p2Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
 		}
 		if (p3Color == PlayerColor.Red) 
 		{
 			p3Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
 		}
 		if (p4Color == PlayerColor.Red) 
 		{
 			p4Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
 		}
 
 		if (scoringPlayers != 0) 
@@ -144,18 +150,22 @@ public class GameManager : MonoBehaviour
 		if (p1Color == PlayerColor.Green) 
 		{
 			p1Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
 		}
 		if (p2Color == PlayerColor.Green) 
 		{
 			p2Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
 		}
 		if (p3Color == PlayerColor.Green) 
 		{
 			p3Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
 		}
 		if (p4Color == PlayerColor.Green) 
 		{
 			p4Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
 		}
 
 		if (scoringPlayers != 0) 
@@ -194,18 +204,22 @@ public class GameManager : MonoBehaviour
 		if (p1Color == PlayerColor.Blue) 
 		{
 			p1Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
 		}
 		if (p2Color == PlayerColor.Blue) 
 		{
 			p2Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
 		}
 		if (p3Color == PlayerColor.Blue) 
 		{
 			p3Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
 		}
 		if (p4Color == PlayerColor.Blue) 
 		{
 			p4Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
 		}
 
 		if (scoringPlayers != 0) 
@@ -245,18 +259,22 @@ public class GameManager : MonoBehaviour
 		if (p1Color == PlayerColor.Yellow) 
 		{
 			p1Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
 		}
 		if (p2Color == PlayerColor.Yellow) 
 		{
 			p2Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
 		}
 		if (p3Color == PlayerColor.Yellow) 
 		{
 			p3Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
 		}
 		if (p4Color == PlayerColor.Yellow) 
 		{
 			p4Score += (pointsScored / scoringPlayers);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
 		}
 
 		if (scoringPlayers != 0) 
@@ -274,22 +292,22 @@ public class GameManager : MonoBehaviour
 			deadPlayer.SetActive (false);
 
 			//If player 1 is who died
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1) {
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1 && p1Color != PlayerColor.Dead) {
 				tempColor = p1Color;
 				p1Color = PlayerColor.Dead;
 			}
 			//If player 2
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2) {
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2 && p2Color != PlayerColor.Dead) {
 				tempColor = p2Color;
 				p2Color = PlayerColor.Dead;
 			}
 			//If player 3
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3) {
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3 && p3Color != PlayerColor.Dead) {
 				tempColor = p3Color;
 				p3Color = PlayerColor.Dead;
 			}
 			//If player 4
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4) {
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4 && p4Color != PlayerColor.Dead) {
 				tempColor = p4Color;
 				p4Color = PlayerColor.Dead;
 			}
@@ -410,6 +428,7 @@ public class GameManager : MonoBehaviour
 	//The big middle screen countdown, also resets the round score
 	public IEnumerator CountdownStart(int time)
 	{
+		UIObject = GameObject.FindGameObjectWithTag ("inGameUI");
 		northSpawnPoint = GameObject.FindGameObjectWithTag ("northSpawnPoint");
 		eastSpawnPoint = GameObject.FindGameObjectWithTag ("eastSpawnPoint");
 		southSpawnPoint = GameObject.FindGameObjectWithTag ("southSpawnPoint");
@@ -451,11 +470,16 @@ public class GameManager : MonoBehaviour
 	{
 		for(int i = time; i >= 0; i--)
 			{
-			gameTimeTextObject.text = i.ToString();
+			UIObject.GetComponent<GameUI> ().UpdateTimer ((float)i);
 			redPointsScored (incrementalPoints);
 			bluePointsScored(incrementalPoints);
 			greenPointsScored(incrementalPoints);
 			yellowPointsScored(incrementalPoints);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
+			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
+
 			yield return new WaitForSeconds (1); 
 			}
 		//Temporary Random Player winning:
