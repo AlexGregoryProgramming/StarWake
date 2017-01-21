@@ -1206,22 +1206,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490f4039d1fb28145b0fba76cd695216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  northSpawnPoint: {fileID: 0}
-  westSpawnPoint: {fileID: 0}
-  southSpawnPoint: {fileID: 0}
-  eastSpawnPoint: {fileID: 0}
   p1Wins: 0
   p2Wins: 0
   p3Wins: 0
   p4Wins: 0
   winnerFound: 0
   winsNeeded: 0
+  p1Color: 3
+  p2Color: 0
+  p3Color: 1
+  p4Color: 2
+  p1Score: 0
+  p2Score: 0
+  p3Score: 0
+  p4Score: 0
+  incrementalPoints: 12
+  matchResults:
+    p1Match: 0
+    p2Match: 0
+    p3Match: 0
+    p4Match: 0
+    dividedPoints: 0
   gameState: 0
   countDownTextObject: {fileID: 0}
   countdownTimerLength: 3
   countDownTimer: 0
   gameTimeTextObject: {fileID: 0}
-  roundTime: 1
+  roundTime: 5
   playTimer: 0
   endRoundButton: {fileID: 0}
 --- !u!4 &1631302551
