@@ -4,7 +4,6 @@ public class ShipController : MonoBehaviour
 {
 
     public float movementSpeed = 1.5f;
-
     public float rotationSpeed = 3.0f;
 
     private float heading = 0.0f;

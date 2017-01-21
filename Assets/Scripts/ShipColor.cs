@@ -7,6 +7,9 @@ public class ShipColor : MonoBehaviour {
 
 	public float cooldownTimeAmount = 3.0f;
 	public float cooldownTimer = 0.0f;
+
+	public bool isInvulnerable = false;
+
 	public GameObject Prims;
 
 	public Material GreenPrism;
