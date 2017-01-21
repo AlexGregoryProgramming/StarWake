@@ -5,13 +5,18 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour 
 {
-
+	private PlayerColor tempColor;
 	public static GameManager _GAMEMANAGER = null; 
 
 	public GameObject northSpawnPoint;
 	public GameObject eastSpawnPoint;
 	public GameObject southSpawnPoint;
 	public GameObject westSpawnPoint;
+
+	public GameObject p1ShipPrefab;
+	public GameObject p2ShipPrefab;
+	public GameObject p3ShipPrefab;
+	public GameObject p4ShipPrefab;
 
 	public GameObject p1Ship;
 	public GameObject p2Ship;
@@ -56,9 +61,7 @@ public class GameManager : MonoBehaviour
 		public bool p4Match;
 		public float dividedPoints;
 	}
-
-
-
+	public int deathTime = 5;
 
 	public MatchResults redPointsScored(int pointsScored)
 	{
@@ -263,12 +266,81 @@ public class GameManager : MonoBehaviour
 		return matchResults;
 	}
 
-	//public IEnumerator deadPlayer(GameObject deadPlayer)
-//	{
+	public IEnumerator deadPlayerIEnumerator(GameObject deadPlayer, int time)
+	{
 		
-//	}
-	//public void KillPlayer(GameObject playerShip)
-//	{}
+		deadPlayer.SetActive (false);
+
+		//If player 1 is who died
+		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1) 
+		{
+			tempColor = p1Color;
+			p1Color = PlayerColor.Dead;
+		}
+		//If player 2
+		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2) 
+		{
+			tempColor = p2Color;
+			p2Color = PlayerColor.Dead;
+		}
+		//If player 3
+		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3) 
+		{
+			tempColor = p3Color;
+			p3Color = PlayerColor.Dead;
+		}
+		//If player 4
+		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4) 
+		{
+			tempColor = p4Color;
+			p4Color = PlayerColor.Dead;
+		}
+		//wait the timer
+		for(int i = time; i >= 0; i--)
+		{
+			//update time left on UI
+			yield return new WaitForSeconds (1); 
+		}
+
+		//If player 1 is who died
+		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1) 
+		{
+			deadPlayer.SetActive (true);
+			p1Color = tempColor;
+		}
+
+		//If player 2
+		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2) 
+		{
+			deadPlayer.SetActive (true);
+			p2Color = tempColor;
+		}
+
+		//If player 3
+		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3) 
+		{
+			deadPlayer.SetActive (true);
+			p3Color = tempColor;
+		}
+
+		//If player 4
+		if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4) 
+		{
+			deadPlayer.SetActive (true);
+			p4Color = tempColor;
+		}
+		deadPlayer.SetActive (true);
+		//reactiviate the player and set their color back to what it was.
+
+
+
+
+	}
+
+	public void KillPlayer(GameObject playerShip)
+	{
+		StartCoroutine(deadPlayerIEnumerator(playerShip, deathTime));
+	}
 
 	public GameState gameState;
 
@@ -323,11 +395,15 @@ public class GameManager : MonoBehaviour
 		p3Score = 0;
 		p4Score = 0;
 
-		Instantiate (p1Ship, northSpawnPoint.GetComponent<Transform> ().position, northSpawnPoint.GetComponent<Transform> ().rotation);
-		Instantiate (p2Ship, eastSpawnPoint.GetComponent<Transform> ().position, eastSpawnPoint.GetComponent<Transform> ().rotation);
-		Instantiate (p3Ship, southSpawnPoint.GetComponent<Transform> ().position, southSpawnPoint.GetComponent<Transform> ().rotation);
-		Instantiate (p4Ship, westSpawnPoint.GetComponent<Transform> ().position, westSpawnPoint.GetComponent<Transform> ().rotation);
+		p1Ship = Instantiate (p1ShipPrefab, northSpawnPoint.GetComponent<Transform> ().position, northSpawnPoint.GetComponent<Transform> ().rotation);
+		p2Ship = Instantiate (p2ShipPrefab, eastSpawnPoint.GetComponent<Transform> ().position, eastSpawnPoint.GetComponent<Transform> ().rotation);
+		p3Ship = Instantiate (p3ShipPrefab, southSpawnPoint.GetComponent<Transform> ().position, southSpawnPoint.GetComponent<Transform> ().rotation);
+		p4Ship = Instantiate (p4ShipPrefab, westSpawnPoint.GetComponent<Transform> ().position, westSpawnPoint.GetComponent<Transform> ().rotation);
 
+		p1Ship.GetComponent<VectorGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
+		p2Ship.GetComponent<VectorGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
+		p3Ship.GetComponent<VectorGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
+		p4Ship.GetComponent<VectorGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
 
 		for (int i = time; i >= 0; i--) 
 		{
@@ -439,6 +515,7 @@ public class GameManager : MonoBehaviour
 			if (Input.GetKeyDown (KeyCode.Alpha1)) 
 			{
 				redPointsScored (1200);
+				KillPlayer (p1Ship);
 			}
 
 			if (Input.GetKeyDown (KeyCode.Alpha2)) 
@@ -485,6 +562,7 @@ public class GameManager : MonoBehaviour
 			if (p1Wins > p2Wins && p1Wins > p3Wins && p1Wins > p4Wins) 
 			{
 				gameTimeTextObject.text = "Player 1 Wins!";
+	
 			}
 
 			if (p2Wins > p1Wins && p2Wins > p3Wins && p2Wins > p4Wins) 
