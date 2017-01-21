@@ -18,10 +18,9 @@ public class GameManager : MonoBehaviour
 	public int p2Wins;
 	public int p3Wins;
 	public int p4Wins;
-
+	public bool winnerFound = false;
 	//Game info
-	public int wavesSelected;
-	public int wavesLeft;
+	public int winsNeeded;
 
 	public enum GameState {MainMenu, CountdownStart, Countdown, CoinGameModeStart, CoinGameMode, EndOfRoundResults, EndOfGameResults}
 	public GameState gameState;
@@ -53,7 +52,6 @@ public class GameManager : MonoBehaviour
 	}
 	public void endResults()
 	{
-		wavesLeft -= 1;
 		gameState = GameState.CountdownStart;
 		UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTempTest");
 	}
@@ -167,13 +165,17 @@ public class GameManager : MonoBehaviour
 		}
 
 		if (gameState == GameState.EndOfRoundResults) 
-		{
+		{	
+			if (p1Wins == winsNeeded || p2Wins == winsNeeded || p3Wins == winsNeeded || p4Wins == winsNeeded) 
+			{
+				winnerFound = true;
+			}
 			gameTimeTextObject.text = "P1: " + p1Wins + " P2: " + p2Wins + " P3: " + p3Wins + " P4: " + p4Wins;
-			if (wavesLeft != 0 && Input.GetKeyDown (KeyCode.Space)) 
+			if (winnerFound == false && Input.GetKeyDown (KeyCode.Space)) 
 			{
 				endResults ();
 			}
-			if(wavesLeft == 0 && Input.GetKeyDown (KeyCode.Space)) 
+			if(winnerFound == true && Input.GetKeyDown (KeyCode.Space)) 
 			{
 				gameState = GameState.EndOfGameResults;
 			}

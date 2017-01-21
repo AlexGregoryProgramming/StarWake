@@ -4,35 +4,47 @@ using UnityEngine;
 
 public class MainMenuButtonScrips : MonoBehaviour {
 
-	public void OneWaveButton()
+	public void OneWinsNeeded()
 	{
-		GameManager._GAMEMANAGER.wavesSelected = 1;
-		GameManager._GAMEMANAGER.wavesLeft = 1;
+		GameManager._GAMEMANAGER.winsNeeded = 1;
 		GameManager._GAMEMANAGER.setCountdownStart ();
 		GameManager._GAMEMANAGER.resetScores ();
+		GameManager._GAMEMANAGER.winnerFound = false;
 		UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTempTest");
 
 	}
 
-	public void FiveWaveButton()
+	public void TwoWinsNeeded()
 	{
-		GameManager._GAMEMANAGER.wavesSelected = 5;
-		GameManager._GAMEMANAGER.wavesLeft = 5;
+		GameManager._GAMEMANAGER.winsNeeded = 2;
 		GameManager._GAMEMANAGER.setCountdownStart ();
 		GameManager._GAMEMANAGER.resetScores ();
-		UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTempTest");
-
-	}	
-
-	public void NineWaveButton()
-	{
-		GameManager._GAMEMANAGER.wavesSelected = 9;
-		GameManager._GAMEMANAGER.wavesLeft = 9;
-		GameManager._GAMEMANAGER.setCountdownStart ();
-		GameManager._GAMEMANAGER.resetScores ();
+		GameManager._GAMEMANAGER.winnerFound = false;
 		UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTempTest");
 
 	}
+
+	public void ThreeWinsNeeded()
+	{
+		GameManager._GAMEMANAGER.winsNeeded = 3;
+		GameManager._GAMEMANAGER.setCountdownStart ();
+		GameManager._GAMEMANAGER.resetScores ();
+		GameManager._GAMEMANAGER.winnerFound = false;
+		UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTempTest");
+
+	}
+
+	public void FourWinsNeeded()
+	{
+		GameManager._GAMEMANAGER.winsNeeded = 4;
+		GameManager._GAMEMANAGER.setCountdownStart ();
+		GameManager._GAMEMANAGER.resetScores ();
+		GameManager._GAMEMANAGER.winnerFound = false;
+		UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTempTest");
+
+	}
+
+
 
 
 	// Use this for initialization
