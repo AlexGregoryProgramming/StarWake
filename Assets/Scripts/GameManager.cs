@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 	public enum GameState {MainMenu, CountdownStart, Countdown, CoinGameModeStart, CoinGameMode, EndOfRoundResults, EndOfGameResultsStart, EndOfGameResults}
 
 	//Player color info
-	public enum PlayerColor {Red, Blue, Green, Yellow}
+	public enum PlayerColor {Red, Blue, Green, Yellow, Dead}
 	public PlayerColor p1Color;
 	public PlayerColor p2Color;
 	public PlayerColor p3Color;
