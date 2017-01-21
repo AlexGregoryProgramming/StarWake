@@ -11,6 +11,7 @@ TagManager:
   - eastSpawnPoint
   - southSpawnPoint
   - westSpawnPoint
+  - VectorGrid
   layers:
   - Default
   - TransparentFX

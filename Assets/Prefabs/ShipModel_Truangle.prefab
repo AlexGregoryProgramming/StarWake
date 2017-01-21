@@ -36,6 +36,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4483800959678922}
+  - component: {fileID: 114922551911649778}
+  - component: {fileID: 114979733358324690}
   m_Layer: 0
   m_Name: ShipModel_Truangle
   m_TagString: Untagged
@@ -84,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411809338686572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.74171, y: -8.003546, z: 2.6637821}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4990505392220068}
@@ -145,7 +147,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4bdb4060678b2344cbff989e7ff640a7, type: 2}
+  - {fileID: 2100000, guid: efacc7b59dbde9a4c933c8984e70032d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -246,3 +248,40 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1234632421107634}
   m_Mesh: {fileID: 4300000, guid: 4734a43857e3feb4cac9764fdecf18aa, type: 2}
+--- !u!114 &114922551911649778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1411809338686572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5829c43aaa8b44a439851d265f512f79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNumber: 3
+  cooldownTimeAmount: 3
+  cooldownTimer: 0
+  Prims: {fileID: 0}
+  GreenPrism: {fileID: 0}
+  RedPrism: {fileID: 0}
+  BluePrism: {fileID: 0}
+  YellowPrism: {fileID: 0}
+--- !u!114 &114979733358324690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1411809338686572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8001c0b333b214cf6819aa35fc6da60a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_VectorGrid: {fileID: 0}
+  m_ForceScale: 0.3
+  m_Directional: 0
+  m_ForceDirection: {x: 0, y: 0, z: 0}
+  m_Radius: 0
+  m_Color: {r: 0.06637919, g: 0, b: 0.875, a: 1}
+  m_HasColor: 0
