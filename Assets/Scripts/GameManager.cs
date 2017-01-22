@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour 
+public class GameManager : MonoBehaviour
 {
 	public float deathExplosionRadius;
 	public float deathExplosionForce;
 
 	private PlayerColor tempColor;
-	public static GameManager _GAMEMANAGER = null; 
+	public static GameManager _GAMEMANAGER = null;
 
 	public GameObject UIObject;
 
@@ -69,54 +69,71 @@ public class GameManager : MonoBehaviour
 	public int deathTime = 5;
 	public int invulnTime = 2;
 
+    public PlayerColor GetPlayerColor(int playerNumber)
+    {
+        switch (playerNumber) {
+            case 1:
+                return p1Color;
+            case 2:
+                return p2Color;
+            case 3:
+                return p3Color;
+            case 4:
+                return p4Color;
+
+            default:
+                return PlayerColor.Dead;
+        }
+    }
+
 	public MatchResults redPointsScored(int pointsScored)
 	{
 
 		int scoringPlayers = 0;
 
-		if (p1Color == PlayerColor.Red) 
+		if (p1Color == PlayerColor.Red)
 		{
 			scoringPlayers++;
 			matchResults.p1Match = true;
 		}
-		if (p2Color == PlayerColor.Red) 
+		if (p2Color == PlayerColor.Red)
 		{
 			scoringPlayers++;
 			matchResults.p2Match = true;
 		}
-		if (p3Color == PlayerColor.Red) 
+		if (p3Color == PlayerColor.Red)
 		{
 			scoringPlayers++;
 			matchResults.p3Match = true;
 		}
-		if (p4Color == PlayerColor.Red) 
+		if (p4Color == PlayerColor.Red)
 		{
 			scoringPlayers++;
 			matchResults.p4Match = true;
 		}
 
-		if (p1Color == PlayerColor.Red) 
+		if (p1Color == PlayerColor.Red)
 		{
 			p1Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
 		}
-		if (p2Color == PlayerColor.Red) 
+		if (p2Color == PlayerColor.Red)
 		{
 			p2Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
 		}
-		if (p3Color == PlayerColor.Red) 
+		if (p3Color == PlayerColor.Red)
 		{
 			p3Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
 		}
-		if (p4Color == PlayerColor.Red) 
+		if (p4Color == PlayerColor.Red)
 		{
 			p4Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
 		}
 
-		if (scoringPlayers != 0) 
+		if (scoringPlayers != 0)
 		{
 			matchResults.dividedPoints = pointsScored / scoringPlayers;
 		}
@@ -129,49 +146,49 @@ public class GameManager : MonoBehaviour
 
 		int scoringPlayers = 0;
 
-		if (p1Color == PlayerColor.Green) 
+		if (p1Color == PlayerColor.Green)
 		{
 			scoringPlayers++;
 			matchResults.p1Match = true;
 		}
-		if (p2Color == PlayerColor.Green) 
+		if (p2Color == PlayerColor.Green)
 		{
 			scoringPlayers++;
 			matchResults.p2Match = true;
 		}
-		if (p3Color == PlayerColor.Green) 
+		if (p3Color == PlayerColor.Green)
 		{
 			scoringPlayers++;
 			matchResults.p3Match = true;
 		}
-		if (p4Color == PlayerColor.Green) 
+		if (p4Color == PlayerColor.Green)
 		{
 			scoringPlayers++;
 			matchResults.p4Match = true;
 		}
 
-		if (p1Color == PlayerColor.Green) 
+		if (p1Color == PlayerColor.Green)
 		{
 			p1Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
 		}
-		if (p2Color == PlayerColor.Green) 
+		if (p2Color == PlayerColor.Green)
 		{
 			p2Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
 		}
-		if (p3Color == PlayerColor.Green) 
+		if (p3Color == PlayerColor.Green)
 		{
 			p3Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
 		}
-		if (p4Color == PlayerColor.Green) 
+		if (p4Color == PlayerColor.Green)
 		{
 			p4Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
 		}
 
-		if (scoringPlayers != 0) 
+		if (scoringPlayers != 0)
 		{
 			matchResults.dividedPoints = pointsScored / scoringPlayers;
 		}
@@ -183,49 +200,49 @@ public class GameManager : MonoBehaviour
 
 		int scoringPlayers = 0;
 
-		if (p1Color == PlayerColor.Blue) 
+		if (p1Color == PlayerColor.Blue)
 		{
 			scoringPlayers++;
 			matchResults.p1Match = true;
 		}
-		if (p2Color == PlayerColor.Blue) 
+		if (p2Color == PlayerColor.Blue)
 		{
 			scoringPlayers++;
 			matchResults.p2Match = true;
 		}
-		if (p3Color == PlayerColor.Blue) 
+		if (p3Color == PlayerColor.Blue)
 		{
 			scoringPlayers++;
 			matchResults.p3Match = true;
 		}
-		if (p4Color == PlayerColor.Blue) 
+		if (p4Color == PlayerColor.Blue)
 		{
 			scoringPlayers++;
 			matchResults.p4Match = true;
 		}
 
-		if (p1Color == PlayerColor.Blue) 
+		if (p1Color == PlayerColor.Blue)
 		{
 			p1Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
 		}
-		if (p2Color == PlayerColor.Blue) 
+		if (p2Color == PlayerColor.Blue)
 		{
 			p2Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
 		}
-		if (p3Color == PlayerColor.Blue) 
+		if (p3Color == PlayerColor.Blue)
 		{
 			p3Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
 		}
-		if (p4Color == PlayerColor.Blue) 
+		if (p4Color == PlayerColor.Blue)
 		{
 			p4Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
 		}
 
-		if (scoringPlayers != 0) 
+		if (scoringPlayers != 0)
 		{
 			matchResults.dividedPoints = pointsScored / scoringPlayers;
 		}
@@ -238,49 +255,49 @@ public class GameManager : MonoBehaviour
 
 		int scoringPlayers = 0;
 
-		if (p1Color == PlayerColor.Yellow) 
+		if (p1Color == PlayerColor.Yellow)
 		{
 			scoringPlayers++;
 			matchResults.p1Match = true;
 		}
-		if (p2Color == PlayerColor.Yellow) 
+		if (p2Color == PlayerColor.Yellow)
 		{
 			scoringPlayers++;
 			matchResults.p2Match = true;
 		}
-		if (p3Color == PlayerColor.Yellow) 
+		if (p3Color == PlayerColor.Yellow)
 		{
 			scoringPlayers++;
 			matchResults.p3Match = true;
 		}
-		if (p4Color == PlayerColor.Yellow) 
+		if (p4Color == PlayerColor.Yellow)
 		{
 			scoringPlayers++;
 			matchResults.p4Match = true;
 		}
 
-		if (p1Color == PlayerColor.Yellow) 
+		if (p1Color == PlayerColor.Yellow)
 		{
 			p1Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
 		}
-		if (p2Color == PlayerColor.Yellow) 
+		if (p2Color == PlayerColor.Yellow)
 		{
 			p2Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
 		}
-		if (p3Color == PlayerColor.Yellow) 
+		if (p3Color == PlayerColor.Yellow)
 		{
 			p3Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
 		}
-		if (p4Color == PlayerColor.Yellow) 
+		if (p4Color == PlayerColor.Yellow)
 		{
 			p4Score += (pointsScored / scoringPlayers);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
 		}
 
-		if (scoringPlayers != 0) 
+		if (scoringPlayers != 0)
 		{
 			matchResults.dividedPoints = pointsScored / scoringPlayers;
 		}
@@ -290,7 +307,7 @@ public class GameManager : MonoBehaviour
 
 	public IEnumerator deadPlayerIEnumerator(GameObject deadPlayer, int time)
 	{
-		if (deadPlayer.GetComponent<ShipColor> ().isInvulnerable == false) 
+		if (deadPlayer.GetComponent<ShipColor> ().isInvulnerable == false)
 		{
 			deadPlayer.SetActive (false);
 
@@ -324,7 +341,7 @@ public class GameManager : MonoBehaviour
 			//wait the timer
 			for (int i = time; i >= 0; i--) {
 				//update time left on UI
-				yield return new WaitForSeconds (1); 
+				yield return new WaitForSeconds (1);
 			}
 
 			//If player 1 is who died
@@ -333,9 +350,9 @@ public class GameManager : MonoBehaviour
 				deadPlayer.GetComponent<Transform> ().position = northSpawnPoint.GetComponent<Transform> ().position;
 				p1Color = tempColor;
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
-				for (int i = invulnTime; i > 0; i--) 
+				for (int i = invulnTime; i > 0; i--)
 				{
-					yield return new WaitForSeconds (1); 
+					yield return new WaitForSeconds (1);
 				}
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
 			}
@@ -346,9 +363,9 @@ public class GameManager : MonoBehaviour
 				deadPlayer.GetComponent<Transform> ().position = eastSpawnPoint.GetComponent<Transform> ().position;
 				p2Color = tempColor;
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
-				for (int i = invulnTime; i > 0; i--) 
+				for (int i = invulnTime; i > 0; i--)
 				{
-					yield return new WaitForSeconds (1); 
+					yield return new WaitForSeconds (1);
 				}
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
 
@@ -360,9 +377,9 @@ public class GameManager : MonoBehaviour
 				deadPlayer.GetComponent<Transform> ().position = westSpawnPoint.GetComponent<Transform> ().position;
 				p3Color = tempColor;
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
-				for (int i = invulnTime; i > 0; i--) 
+				for (int i = invulnTime; i > 0; i--)
 				{
-					yield return new WaitForSeconds (1); 
+					yield return new WaitForSeconds (1);
 				}
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
 			}
@@ -373,9 +390,9 @@ public class GameManager : MonoBehaviour
 				deadPlayer.GetComponent<Transform> ().position = southSpawnPoint.GetComponent<Transform> ().position;
 				p4Color = tempColor;
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
-				for (int i = invulnTime; i > 0; i--) 
+				for (int i = invulnTime; i > 0; i--)
 				{
-					yield return new WaitForSeconds (1); 
+					yield return new WaitForSeconds (1);
 				}
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
 			}
@@ -463,7 +480,7 @@ public class GameManager : MonoBehaviour
 		p3Ship.GetComponent<DirectionalGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
 		p4Ship.GetComponent<DirectionalGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
 
-		for (int i = time; i >= 0; i--) 
+		for (int i = time; i >= 0; i--)
 		{
 			countDownTextObject.text = i.ToString();
 			print (countDownTimer);
@@ -491,26 +508,26 @@ public class GameManager : MonoBehaviour
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
 			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
 
-			yield return new WaitForSeconds (1); 
+			yield return new WaitForSeconds (1);
 			}
 		//Temporary Random Player winning:
 
-		if (p1Score > p2Score && p1Score > p3Score && p1Score > p4Score) 
+		if (p1Score > p2Score && p1Score > p3Score && p1Score > p4Score)
 		{
 			p1Wins++;
 		}
 
-		if (p2Score > p1Score && p2Score > p3Score && p2Score > p4Score) 
+		if (p2Score > p1Score && p2Score > p3Score && p2Score > p4Score)
 		{
 			p2Wins++;
 		}
 
-		if (p3Score > p2Score && p3Score > p1Score && p3Score > p4Score) 
+		if (p3Score > p2Score && p3Score > p1Score && p3Score > p4Score)
 		{
 			p3Wins++;
 		}
 
-		if (p4Score > p2Score && p4Score > p3Score && p4Score > p1Score) 
+		if (p4Score > p2Score && p4Score > p3Score && p4Score > p1Score)
 		{
 			p4Wins++;
 		}
@@ -535,7 +552,7 @@ public class GameManager : MonoBehaviour
 		else if (_GAMEMANAGER != this)
 
 			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-			Destroy(gameObject);    
+			Destroy(gameObject);
 
 		//Sets this to not be destroyed when reloading scene
 		DontDestroyOnLoad(gameObject);
@@ -543,20 +560,20 @@ public class GameManager : MonoBehaviour
 	}
 
 
-	void Start () 
+	void Start ()
 	{
 		gameState = GameState.MainMenu;
 	}
-	
+
 	// Update is called once per frame
-	void Update () 
+	void Update ()
 	{
-		if (gameState == GameState.MainMenu) 
+		if (gameState == GameState.MainMenu)
 		{
-			
+
 		}
 
-		if (gameState == GameState.CountdownStart) 
+		if (gameState == GameState.CountdownStart)
 		{
 			countDownTextObject = GameObject.FindGameObjectWithTag ("CountdownText").GetComponent<Text>();
 			StartCoroutine (CountdownStart (countdownTimerLength));
@@ -564,7 +581,7 @@ public class GameManager : MonoBehaviour
 			gameState = GameState.Countdown;
 		}
 
-		if (gameState == GameState.CoinGameModeStart) 
+		if (gameState == GameState.CoinGameModeStart)
 		{
 			gameTimeTextObject = GameObject.FindGameObjectWithTag ("GameTimeText").GetComponent<Text>();
 
@@ -573,80 +590,80 @@ public class GameManager : MonoBehaviour
 			gameState = GameState.CoinGameMode;
 		}
 
-		if (gameState == GameState.CoinGameMode) 
+		if (gameState == GameState.CoinGameMode)
 		{
-			if (Input.GetKeyDown (KeyCode.Alpha1)) 
+			if (Input.GetKeyDown (KeyCode.Alpha1))
 			{
 				redPointsScored (1200);
 				KillPlayer (p1Ship);
 			}
 
-			if (Input.GetKeyDown (KeyCode.Alpha2)) 
+			if (Input.GetKeyDown (KeyCode.Alpha2))
 			{
 				greenPointsScored (1200);
 				KillPlayer (p2Ship);
 			}
 
-			if (Input.GetKeyDown (KeyCode.Alpha3)) 
+			if (Input.GetKeyDown (KeyCode.Alpha3))
 			{
 				bluePointsScored (1200);
 				KillPlayer (p3Ship);
 			}
 
-			if (Input.GetKeyDown (KeyCode.Alpha4)) 
+			if (Input.GetKeyDown (KeyCode.Alpha4))
 			{
 				yellowPointsScored (1200);
 				KillPlayer (p4Ship);
 			}
 		}
 
-		if (gameState == GameState.EndOfRoundResults) 
-		{	
-			if (p1Wins == winsNeeded || p2Wins == winsNeeded || p3Wins == winsNeeded || p4Wins == winsNeeded) 
+		if (gameState == GameState.EndOfRoundResults)
+		{
+			if (p1Wins == winsNeeded || p2Wins == winsNeeded || p3Wins == winsNeeded || p4Wins == winsNeeded)
 			{
 				winnerFound = true;
 			}
 			gameTimeTextObject.text = "P1: " + p1Wins + " P2: " + p2Wins + " P3: " + p3Wins + " P4: " + p4Wins;
-			if (winnerFound == false && Input.GetKeyDown (KeyCode.Space)) 
+			if (winnerFound == false && Input.GetKeyDown (KeyCode.Space))
 			{
 				endResults ();
 			}
-			if(winnerFound == true && Input.GetKeyDown (KeyCode.Space)) 
+			if(winnerFound == true && Input.GetKeyDown (KeyCode.Space))
 			{
 				gameState = GameState.EndOfGameResultsStart;
 				StartCoroutine(EndOfGameDelay());
 			}
 		}
 
-		if (gameState == GameState.EndOfGameResultsStart) 
+		if (gameState == GameState.EndOfGameResultsStart)
 		{
-			
+
 		}
 
-		if (gameState == GameState.EndOfGameResults) 
+		if (gameState == GameState.EndOfGameResults)
 		{
-			if (p1Wins > p2Wins && p1Wins > p3Wins && p1Wins > p4Wins) 
+			if (p1Wins > p2Wins && p1Wins > p3Wins && p1Wins > p4Wins)
 			{
 				gameTimeTextObject.text = "Player 1 Wins!";
-	
+
 			}
 
-			if (p2Wins > p1Wins && p2Wins > p3Wins && p2Wins > p4Wins) 
+			if (p2Wins > p1Wins && p2Wins > p3Wins && p2Wins > p4Wins)
 			{
 				gameTimeTextObject.text = "Player 2 Wins!";
 			}
 
-			if (p3Wins > p2Wins && p3Wins > p1Wins && p3Wins > p4Wins) 
+			if (p3Wins > p2Wins && p3Wins > p1Wins && p3Wins > p4Wins)
 			{
 				gameTimeTextObject.text = "Player 2 Wins!";
 			}
 
-			if (p4Wins > p2Wins && p4Wins > p3Wins && p4Wins > p1Wins) 
+			if (p4Wins > p2Wins && p4Wins > p3Wins && p4Wins > p1Wins)
 			{
 				gameTimeTextObject.text = "Player 4 Wins!";
 			}
 
-			if(Input.GetKeyDown (KeyCode.Space)) 
+			if(Input.GetKeyDown (KeyCode.Space))
 			{
 				UnityEngine.SceneManagement.SceneManager.LoadScene ("alexTestMainMenu");
 			}
