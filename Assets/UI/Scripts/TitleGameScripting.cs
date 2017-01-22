@@ -39,6 +39,8 @@ public class TitleGameScripting : MonoBehaviour {
 	public GameObject diamond;
 	public GameObject roundSelecter;
 	public GameObject tutorial;
+	public Image[] tutorialScreens;
+	private int currrentTut;
 
 	public enum MainMenuStates{
 		titlecenter,
@@ -244,27 +246,49 @@ public class TitleGameScripting : MonoBehaviour {
 			if(Input.GetKeyDown (KeyCode.Joystick1Button7) || Input.GetKeyDown (KeyCode.Joystick2Button7) || Input.GetKeyDown (KeyCode.Joystick3Button7) || Input.GetKeyDown (KeyCode.Joystick4Button7))
 			{
 				mystate = MainMenuStates.tutorial;
+				currrentTut = 1;
+				delay = 0;
 			}
 
 			if(Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
 			{
 				mystate = MainMenuStates.tutorial;
+				currrentTut = 1;
+				delay = 0;
 			}
 
 
 		} else if (mystate == MainMenuStates.tutorial) {
 			tutorial.SetActive (true);
 			//Press a to start match
-			if (Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0)) 
-			{
-				GameManager._GAMEMANAGER.winsNeeded = numRounds();
-				GameManager._GAMEMANAGER.resetScores ();
-				GameManager._GAMEMANAGER.setCountdownStart ();
-				GameManager._GAMEMANAGER.winnerFound = false;
-				UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTempTest");
+			if (delay < 1) {
+				delay += Time.deltaTime*2;
+				if (delay >= 1) {
+					delay = 1;
+				}
+				tutorialScreens [currrentTut - 1].color = new Color (1, 1, 1, delay);
+			} else {
+				if (Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0)) 
+				{
+					NextTutorialScreen ();
+				}
 			}
 		}
 
+	}
+
+	public void NextTutorialScreen()
+	{
+		if (currrentTut == 4) {
+			GameManager._GAMEMANAGER.winsNeeded = numRounds ();
+			GameManager._GAMEMANAGER.resetScores ();
+			GameManager._GAMEMANAGER.setCountdownStart ();
+			GameManager._GAMEMANAGER.winnerFound = false;
+			UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTempTest");
+		} else {
+			currrentTut += 1;
+			delay = 0;
+		}
 	}
 
 	public void AttachAllObjectsToParent()
