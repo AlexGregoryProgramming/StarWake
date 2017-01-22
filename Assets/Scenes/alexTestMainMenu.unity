@@ -1367,7 +1367,7 @@ MonoBehaviour:
     dividedPoints: 0
   pickupSpawner: {fileID: 0}
   deathTime: 2
-  invulnTime: 2
+  invulnTime: 1
   countdown: {fileID: 0}
   gameState: 0
   countDownTextObject: {fileID: 0}

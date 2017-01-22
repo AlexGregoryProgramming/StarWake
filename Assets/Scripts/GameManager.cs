@@ -539,7 +539,7 @@ public class GameManager : MonoBehaviour
 	{
 		for(int i = time; i >= 0; i--)
 			{
-			UIObject.GetComponent<GameUI> ().UpdateTimer ((float)i);
+			UIObject.GetComponent<GameUI> ().UpdateTimer (i.ToString());
 			redPointsScored (incrementalPoints);
 			bluePointsScored(incrementalPoints);
 			greenPointsScored(incrementalPoints);
@@ -556,21 +556,25 @@ public class GameManager : MonoBehaviour
 		if (p1Score > p2Score && p1Score > p3Score && p1Score > p4Score)
 		{
 			p1Wins++;
+			UIObject.GetComponent<GameUI> ().UpdateTimer ("Round Winner: P1");
 		}
 
 		if (p2Score > p1Score && p2Score > p3Score && p2Score > p4Score)
 		{
 			p2Wins++;
+			UIObject.GetComponent<GameUI> ().UpdateTimer ("Round Winner: P2");
 		}
 
 		if (p3Score > p2Score && p3Score > p1Score && p3Score > p4Score)
 		{
 			p3Wins++;
+			UIObject.GetComponent<GameUI> ().UpdateTimer ("Round Winner: P3");
 		}
 
 		if (p4Score > p2Score && p4Score > p3Score && p4Score > p1Score)
 		{
 			p4Wins++;
+			UIObject.GetComponent<GameUI> ().UpdateTimer ("Round Winner: P4");
 		}
 		gameState = GameState.EndOfRoundResults;
 	}
@@ -664,12 +668,12 @@ public class GameManager : MonoBehaviour
 			{
 				winnerFound = true;
 			}
-			gameTimeTextObject.text = "P1: " + p1Wins + " P2: " + p2Wins + " P3: " + p3Wins + " P4: " + p4Wins;
-			if (winnerFound == false && Input.GetKeyDown (KeyCode.Space))
+
+			if (winnerFound == false && Input.GetKeyDown (KeyCode.Joystick1Button0))
 			{
 				endResults ();
 			}
-			if(winnerFound == true && Input.GetKeyDown (KeyCode.Space))
+			if(winnerFound == true && Input.GetKeyDown (KeyCode.Joystick1Button0))
 			{
 				gameState = GameState.EndOfGameResultsStart;
 				StartCoroutine(EndOfGameDelay());

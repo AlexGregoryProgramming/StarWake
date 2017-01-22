@@ -61,9 +61,9 @@ public class GameUI : MonoBehaviour {
 		corners [player - 1].Score (score);
 	}
 
-	public void UpdateTimer(float time)
+	public void UpdateTimer(string time)
 	{
-		timer.text = string.Format("{0}", (double)time);
+		timer.text = time;
 	}
 	
 

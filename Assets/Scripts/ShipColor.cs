@@ -27,12 +27,16 @@ public class ShipColor : MonoBehaviour {
 	{
 		if (playerNumber == 1) {
 			ParticleColors (Color.yellow);
+			WakeParticles (Color.yellow);
 		} else if (playerNumber == 2) {
 			ParticleColors (Color.red);
+			WakeParticles (Color.red);
 		} else if (playerNumber == 3) {
 			ParticleColors (Color.blue);
+			WakeParticles (Color.blue);
 		} else if (playerNumber == 4) {
 			ParticleColors (Color.green);
+			WakeParticles (Color.green);
 		}
 	}
 	
