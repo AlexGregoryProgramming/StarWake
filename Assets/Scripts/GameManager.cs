@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 	public float deathExplosionRadius;
 	public float deathExplosionForce;
 
+	public VectorGrid gameGrid;
+
 	private PlayerColor tempColor;
 	public static GameManager _GAMEMANAGER = null;
 
@@ -474,6 +476,7 @@ public class GameManager : MonoBehaviour
 		p3Ship = Instantiate (p3ShipPrefab, southSpawnPoint.GetComponent<Transform> ().position, southSpawnPoint.GetComponent<Transform> ().rotation);
 		p4Ship = Instantiate (p4ShipPrefab, westSpawnPoint.GetComponent<Transform> ().position, westSpawnPoint.GetComponent<Transform> ().rotation);
 
+		gameGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
 		p1Ship.GetComponent<DirectionalGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
 		print ("test");
 		p2Ship.GetComponent<DirectionalGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
