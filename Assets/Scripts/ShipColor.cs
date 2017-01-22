@@ -18,6 +18,8 @@ public class ShipColor : MonoBehaviour {
 	public Material YellowPrism;
 
 	public ParticleSystem[]orbiterParticles;
+	public ParticleSystem wakeParticles;
+	public ParticleSystem wakeParticleBurst;
 	private bool particlesOn;
 
 	// Use this for initialization
@@ -51,6 +53,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Green);
 					DisableParticles ();
 					ParticleColors (Color.green);
+					WakeParticles (Color.green);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 
 				}
@@ -62,6 +65,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Red);
 					DisableParticles ();
 					ParticleColors (Color.red);
+					WakeParticles(Color.red);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 
 				}
@@ -73,6 +77,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Blue);
 					DisableParticles ();
 					ParticleColors (Color.blue);
+					WakeParticles(Color.blue);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick1Button3) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Yellow) {
@@ -83,6 +88,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Yellow);
 					DisableParticles ();
 					ParticleColors (Color.yellow);
+					WakeParticles(Color.yellow);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 			}
@@ -99,6 +105,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Green);
 					DisableParticles ();
 					ParticleColors (Color.green);
+					WakeParticles (Color.green);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick2Button1) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Red) {
@@ -109,6 +116,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Red);
 					DisableParticles ();
 					ParticleColors (Color.red);
+					WakeParticles(Color.red);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick2Button2) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Blue) {
@@ -119,6 +127,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Blue);
 					DisableParticles ();
 					ParticleColors (Color.blue);
+					WakeParticles(Color.blue);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick2Button3) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Yellow) {
@@ -129,6 +138,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Yellow);
 					DisableParticles ();
 					ParticleColors (Color.yellow);
+					WakeParticles(Color.yellow);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 			}
@@ -144,6 +154,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Green);
 					DisableParticles ();
 					ParticleColors (Color.green);
+					WakeParticles (Color.green);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick3Button1) && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Red) {
@@ -154,6 +165,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Red);
 					DisableParticles ();
 					ParticleColors (Color.red);
+					WakeParticles(Color.red);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick3Button2)  && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Blue) {
@@ -164,6 +176,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Blue);
 					DisableParticles ();
 					ParticleColors (Color.blue);
+					WakeParticles(Color.blue);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick3Button3) && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Yellow) {
@@ -174,6 +187,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Yellow);
 					DisableParticles ();
 					ParticleColors (Color.yellow);
+					WakeParticles(Color.yellow);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 			}
@@ -188,6 +202,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Green);
 					DisableParticles ();
 					ParticleColors (Color.green);
+					WakeParticles (Color.green);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick4Button1) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Red) {
@@ -197,6 +212,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Red);
 					DisableParticles ();
 					ParticleColors (Color.red);
+					WakeParticles(Color.red);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick4Button2) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Blue) {
@@ -206,6 +222,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Blue);
 					DisableParticles ();
 					ParticleColors (Color.blue);
+					WakeParticles(Color.blue);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick4Button3) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Yellow) {
@@ -215,6 +232,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Yellow);
 					DisableParticles ();
 					ParticleColors (Color.yellow);
+					WakeParticles(Color.yellow);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 			}
@@ -242,6 +260,29 @@ public class ShipColor : MonoBehaviour {
 			color1.startColor = Color.red;
 			color2.startColor = Color.green;
 			color3.startColor = Color.yellow;
+		}
+	}
+
+	public void WakeParticles(Color switchToMe)
+	{
+		var color1 = wakeParticles.main;
+		var color2 = wakeParticleBurst.main;
+		if (switchToMe == Color.green) {
+			color1.startColor = Color.green;
+			color2.startColor = Color.green;
+			wakeParticleBurst.Emit (100);
+		}else if(switchToMe == Color.red){
+			color1.startColor = Color.red;
+			color2.startColor = Color.red;
+			wakeParticleBurst.Emit (100);
+		}else if(switchToMe == Color.yellow){
+			color1.startColor = Color.yellow;
+			color2.startColor = Color.yellow;
+			wakeParticleBurst.Emit (100);
+		}else if(switchToMe == Color.blue){
+			color1.startColor = Color.blue;
+			color2.startColor = Color.blue;
+			wakeParticleBurst.Emit (100);
 		}
 	}
 
