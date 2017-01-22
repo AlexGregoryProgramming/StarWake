@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 144
-  fillTime: 8
+  fillTime: 10
   collectionForce: 0.6
   collectionRadius: 0.6
   pickUP: {fileID: 114699917825836224}
