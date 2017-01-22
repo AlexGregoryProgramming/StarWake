@@ -508,9 +508,13 @@ public class GameManager : MonoBehaviour
 		p4Score = 0;
 
 		p1Ship = Instantiate (p1ShipPrefab, northSpawnPoint.GetComponent<Transform> ().position, northSpawnPoint.GetComponent<Transform> ().rotation);
+        p1Ship.GetComponent<ShipController>().heading = northSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
 		p2Ship = Instantiate (p2ShipPrefab, eastSpawnPoint.GetComponent<Transform> ().position, eastSpawnPoint.GetComponent<Transform> ().rotation);
+        p2Ship.GetComponent<ShipController>().heading = eastSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
 		p3Ship = Instantiate (p3ShipPrefab, southSpawnPoint.GetComponent<Transform> ().position, southSpawnPoint.GetComponent<Transform> ().rotation);
+        p3Ship.GetComponent<ShipController>().heading = southSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
 		p4Ship = Instantiate (p4ShipPrefab, westSpawnPoint.GetComponent<Transform> ().position, westSpawnPoint.GetComponent<Transform> ().rotation);
+        p4Ship.GetComponent<ShipController>().heading = westSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
 
 		p1Manager = p1Ship.GetComponent<ShipGridManager> ();
 		p2Manager = p2Ship.GetComponent<ShipGridManager> ();
@@ -623,6 +627,11 @@ public class GameManager : MonoBehaviour
 			countDownTextObject = GameObject.FindGameObjectWithTag ("CountdownText").GetComponent<Text>();
 			StartCoroutine (CountdownStart (countdownTimerLength));
 
+            p1Ship.GetComponent<ShipController>().enabled = false;
+            p2Ship.GetComponent<ShipController>().enabled = false;
+            p3Ship.GetComponent<ShipController>().enabled = false;
+            p4Ship.GetComponent<ShipController>().enabled = false;
+
 			gameState = GameState.Countdown;
 		}
 
@@ -660,6 +669,14 @@ public class GameManager : MonoBehaviour
 				yellowPointsScored (1200);
 				KillPlayer (p4Ship);
 			}
+
+			if (Time.timeSinceLevelLoad > 8.1)
+			{
+                p1Ship.GetComponent<ShipController>().enabled = true;
+                p2Ship.GetComponent<ShipController>().enabled = true;
+                p3Ship.GetComponent<ShipController>().enabled = true;
+                p4Ship.GetComponent<ShipController>().enabled = true;
+            }
 		}
 
 		if (gameState == GameState.EndOfRoundResults)
