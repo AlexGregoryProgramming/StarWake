@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8c3e05d6f44a34985144f2a5ef7a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GridWidth: 62
-  m_GridHeight: 32
+  m_GridWidth: 50
+  m_GridHeight: 50
   m_GridScale: 0.1
   m_MaxFogDistance: 0.25
   m_MaxFogAlphaScale: 0.2
@@ -100,12 +100,12 @@ MonoBehaviour:
   m_RenderMode: 0
   m_VectorGridPointMass: 1
   m_VelocityDamping: 0.98
-  m_ThickLineSpawnColor: {r: 0, g: 0.6689658, b: 1, a: 1}
-  m_ThinLineSpawnColor: {r: 1, g: 1, b: 1, a: 0.5}
-  m_ThickLineWidth: 0.05
-  m_ThinLineWidth: 0.05
-  m_ThickLineSpacingX: 6
-  m_ThickLineSpacingY: 6
+  m_ThickLineSpawnColor: {r: 0, g: 0.8758622, b: 1, a: 0.297}
+  m_ThinLineSpawnColor: {r: 1, g: 1, b: 1, a: 0.053}
+  m_ThickLineWidth: 0.01
+  m_ThinLineWidth: 0.005
+  m_ThickLineSpacingX: 5
+  m_ThickLineSpacingY: 5
   m_SpringStiffness: 0.28
   m_SpringDamping: 0.06
   m_EdgeSpringStiffness: 0.1
