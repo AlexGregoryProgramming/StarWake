@@ -213,7 +213,7 @@ Material:
       second: 0
     - first:
         name: _V_WIRE_Size
-      second: 0.5
+      second: 0.1
     - first:
         name: _V_WIRE_Source_Options
       second: 0
@@ -259,7 +259,7 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
+      second: {r: 0, g: 1, b: 0.9586208, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 1, b: 0.006896496, a: 1}
@@ -268,7 +268,7 @@ Material:
       second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - first:
         name: _V_WIRE_Color
-      second: {r: 0, g: 0, b: 0, a: 1}
+      second: {r: 0, g: 0, b: 0, a: 0.484}
     - first:
         name: _V_WIRE_MainTex_Scroll
       second: {r: 0, g: 0, b: 0, a: 0}

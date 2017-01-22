@@ -213,7 +213,7 @@ Material:
       second: 0
     - first:
         name: _V_WIRE_Size
-      second: 1
+      second: 0.2
     - first:
         name: _V_WIRE_Source_Options
       second: 0
