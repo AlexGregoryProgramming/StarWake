@@ -30,15 +30,18 @@ public class ShipController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        float lh = Input.GetAxis(LeftStickHorizontalAxis);
-        float lv = Input.GetAxis(LeftStickVerticalAxis);
-        if ((lh != 0) || (lv != 0)) {
-            heading = Mathf.Atan2(-lh, lv);
-        }
+		if (GameManager._GAMEMANAGER.gameState == GameManager.GameState.CoinGameMode) 
+		{
+			float lh = Input.GetAxis (LeftStickHorizontalAxis);
+			float lv = Input.GetAxis (LeftStickVerticalAxis);
+			if ((lh != 0) || (lv != 0)) {
+				heading = Mathf.Atan2 (-lh, lv);
+			}
 
-        Quaternion targetRotation = Quaternion.Euler(0f, 0f, heading * Mathf.Rad2Deg);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-        Vector3 position = transform.up * movementSpeed * Time.deltaTime;
-        transform.position += new Vector3(position.x, position.y, 0.0f);
+			Quaternion targetRotation = Quaternion.Euler (0f, 0f, heading * Mathf.Rad2Deg);
+			transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+			Vector3 position = transform.up * movementSpeed * Time.deltaTime;
+			transform.position += new Vector3 (position.x, position.y, 0.0f);
+		}
     }
 }

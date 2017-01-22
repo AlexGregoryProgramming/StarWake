@@ -20,7 +20,7 @@ public class IntroCountdown : MonoBehaviour {
 	private int countdownCurrent;
 	private bool transitioning;
 	private bool start;
-	private bool end;
+	private bool end = true;
 	private bool final;
 	public float scaleSpeed;
 

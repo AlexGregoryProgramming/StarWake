@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
 	}
 	public int deathTime = 5;
 	public int invulnTime = 2;
-
+	public IntroCountdown countdown;
     public PlayerColor GetPlayerColor(int playerNumber)
     {
         switch (playerNumber) {
@@ -498,14 +498,16 @@ public class GameManager : MonoBehaviour
 
 		gameGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
 
-		for (int i = time; i >= 0; i--)
-		{
-			countDownTextObject.text = i.ToString();
-			print (countDownTimer);
-			countDownTimer -= 1;
-			yield return new WaitForSeconds (1);
+//		for (int i = time; i >= 0; i--)
+//		{
+//			countDownTextObject.text = i.ToString();
+//			print (countDownTimer);
+//			countDownTimer -= 1;
+//			yield return new WaitForSeconds (1);
+//
+//		}
 
-		}
+		yield return new WaitForSeconds (8);
 		countDownTextObject.text = "";
 		gameState = GameState.CoinGameModeStart;
 

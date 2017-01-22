@@ -14,6 +14,7 @@ TagManager:
   - VectorGrid
   - inGameUI
   - pickupSpawner
+  - countdown
   layers:
   - Default
   - TransparentFX
