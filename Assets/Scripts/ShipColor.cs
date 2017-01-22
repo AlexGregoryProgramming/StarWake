@@ -17,16 +17,29 @@ public class ShipColor : MonoBehaviour {
 	public Material BluePrism;
 	public Material YellowPrism;
 
+	public ParticleSystem[]orbiterParticles;
+	private bool particlesOn;
+
 	// Use this for initialization
 	void Start () 
 	{
-		
-		
+		if (playerNumber == 1) {
+			ParticleColors (Color.yellow);
+		} else if (playerNumber == 2) {
+			ParticleColors (Color.red);
+		} else if (playerNumber == 3) {
+			ParticleColors (Color.blue);
+		} else if (playerNumber == 4) {
+			ParticleColors (Color.green);
+		}
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		if (cooldownTimer <= Time.time) {
+			EnableParticles ();
+		}
 		if (GameManager._GAMEMANAGER.gameState == GameManager.GameState.CoinGameMode) {
 			if (playerNumber == 1 && cooldownTimer <= Time.time) 
 			{
@@ -36,7 +49,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Green;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color = Color.green;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Green);
-
+					DisableParticles ();
+					ParticleColors (Color.green);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick1Button1) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
@@ -44,6 +58,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Red;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.red;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Red);
+					DisableParticles ();
+					ParticleColors (Color.red);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick1Button2) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
@@ -51,6 +67,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Blue;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.blue;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Blue);
+					DisableParticles ();
+					ParticleColors (Color.blue);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick1Button3) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
@@ -58,6 +76,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Yellow;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.yellow;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Yellow);
+					DisableParticles ();
+					ParticleColors (Color.yellow);
 				}
 			}
 
@@ -71,6 +91,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Green;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.green;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Green);
+					DisableParticles ();
+					ParticleColors (Color.green);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick2Button1) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
@@ -78,6 +100,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Red;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.red;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Red);
+					DisableParticles ();
+					ParticleColors (Color.red);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick2Button2) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
@@ -85,6 +109,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Blue;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.blue;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Blue);
+					DisableParticles ();
+					ParticleColors (Color.blue);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick2Button3) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
@@ -92,6 +118,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Yellow;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.yellow;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Yellow);
+					DisableParticles ();
+					ParticleColors (Color.yellow);
 				}
 			}
 
@@ -104,6 +132,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Green;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.green;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Green);
+					DisableParticles ();
+					ParticleColors (Color.green);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick3Button1) && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
@@ -111,6 +141,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Red;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.red;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Red);
+					DisableParticles ();
+					ParticleColors (Color.red);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick3Button2)  && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
@@ -118,6 +150,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Blue;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.blue;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Blue);
+					DisableParticles ();
+					ParticleColors (Color.blue);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick3Button3) && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
@@ -125,6 +159,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Yellow;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.yellow;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Yellow);
+					DisableParticles ();
+					ParticleColors (Color.yellow);
 				}
 			}
 
@@ -136,26 +172,78 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Green;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.green;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Green);
+					DisableParticles ();
+					ParticleColors (Color.green);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick4Button1) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
 					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Red;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.red;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Red);
+					DisableParticles ();
+					ParticleColors (Color.red);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick4Button2) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
 					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Blue;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.blue;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Blue);
+					DisableParticles ();
+					ParticleColors (Color.blue);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick4Button3) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
 					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Yellow;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.yellow;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Yellow);
+					DisableParticles ();
+					ParticleColors (Color.yellow);
 				}
 			}
+		}
+	}
+
+	public void ParticleColors(Color allButThisColor)
+	{
+		var color1 = orbiterParticles[0].main;
+		var color2 = orbiterParticles[1].main;
+		var color3 = orbiterParticles[2].main;
+		if (allButThisColor == Color.green) {
+			color1.startColor = Color.red;
+			color2.startColor = Color.yellow;
+			color3.startColor = Color.blue;
+		}else if(allButThisColor == Color.red){
+			color1.startColor = Color.green;
+			color2.startColor = Color.yellow;
+			color3.startColor = Color.blue;
+		}else if(allButThisColor == Color.yellow){
+			color1.startColor = Color.blue;
+			color2.startColor = Color.green;
+			color3.startColor = Color.red;
+		}else if(allButThisColor == Color.blue){
+			color1.startColor = Color.red;
+			color2.startColor = Color.green;
+			color3.startColor = Color.yellow;
+		}
+	}
+
+	public void EnableParticles()
+	{
+		if (particlesOn == false) {
+			foreach (ParticleSystem temp in orbiterParticles) {
+				temp.Play ();
+			}
+			particlesOn = true;
+		}
+	}
+
+	public void DisableParticles()
+	{
+		if (particlesOn == true) {
+			foreach (ParticleSystem temp in orbiterParticles) {
+				temp.Stop ();
+			}
+			particlesOn = false;
 		}
 	}
 }
