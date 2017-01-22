@@ -45,7 +45,7 @@ public class AudioManager : MonoBehaviour {
 			if (audioObjectArray [i].clipName == name) 
 			{
 				namedAudioObjectArray.Add (audioObjectArray [i]);
-				print ("added");
+				//print ("added");
 			}
 		}
 

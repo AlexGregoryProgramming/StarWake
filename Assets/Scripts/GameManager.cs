@@ -606,7 +606,7 @@ public class GameManager : MonoBehaviour
 
 	public IEnumerator EndOfGameDelay()
 	{
-		yield return new WaitForSeconds (1);
+		yield return new WaitForSeconds (0);
 		gameState = GameState.EndOfGameResults;
 	}
 
@@ -742,28 +742,33 @@ public class GameManager : MonoBehaviour
 		{
 			if (p1Wins > p2Wins && p1Wins > p3Wins && p1Wins > p4Wins)
 			{
-				gameTimeTextObject.text = "Player 1 Wins!";
+				UIObject.GetComponent<GameUI> ().UpdateTimer ("Player 1 Wins!");
 
 			}
 
 			if (p2Wins > p1Wins && p2Wins > p3Wins && p2Wins > p4Wins)
 			{
-				gameTimeTextObject.text = "Player 2 Wins!";
+				UIObject.GetComponent<GameUI> ().UpdateTimer ("Player 2 Wins!");
 			}
 
 			if (p3Wins > p2Wins && p3Wins > p1Wins && p3Wins > p4Wins)
 			{
-				gameTimeTextObject.text = "Player 2 Wins!";
+				UIObject.GetComponent<GameUI> ().UpdateTimer ("Player 3 Wins!");
 			}
 
 			if (p4Wins > p2Wins && p4Wins > p3Wins && p4Wins > p1Wins)
 			{
-				gameTimeTextObject.text = "Player 4 Wins!";
+				UIObject.GetComponent<GameUI> ().UpdateTimer ("Player 4 Wins!");
 			}
 
 			if(Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
 			{
 				UnityEngine.SceneManagement.SceneManager.LoadScene ("alexTestMainMenu");
+				p1Color = PlayerColor.Yellow;
+				p2Color = PlayerColor.Red;
+				p3Color = PlayerColor.Blue;
+				p4Color = PlayerColor.Green;
+				gameState = GameState.MainMenu;
 			}
 		}
 	}
