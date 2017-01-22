@@ -30,7 +30,7 @@ public class ShipColor : MonoBehaviour {
 		if (GameManager._GAMEMANAGER.gameState == GameManager.GameState.CoinGameMode) {
 			if (playerNumber == 1 && cooldownTimer <= Time.time) 
 			{
-				if (Input.GetKeyDown (KeyCode.Joystick1Button0)) {
+				if (Input.GetKeyDown (KeyCode.Joystick1Button0) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Green) {
 					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Green;
@@ -38,21 +38,21 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Green);
 
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick1Button1)) {
+				if (Input.GetKeyDown (KeyCode.Joystick1Button1) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Red;
 					this.gameObject.GetComponent<DirectionalGridForce> ().m_Color = Color.red;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Red);
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick1Button2)) {
+				if (Input.GetKeyDown (KeyCode.Joystick1Button2) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Blue;
 					this.gameObject.GetComponent<DirectionalGridForce> ().m_Color = Color.blue;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Blue);
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick1Button3)) {
+				if (Input.GetKeyDown (KeyCode.Joystick1Button3) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Yellow;
@@ -65,28 +65,28 @@ public class ShipColor : MonoBehaviour {
 			if (playerNumber == 2 && cooldownTimer <= Time.time) 
 			{
 
-				if (Input.GetKeyDown (KeyCode.Joystick2Button0)) {
+				if (Input.GetKeyDown (KeyCode.Joystick2Button0) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Green) {
 					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Green;
 					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.green;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Green);
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick2Button1)) {
+				if (Input.GetKeyDown (KeyCode.Joystick2Button1) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Red;
 					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.red;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Red);
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick2Button2)) {
+				if (Input.GetKeyDown (KeyCode.Joystick2Button2) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Blue;
 					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.blue;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Blue);
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick2Button3)) {
+				if (Input.GetKeyDown (KeyCode.Joystick2Button3) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Yellow;
@@ -98,28 +98,28 @@ public class ShipColor : MonoBehaviour {
 
 			if (playerNumber == 3 && cooldownTimer <= Time.time) 
 			{
-				if (Input.GetKeyDown (KeyCode.Joystick3Button0)) {
+				if (Input.GetKeyDown (KeyCode.Joystick3Button0) && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Green) {
 					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Green;
 					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.green;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Green);
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick3Button1)) {
+				if (Input.GetKeyDown (KeyCode.Joystick3Button1) && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Red;
 					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.red;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Red);
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick3Button2)) {
+				if (Input.GetKeyDown (KeyCode.Joystick3Button2)  && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Blue;
 					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.blue;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Blue);
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick3Button3)) {
+				if (Input.GetKeyDown (KeyCode.Joystick3Button3) && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Yellow;
@@ -131,25 +131,25 @@ public class ShipColor : MonoBehaviour {
 
 			if (playerNumber == 4 && cooldownTimer <= Time.time) 
 			{
-				if (Input.GetKeyDown (KeyCode.Joystick4Button0)) {
+				if (Input.GetKeyDown (KeyCode.Joystick4Button0) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Green) {
 					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
 					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Green;
 					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.green;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Green);
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick4Button1)) {
+				if (Input.GetKeyDown (KeyCode.Joystick4Button1) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
 					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Red;
 					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.red;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Red);
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick4Button2)) {
+				if (Input.GetKeyDown (KeyCode.Joystick4Button2) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
 					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Blue;
 					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.blue;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Blue);
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick4Button3)) {
+				if (Input.GetKeyDown (KeyCode.Joystick4Button3) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
 					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Yellow;
 					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.yellow;
