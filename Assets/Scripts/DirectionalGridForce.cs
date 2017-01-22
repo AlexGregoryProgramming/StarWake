@@ -8,8 +8,12 @@ public class DirectionalGridForce : VectorGridForce {
     /// </summary>
     void Start() {
         if (m_VectorGrid == null) {
-            Debug.LogWarning("DirectionalGridForce should have a VectorGrid instance", this);
-            enabled = false;
+            m_VectorGrid = GameManager._GAMEMANAGER.gameGrid;
+
+            if (m_VectorGrid == null) {
+                Debug.LogWarning("DirectionalGridForce should have a VectorGrid instance", this);
+                enabled = false;
+            }
         }
     }
 
