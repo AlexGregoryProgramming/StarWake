@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114446661422053230}
   - component: {fileID: 114381562879157438}
   - component: {fileID: 65555305668092622}
-  - component: {fileID: 114068709580765500}
+  - component: {fileID: 114837446402294496}
   m_Layer: 0
   m_Name: ShipModel_AngelModel
   m_TagString: Untagged
@@ -291,24 +291,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 5, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114068709580765500
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1115052283618870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8001c0b333b214cf6819aa35fc6da60a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_VectorGrid: {fileID: 0}
-  m_ForceScale: 0.25
-  m_Directional: 0
-  m_ForceDirection: {x: 0, y: 0, z: 0}
-  m_Radius: 0.35
-  m_Color: {r: 0.9862069, g: 1, b: 0, a: 1}
-  m_HasColor: 1
 --- !u!114 &114381562879157438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,6 +305,7 @@ MonoBehaviour:
   playerNumber: 1
   cooldownTimeAmount: 3
   cooldownTimer: 0
+  isInvulnerable: 0
   Prims: {fileID: 1806973122756876}
   GreenPrism: {fileID: 2100000, guid: d86b546f44601384ab821043ff514385, type: 2}
   RedPrism: {fileID: 2100000, guid: 832a116b6444c914187585e6f059e38d, type: 2}
@@ -341,3 +324,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 9
   rotationSpeed: 3
+--- !u!114 &114837446402294496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1115052283618870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2753c1593f9c4e309a8671aad8228cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_VectorGrid: {fileID: 0}
+  m_ForceScale: 0.25
+  m_Directional: 0
+  m_ForceDirection: {x: 0, y: 0, z: 0}
+  m_Radius: 0.35
+  m_Color: {r: 0.90344834, g: 1, b: 0, a: 1}
+  m_HasColor: 1

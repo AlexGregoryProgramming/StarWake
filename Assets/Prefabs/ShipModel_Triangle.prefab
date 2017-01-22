@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4483800959678922}
   - component: {fileID: 114922551911649778}
-  - component: {fileID: 114979733358324690}
+  - component: {fileID: 114518446426910148}
   m_Layer: 0
   m_Name: ShipModel_Triangle
   m_TagString: Untagged
@@ -248,6 +248,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1234632421107634}
   m_Mesh: {fileID: 4300000, guid: 4734a43857e3feb4cac9764fdecf18aa, type: 2}
+--- !u!114 &114518446426910148
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1411809338686572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2753c1593f9c4e309a8671aad8228cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_VectorGrid: {fileID: 0}
+  m_ForceScale: 0.25
+  m_Directional: 0
+  m_ForceDirection: {x: 0, y: 0, z: 0}
+  m_Radius: 0.35
+  m_Color: {r: 0, g: 0.0068967342, b: 1, a: 1}
+  m_HasColor: 1
 --- !u!114 &114922551911649778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -262,26 +280,9 @@ MonoBehaviour:
   playerNumber: 3
   cooldownTimeAmount: 3
   cooldownTimer: 0
+  isInvulnerable: 0
   Prims: {fileID: 0}
   GreenPrism: {fileID: 0}
   RedPrism: {fileID: 0}
   BluePrism: {fileID: 0}
   YellowPrism: {fileID: 0}
---- !u!114 &114979733358324690
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1411809338686572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8001c0b333b214cf6819aa35fc6da60a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_VectorGrid: {fileID: 0}
-  m_ForceScale: 0.3
-  m_Directional: 0
-  m_ForceDirection: {x: 0, y: 0, z: 0}
-  m_Radius: 0
-  m_Color: {r: 0.06637919, g: 0, b: 0.875, a: 1}
-  m_HasColor: 0

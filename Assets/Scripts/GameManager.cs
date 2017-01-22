@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour 
 {
+	public float deathExplosionRadius;
+	public float deathExplosionForce;
+
 	private PlayerColor tempColor;
 	public static GameManager _GAMEMANAGER = null; 
 
@@ -295,21 +298,28 @@ public class GameManager : MonoBehaviour
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1 && p1Color != PlayerColor.Dead) {
 				tempColor = p1Color;
 				p1Color = PlayerColor.Dead;
+				p1Ship.GetComponent<DirectionalGridForce> ().m_VectorGrid.AddGridForce (p1Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p1Ship.GetComponent<DirectionalGridForce> ().m_Color, true);
 			}
 			//If player 2
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2 && p2Color != PlayerColor.Dead) {
 				tempColor = p2Color;
 				p2Color = PlayerColor.Dead;
+				p2Ship.GetComponent<DirectionalGridForce> ().m_VectorGrid.AddGridForce (p2Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p2Ship.GetComponent<DirectionalGridForce> ().m_Color, true);
+
 			}
 			//If player 3
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3 && p3Color != PlayerColor.Dead) {
 				tempColor = p3Color;
 				p3Color = PlayerColor.Dead;
+				p3Ship.GetComponent<DirectionalGridForce> ().m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Ship.GetComponent<DirectionalGridForce> ().m_Color, true);
+
 			}
 			//If player 4
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4 && p4Color != PlayerColor.Dead) {
 				tempColor = p4Color;
 				p4Color = PlayerColor.Dead;
+				p4Ship.GetComponent<DirectionalGridForce> ().m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Ship.GetComponent<DirectionalGridForce> ().m_Color, true);
+
 			}
 			//wait the timer
 			for (int i = time; i >= 0; i--) {
@@ -447,10 +457,11 @@ public class GameManager : MonoBehaviour
 		p3Ship = Instantiate (p3ShipPrefab, southSpawnPoint.GetComponent<Transform> ().position, southSpawnPoint.GetComponent<Transform> ().rotation);
 		p4Ship = Instantiate (p4ShipPrefab, westSpawnPoint.GetComponent<Transform> ().position, westSpawnPoint.GetComponent<Transform> ().rotation);
 
-		p1Ship.GetComponent<VectorGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
-		p2Ship.GetComponent<VectorGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
-		p3Ship.GetComponent<VectorGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
-		p4Ship.GetComponent<VectorGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
+		p1Ship.GetComponent<DirectionalGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
+		print ("test");
+		p2Ship.GetComponent<DirectionalGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
+		p3Ship.GetComponent<DirectionalGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
+		p4Ship.GetComponent<DirectionalGridForce>().m_VectorGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
 
 		for (int i = time; i >= 0; i--) 
 		{
