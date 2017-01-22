@@ -91,7 +91,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!43 &116668779
+--- !u!43 &56277918
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -268,7 +268,7 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 116668779}
+      objectReference: {fileID: 56277918}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1f8ae947d99d4aa8b5ab6de3165f213, type: 2}
   m_IsPrefabParent: 0
@@ -368,6 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 1.5
   rotationSpeed: 5
+  heading: 0
 --- !u!114 &1368865590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,16 +377,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1368865584}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8001c0b333b214cf6819aa35fc6da60a, type: 3}
+  m_Script: {fileID: 11500000, guid: f2753c1593f9c4e309a8671aad8228cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_VectorGrid: {fileID: 681194408}
   m_ForceScale: 0.03
   m_Directional: 0
-  m_ForceDirection: {x: 0, y: 0, z: 1}
+  m_ForceDirection: {x: 0, y: 0, z: 0}
   m_Radius: 0.25
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_HasColor: 0
+  shipController: {fileID: 0}
 --- !u!1 &1637069461
 GameObject:
   m_ObjectHideFlags: 0
