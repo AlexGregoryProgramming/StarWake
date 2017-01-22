@@ -46,7 +46,7 @@ public class IntroCountdown : MonoBehaviour {
 		}
 		end = true;
 		//HACK FOR COUNTDOWN
-		Invoke ("StartCountdown", 2.0f);
+		//Invoke ("StartCountdown", 2.0f);
 		//Invoke ("StartCountdown", 15.0f);
 	}
 

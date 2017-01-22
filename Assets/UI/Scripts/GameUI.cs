@@ -15,6 +15,7 @@ public class GameUI : MonoBehaviour {
 	public Color[] yellow;
 	public float cycleSpeed;
 
+	public IntroCountdown countdown;
 	//Images for updating the UI
 	public void Awake()
 	{

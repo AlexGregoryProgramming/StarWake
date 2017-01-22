@@ -506,7 +506,7 @@ public class GameManager : MonoBehaviour
 //			yield return new WaitForSeconds (1);
 //
 //		}
-
+		UIObject.GetComponent<GameUI>().countdown.StartCountdown();
 		yield return new WaitForSeconds (8);
 		countDownTextObject.text = "";
 		gameState = GameState.CoinGameModeStart;
