@@ -1331,6 +1331,10 @@ MonoBehaviour:
     type: 2}
   p4ShipPrefab: {fileID: 1411809338686572, guid: a1faf6701caec08499876a3c2bd18f84,
     type: 2}
+  p1Joined: 1
+  p2Joined: 1
+  p3Joined: 1
+  p4Joined: 1
   p1Ship: {fileID: 1115052283618870, guid: 1c3266fe4d63f1441aaa990542893a01, type: 2}
   p2Ship: {fileID: 1297258521499668, guid: d1205da4be927c242b62a86b71bbe671, type: 2}
   p3Ship: {fileID: 1948024899770760, guid: e5b2724165cf75d4e9ff5e0918edf003, type: 2}

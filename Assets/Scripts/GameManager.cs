@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
 	public GameObject p3ShipPrefab;
 	public GameObject p4ShipPrefab;
 
+	public bool p1Joined;
+	public bool p2Joined;
+	public bool p3Joined;
+	public bool p4Joined;
+
 	public GameObject p1Ship;
 	public GameObject p2Ship;
 	public GameObject p3Ship;
@@ -507,18 +512,34 @@ public class GameManager : MonoBehaviour
 		p3Score = 0;
 		p4Score = 0;
 
-		p1Ship = Instantiate (p1ShipPrefab, northSpawnPoint.GetComponent<Transform> ().position, northSpawnPoint.GetComponent<Transform> ().rotation);
-        p1Ship.GetComponent<ShipController>().heading = northSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
-		p2Ship = Instantiate (p2ShipPrefab, eastSpawnPoint.GetComponent<Transform> ().position, eastSpawnPoint.GetComponent<Transform> ().rotation);
-        p2Ship.GetComponent<ShipController>().heading = eastSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
-		p3Ship = Instantiate (p3ShipPrefab, southSpawnPoint.GetComponent<Transform> ().position, southSpawnPoint.GetComponent<Transform> ().rotation);
-        p3Ship.GetComponent<ShipController>().heading = southSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
-		p4Ship = Instantiate (p4ShipPrefab, westSpawnPoint.GetComponent<Transform> ().position, westSpawnPoint.GetComponent<Transform> ().rotation);
-        p4Ship.GetComponent<ShipController>().heading = westSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+		if (p1Joined == true) 
+		{
+			p1Ship = Instantiate (p1ShipPrefab, northSpawnPoint.GetComponent<Transform> ().position, northSpawnPoint.GetComponent<Transform> ().rotation);
+			p1Ship.GetComponent<ShipController> ().heading = northSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+		}
+		if (p2Joined == true) 
+		{
+			p2Ship = Instantiate (p2ShipPrefab, eastSpawnPoint.GetComponent<Transform> ().position, eastSpawnPoint.GetComponent<Transform> ().rotation);
+			p2Ship.GetComponent<ShipController> ().heading = eastSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+		}
+		if (p3Joined == true) 
+		{
+			p3Ship = Instantiate (p3ShipPrefab, southSpawnPoint.GetComponent<Transform> ().position, southSpawnPoint.GetComponent<Transform> ().rotation);
+			p3Ship.GetComponent<ShipController> ().heading = southSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+		}
+		if (p4Joined == true) 
+		{
+			p4Ship = Instantiate (p4ShipPrefab, westSpawnPoint.GetComponent<Transform> ().position, westSpawnPoint.GetComponent<Transform> ().rotation);
+			p4Ship.GetComponent<ShipController> ().heading = westSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+		}
 
+		if (p1Joined == true) 
 		p1Manager = p1Ship.GetComponent<ShipGridManager> ();
+		if (p2Joined == true) 
 		p2Manager = p2Ship.GetComponent<ShipGridManager> ();
+		if (p3Joined == true) 
 		p3Manager = p3Ship.GetComponent<ShipGridManager> ();
+		if (p4Joined == true) 
 		p4Manager = p4Ship.GetComponent<ShipGridManager> ();
 
 		gameGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
@@ -627,9 +648,13 @@ public class GameManager : MonoBehaviour
 			countDownTextObject = GameObject.FindGameObjectWithTag ("CountdownText").GetComponent<Text>();
 			StartCoroutine (CountdownStart (countdownTimerLength));
 
+			if(p1Joined == true)
             p1Ship.GetComponent<ShipController>().enabled = false;
+			if(p2Joined == true)
             p2Ship.GetComponent<ShipController>().enabled = false;
+			if(p3Joined == true)
             p3Ship.GetComponent<ShipController>().enabled = false;
+			if(p4Joined == true)
             p4Ship.GetComponent<ShipController>().enabled = false;
 
 			gameState = GameState.Countdown;
@@ -672,9 +697,13 @@ public class GameManager : MonoBehaviour
 
 			if (Time.timeSinceLevelLoad > 8.1)
 			{
+				if(p1Joined == true)
                 p1Ship.GetComponent<ShipController>().enabled = true;
+				if(p2Joined == true)
                 p2Ship.GetComponent<ShipController>().enabled = true;
+				if(p3Joined == true)
                 p3Ship.GetComponent<ShipController>().enabled = true;
+				if(p4Joined == true)
                 p4Ship.GetComponent<ShipController>().enabled = true;
             }
 		}
@@ -686,14 +715,21 @@ public class GameManager : MonoBehaviour
 				winnerFound = true;
 			}
 
-			if (winnerFound == false && Input.GetKeyDown (KeyCode.Joystick1Button0))
+			if (winnerFound == false) 
 			{
-				endResults ();
+				if(Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
+				{
+					endResults ();
+				}	
 			}
-			if(winnerFound == true && Input.GetKeyDown (KeyCode.Joystick1Button0))
+
+			if (winnerFound == true) 
 			{
-				gameState = GameState.EndOfGameResultsStart;
-				StartCoroutine(EndOfGameDelay());
+				if(Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
+				{
+					gameState = GameState.EndOfGameResultsStart;
+					StartCoroutine(EndOfGameDelay());
+				}	
 			}
 		}
 
@@ -725,7 +761,7 @@ public class GameManager : MonoBehaviour
 				gameTimeTextObject.text = "Player 4 Wins!";
 			}
 
-			if(Input.GetKeyDown (KeyCode.Space))
+			if(Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
 			{
 				UnityEngine.SceneManagement.SceneManager.LoadScene ("alexTestMainMenu");
 			}
