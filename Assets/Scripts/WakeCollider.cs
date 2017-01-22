@@ -7,6 +7,8 @@ public class WakeCollider : MonoBehaviour {
 
     public GameManager.PlayerColor playerColor = GameManager.PlayerColor.Dead;
 
+    internal int playerNumber;
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -38,6 +40,7 @@ public class WakeCollider : MonoBehaviour {
             GameManager.PlayerColor shipPlayerColor = GameManager._GAMEMANAGER.GetPlayerColor(shipColor.playerNumber);
             if (shipPlayerColor != playerColor) {
                 GameManager._GAMEMANAGER.KillPlayer(other.gameObject);
+                Debug.Log(string.Format("Player {0} {1} wake killed player {2} {3}", playerNumber, playerColor, shipColor.playerNumber, shipPlayerColor));
             }
         }
     }

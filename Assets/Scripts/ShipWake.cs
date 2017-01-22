@@ -27,7 +27,9 @@ public class ShipWake : MonoBehaviour {
         if (generateWake && (wakeColliderPrefab != null)) {
             WakeCollider wakeCollider = Instantiate<WakeCollider>(wakeColliderPrefab, transform.position, transform.rotation);
             if (wakeCollider != null) {
-                wakeCollider.playerColor = GameManager._GAMEMANAGER.GetPlayerColor(shipColor.playerNumber);
+                int playerNumber = shipColor.playerNumber;
+                wakeCollider.playerNumber = playerNumber;
+                wakeCollider.playerColor = GameManager._GAMEMANAGER.GetPlayerColor(playerNumber);
             }
         }
     }
