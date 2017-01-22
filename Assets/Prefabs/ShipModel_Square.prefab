@@ -118,6 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4350442810059168}
   - component: {fileID: 114813329405788448}
+  - component: {fileID: 114529505819607380}
   m_Layer: 0
   m_Name: LeftWake
   m_TagString: Untagged
@@ -184,6 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4733577830336274}
   - component: {fileID: 114405168020276894}
+  - component: {fileID: 114329288074671214}
   m_Layer: 0
   m_Name: RightWake
   m_TagString: Untagged
@@ -641,6 +643,20 @@ MonoBehaviour:
   xrot: 90
   yrot: 360
   zrot: 25
+--- !u!114 &114329288074671214
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1930051240214152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f28c3041aa2c44c5fb1db2b0a2c53c59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generateWake: 1
+  wakeColliderPrefab: {fileID: 114816128485889052, guid: 49c79cbd479514463a8f532bd4bfe4e6,
+    type: 2}
 --- !u!114 &114405168020276894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -659,6 +675,20 @@ MonoBehaviour:
   m_Radius: 0.1
   m_Color: {r: 1, g: 0.88965523, b: 0, a: 1}
   m_HasColor: 0
+--- !u!114 &114529505819607380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1615295989586394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f28c3041aa2c44c5fb1db2b0a2c53c59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generateWake: 1
+  wakeColliderPrefab: {fileID: 114816128485889052, guid: 49c79cbd479514463a8f532bd4bfe4e6,
+    type: 2}
 --- !u!114 &114533464886055074
 MonoBehaviour:
   m_ObjectHideFlags: 1

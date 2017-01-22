@@ -73,6 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4499361204300058}
   - component: {fileID: 114344621553075354}
+  - component: {fileID: 114879542786933412}
   m_Layer: 0
   m_Name: LeftWake
   m_TagString: Untagged
@@ -220,6 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4777993347390278}
   - component: {fileID: 114933726712840918}
+  - component: {fileID: 114700215092965880}
   m_Layer: 0
   m_Name: RightWake
   m_TagString: Untagged
@@ -695,6 +697,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 1.425
   rotationSpeed: 5
+--- !u!114 &114700215092965880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1847765553451590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f28c3041aa2c44c5fb1db2b0a2c53c59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generateWake: 1
+  wakeColliderPrefab: {fileID: 114816128485889052, guid: 49c79cbd479514463a8f532bd4bfe4e6,
+    type: 2}
 --- !u!114 &114781106102515988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -709,6 +725,20 @@ MonoBehaviour:
   leftWake: {fileID: 114344621553075354}
   rightWake: {fileID: 114933726712840918}
   colorWake: {fileID: 114027604584335890}
+--- !u!114 &114879542786933412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1369747805689456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f28c3041aa2c44c5fb1db2b0a2c53c59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generateWake: 1
+  wakeColliderPrefab: {fileID: 114816128485889052, guid: 49c79cbd479514463a8f532bd4bfe4e6,
+    type: 2}
 --- !u!114 &114933726712840918
 MonoBehaviour:
   m_ObjectHideFlags: 1
