@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
 	public float p4Score;
 	public int incrementalPoints = 12;
 	public MatchResults matchResults;
+
+	public GameObject pickupSpawner;
 	//Data for drawing the points split
 	[System.Serializable]
 	public class MatchResults

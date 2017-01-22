@@ -30,10 +30,8 @@ public class PickupScript : MonoBehaviour {
 
 	public void OnCollisionEnter(Collision col)
 	{
-		print ("A collision");
 		if (pickUP.fillAmount == 1 && col.gameObject.GetComponent<ShipColor> () != null) 
 		{
-			print ("A collision we want");
 			int playerNum = col.gameObject.GetComponent<ShipColor> ().playerNumber;
 			collectorColor = GameManager._GAMEMANAGER.GetPlayerColor (playerNum);
 
