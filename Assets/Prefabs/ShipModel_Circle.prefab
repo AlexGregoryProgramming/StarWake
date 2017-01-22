@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 114781903578245620}
   - component: {fileID: 114697068886576092}
   - component: {fileID: 65236948347168918}
+  - component: {fileID: 114107040786117898}
   m_Layer: 0
   m_Name: ShipModel_Circle
   m_TagString: Untagged
@@ -218,7 +219,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1297258521499668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.2483354, y: -27.737896, z: 28.396801}
   m_LocalScale: {x: 0.035, y: 0.035, z: 0.035}
   m_Children:
   - {fileID: 4202467728725770}
@@ -398,6 +399,20 @@ MonoBehaviour:
   m_Radius: 0.1
   m_Color: {r: 1, g: 0.88965523, b: 0, a: 1}
   m_HasColor: 0
+--- !u!114 &114107040786117898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1297258521499668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d1fb0a1f4f3df46bd2fefad88ab405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftWake: {fileID: 114032299261821382}
+  rightWake: {fileID: 114462249956241326}
+  colorWake: {fileID: 114315619578540128}
 --- !u!114 &114315619578540128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -414,7 +429,7 @@ MonoBehaviour:
   m_Directional: 0
   m_ForceDirection: {x: 0, y: 0, z: 0}
   m_Radius: 0.25
-  m_Color: {r: 1, g: 0.88965523, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_HasColor: 1
 --- !u!114 &114462249956241326
 MonoBehaviour:

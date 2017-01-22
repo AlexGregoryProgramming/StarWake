@@ -1409,6 +1409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathExplosionRadius: 2
   deathExplosionForce: 0.5
+  gameGrid: {fileID: 0}
   UIObject: {fileID: 0}
   northSpawnPoint: {fileID: 0}
   eastSpawnPoint: {fileID: 0}
