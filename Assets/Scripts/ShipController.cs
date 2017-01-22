@@ -42,4 +42,19 @@ public class ShipController : MonoBehaviour
         Vector3 position = transform.up * movementSpeed * Time.deltaTime;
         transform.position += new Vector3 (position.x, position.y, 0.0f);
     }
+
+    /// <summary>
+    /// OnTriggerEnter is called when the Collider other enters the trigger.
+    /// </summary>
+    /// <param name="other">The other Collider involved in this collision.</param>
+    void OnTriggerEnter(Collider other) {
+        Vector3 rayLength = transform.up * 0.5f;
+        Ray ray = new Ray(transform.position, rayLength);
+        //Debug.DrawRay(transform.position, rayLength);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 0.5f)) {
+            Vector3 reflectedDir = Vector3.Reflect(ray.direction, hit.normal);
+            heading = Mathf.Atan2(reflectedDir.x, reflectedDir.y);
+        }
+    }
 }
