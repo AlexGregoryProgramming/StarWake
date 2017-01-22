@@ -352,18 +352,18 @@ public class GameManager : MonoBehaviour
 				tempColor3 = p3Color;
 				p3Color = PlayerColor.Dead;
 
-				p3Manager.colorWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
-				p3Manager.leftWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
-				p3Manager.rightWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
+				p3Manager.colorWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
+				p3Manager.leftWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
+				p3Manager.rightWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
 			}
 			//If player 4
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4 && p4Color != PlayerColor.Dead) {
 				tempColor4 = p4Color;
 				p4Color = PlayerColor.Dead;
 
-				p4Manager.colorWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
-				p4Manager.leftWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
-				p4Manager.rightWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
+				p4Manager.colorWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
+				p4Manager.leftWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
+				p4Manager.rightWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
 			}
 			//wait the timer
 			for (int i = time; i >= 0; i--) {
