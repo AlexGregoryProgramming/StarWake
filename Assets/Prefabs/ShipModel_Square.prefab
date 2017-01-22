@@ -71,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4795069557517644}
   - component: {fileID: 114941484207906078}
-  - component: {fileID: 114932194422757198}
+  - component: {fileID: 114423466857352050}
   m_Layer: 0
   m_Name: ShipModel_Square
   m_TagString: Untagged
@@ -248,7 +248,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1047233335055484}
   m_Mesh: {fileID: 4300000, guid: af24091f417316346a8a753fa437b671, type: 2}
---- !u!114 &114932194422757198
+--- !u!114 &114423466857352050
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -256,16 +256,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1948024899770760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8001c0b333b214cf6819aa35fc6da60a, type: 3}
+  m_Script: {fileID: 11500000, guid: f2753c1593f9c4e309a8671aad8228cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_VectorGrid: {fileID: 0}
-  m_ForceScale: 0.3
+  m_ForceScale: 0.25
   m_Directional: 0
   m_ForceDirection: {x: 0, y: 0, z: 0}
-  m_Radius: 0
-  m_Color: {r: 0, g: 0.42647058, b: 0.12647058, a: 1}
-  m_HasColor: 0
+  m_Radius: 0.35
+  m_Color: {r: 0, g: 0.33088237, b: 0.11181546, a: 1}
+  m_HasColor: 1
 --- !u!114 &114941484207906078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -280,6 +280,7 @@ MonoBehaviour:
   playerNumber: 4
   cooldownTimeAmount: 3
   cooldownTimer: 0
+  isInvulnerable: 0
   Prims: {fileID: 0}
   GreenPrism: {fileID: 0}
   RedPrism: {fileID: 0}

@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4381224385453582}
   - component: {fileID: 114697068886576092}
-  - component: {fileID: 114163485196256550}
+  - component: {fileID: 114802876816433270}
   m_Layer: 0
   m_Name: ShipModel_Circle
   m_TagString: Untagged
@@ -277,24 +277,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1428683191250156}
   m_Mesh: {fileID: 4300000, guid: b1fca1a1f8d1da44d932771728f24963, type: 2}
---- !u!114 &114163485196256550
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1297258521499668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8001c0b333b214cf6819aa35fc6da60a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_VectorGrid: {fileID: 0}
-  m_ForceScale: 0.3
-  m_Directional: 0
-  m_ForceDirection: {x: 0, y: 0, z: 0}
-  m_Radius: 0
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_HasColor: 0
 --- !u!114 &114697068886576092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -309,8 +291,27 @@ MonoBehaviour:
   playerNumber: 2
   cooldownTimeAmount: 3
   cooldownTimer: 0
+  isInvulnerable: 0
   Prims: {fileID: 1244720590610468}
   GreenPrism: {fileID: 2100000, guid: d86b546f44601384ab821043ff514385, type: 2}
   RedPrism: {fileID: 2100000, guid: 832a116b6444c914187585e6f059e38d, type: 2}
   BluePrism: {fileID: 2100000, guid: efacc7b59dbde9a4c933c8984e70032d, type: 2}
   YellowPrism: {fileID: 2100000, guid: 4bdb4060678b2344cbff989e7ff640a7, type: 2}
+--- !u!114 &114802876816433270
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1297258521499668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2753c1593f9c4e309a8671aad8228cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_VectorGrid: {fileID: 0}
+  m_ForceScale: 0.25
+  m_Directional: 0
+  m_ForceDirection: {x: 0, y: 0, z: 0}
+  m_Radius: 0.35
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_HasColor: 1

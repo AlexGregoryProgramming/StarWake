@@ -34,7 +34,7 @@ public class ShipColor : MonoBehaviour {
 					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Green;
-					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.green;
+					this.gameObject.GetComponent<DirectionalGridForce> ().m_Color = Color.green;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Green);
 
 				}
@@ -42,21 +42,21 @@ public class ShipColor : MonoBehaviour {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Red;
-					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.red;
+					this.gameObject.GetComponent<DirectionalGridForce> ().m_Color = Color.red;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Red);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick1Button2)) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Blue;
-					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.blue;
+					this.gameObject.GetComponent<DirectionalGridForce> ().m_Color = Color.blue;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Blue);
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick1Button3)) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Yellow;
-					this.gameObject.GetComponent<VectorGridForce> ().m_Color = Color.yellow;
+					this.gameObject.GetComponent<DirectionalGridForce> ().m_Color = Color.yellow;
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Yellow);
 				}
 			}

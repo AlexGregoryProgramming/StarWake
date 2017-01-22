@@ -1407,6 +1407,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490f4039d1fb28145b0fba76cd695216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathExplosionRadius: 2
+  deathExplosionForce: 0.5
+  UIObject: {fileID: 0}
   northSpawnPoint: {fileID: 0}
   eastSpawnPoint: {fileID: 0}
   southSpawnPoint: {fileID: 0}
@@ -1450,6 +1453,7 @@ MonoBehaviour:
     p4Match: 0
     dividedPoints: 0
   deathTime: 2
+  invulnTime: 2
   gameState: 0
   countDownTextObject: {fileID: 0}
   countdownTimerLength: 3
