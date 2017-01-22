@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickupSpawner : MonoBehaviour 
+public class PickupSpawner : MonoBehaviour
 {
 
 	public GameObject pickup12;
@@ -27,54 +27,53 @@ public class PickupSpawner : MonoBehaviour
 	public float spawnInterval = 4;
 	public GameObject[] spawnerArray;
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
 		timeLeft = 36;
 
 	}
-	
+
 	// Update is called once per frame
-	void Update () 
+	void Update ()
 	{
 		timeLeft -= Time.deltaTime;
-		if (timeLeft < nextSpawnTime && timeLeft < 30 && timeLeft > 0) 
+		if (timeLeft < nextSpawnTime && timeLeft < 30 && timeLeft > 0)
 		{
 			nextSpawnTime -= spawnInterval;
-			GameObject tempPoint = spawnerArray [Random.Range (0, spawnerArray.Length)];
 			roll = Random.Range (0, 101);
 			twoOrThree = Random.Range (2, 4);
 
-			if (roll <= 20) 
+			if (roll <= 20)
 			{
 				startPlace = Random.Range (0, 24);
 				firstPoint = spawnerArray [startPlace];
 				Instantiate (pickup12, firstPoint.GetComponent<Transform> ().position, firstPoint.GetComponent<Transform> ().rotation);
 			}
 
-			if (roll > 20 && roll <= 35) 
+			if (roll > 20 && roll <= 35)
 			{
 				startPlace = Random.Range (0, 24);
 				firstPoint = spawnerArray [startPlace];
 				Instantiate (pickup24, firstPoint.GetComponent<Transform> ().position, firstPoint.GetComponent<Transform> ().rotation);
 			}
 
-			if (roll > 35 && roll <= 45) 
+			if (roll > 35 && roll <= 45)
 			{
 				startPlace = Random.Range (0, 24);
 				firstPoint = spawnerArray [startPlace];
 				Instantiate (pickup48, firstPoint.GetComponent<Transform> ().position, firstPoint.GetComponent<Transform> ().rotation);
 			}
 
-			if (roll > 45 && roll <= 50) 
+			if (roll > 45 && roll <= 50)
 			{
 				startPlace = Random.Range (0, 24);
 				firstPoint = spawnerArray [startPlace];
 				Instantiate (pickup144, firstPoint.GetComponent<Transform> ().position, firstPoint.GetComponent<Transform> ().rotation);
 			}
 
-			if (roll > 50 && roll <= 70) 
+			if (roll > 50 && roll <= 70)
 			{
-				if (twoOrThree == 2) 
+				if (twoOrThree == 2)
 				{
 					startPlace = Random.Range (0, 10);
 					secondPlace = Random.Range (14, 24);
@@ -86,7 +85,7 @@ public class PickupSpawner : MonoBehaviour
 					Instantiate (pickup12, secondPoint.GetComponent<Transform> ().position, secondPoint.GetComponent<Transform> ().rotation);
 				}
 
-				if (twoOrThree == 3) 
+				if (twoOrThree == 3)
 				{
 					startPlace = Random.Range (0, 10);
 					secondPlace = startPlace + Random.Range (4, 7);
@@ -102,9 +101,9 @@ public class PickupSpawner : MonoBehaviour
 				}
 			}
 
-			if (roll > 70 && roll <= 85) 
+			if (roll > 70 && roll <= 85)
 			{
-				if (twoOrThree == 2) 
+				if (twoOrThree == 2)
 				{
 					startPlace = Random.Range (0, 10);
 					secondPlace = Random.Range (14, 24);
@@ -116,7 +115,7 @@ public class PickupSpawner : MonoBehaviour
 					Instantiate (pickup24, secondPoint.GetComponent<Transform> ().position, secondPoint.GetComponent<Transform> ().rotation);
 				}
 
-				if (twoOrThree == 3) 
+				if (twoOrThree == 3)
 				{
 					startPlace = Random.Range (0, 10);
 					secondPlace = startPlace + Random.Range (4, 7);
@@ -132,9 +131,9 @@ public class PickupSpawner : MonoBehaviour
 				}
 			}
 
-			if (roll > 85 && roll <= 95) 
+			if (roll > 85 && roll <= 95)
 			{
-				if (twoOrThree == 2) 
+				if (twoOrThree == 2)
 				{
 					startPlace = Random.Range (0, 10);
 					secondPlace = Random.Range (14, 24);
@@ -146,7 +145,7 @@ public class PickupSpawner : MonoBehaviour
 					Instantiate (pickup48, secondPoint.GetComponent<Transform> ().position, secondPoint.GetComponent<Transform> ().rotation);
 				}
 
-				if (twoOrThree == 3) 
+				if (twoOrThree == 3)
 				{
 					startPlace = Random.Range (0, 10);
 					secondPlace = startPlace + Random.Range (4, 7);
@@ -162,9 +161,9 @@ public class PickupSpawner : MonoBehaviour
 				}
 			}
 
-			if (roll > 95 && roll <= 100) 
+			if (roll > 95 && roll <= 100)
 			{
-				if (twoOrThree == 2) 
+				if (twoOrThree == 2)
 				{
 					startPlace = Random.Range (0, 10);
 					secondPlace = Random.Range (14, 24);
@@ -176,7 +175,7 @@ public class PickupSpawner : MonoBehaviour
 					Instantiate (pickup144, secondPoint.GetComponent<Transform> ().position, secondPoint.GetComponent<Transform> ().rotation);
 				}
 
-				if (twoOrThree == 3) 
+				if (twoOrThree == 3)
 				{
 					startPlace = Random.Range (0, 10);
 					secondPlace = startPlace + Random.Range (4, 7);
