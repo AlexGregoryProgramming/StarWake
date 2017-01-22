@@ -342,12 +342,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 223237645860904324, guid: e6a0758c763525d4da020e224cef4c26,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2303764}
     - target: {fileID: 223333486920753422, guid: e6a0758c763525d4da020e224cef4c26,
         type: 2}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2303764}
-    - target: {fileID: 223237645860904324, guid: e6a0758c763525d4da020e224cef4c26,
+    - target: {fileID: 223090369078843262, guid: e6a0758c763525d4da020e224cef4c26,
         type: 2}
       propertyPath: m_Camera
       value: 

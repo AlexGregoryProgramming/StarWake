@@ -6,12 +6,13 @@ public class AudioManager : MonoBehaviour {
 
 	public static AudioManager _AUDIOMANAGER = null; 
 	public AudioSource audioSource;
+
 	[System.Serializable]
 	public class AudioObject
 	{
-		public AudioClip audioClip;
-
 		public string clipName;
+		public override string ToString() { return clipName; }
+		public AudioClip audioClip;
 	}
 
 	public AudioObject[] audioObjectArray;
@@ -51,7 +52,7 @@ public class AudioManager : MonoBehaviour {
 
 		int sound = Random.Range (0, namedAudioObjectArray.Count);
 		print ("random made: " + sound);
-		audioSource.PlayOneShot (namedAudioObjectArray [sound].audioClip);
+		audioSource.PlayOneShot (namedAudioObjectArray [sound].audioClip, 1.0f);
 	}
 
 	public AudioClip returnSound(string name)
