@@ -17,13 +17,12 @@ public class ShipController : MonoBehaviour
     /// </summary>
     void Start()
     {
-		float lh = Input.GetAxis (LeftStickHorizontalAxis);
-		float lv = Input.GetAxis (LeftStickVerticalAxis);
-		heading = Mathf.Atan2 (-lh, lv);
-		Quaternion targetRotation = Quaternion.Euler (0f, 0f, heading * Mathf.Rad2Deg);
-
-        transform.forward = Vector3.up;
-		transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        ShipColor shipColor = GetComponent<ShipColor>();
+        if (shipColor != null) {
+            int playerNumber = shipColor.playerNumber;
+            LeftStickHorizontalAxis = string.Format("P{0}LeftStickHorizontal", playerNumber);
+            LeftStickVerticalAxis = string.Format("P{0}LeftStickVertical", playerNumber);
+        }
     }
 
     /// <summary>
