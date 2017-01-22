@@ -203,7 +203,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950614921757548}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -234,7 +234,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1730144064700826}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -265,7 +265,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1261584813796270}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -296,7 +296,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1228677690973972}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -367,36 +367,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8c3e05d6f44a34985144f2a5ef7a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GridWidth: 76
-  m_GridHeight: 76
+  m_GridWidth: 70
+  m_GridHeight: 51
   m_GridScale: 0.1
-  m_MaxFogDistance: 0.25
-  m_MaxFogAlphaScale: 0.2
+  m_MaxFogDistance: 0.1
+  m_MaxFogAlphaScale: 0
   m_TwoWayFog: 1
   m_RenderMode: 0
   m_VectorGridPointMass: 1
-  m_VelocityDamping: 0.98
-  m_ThickLineSpawnColor: {r: 0, g: 0.8758622, b: 1, a: 0.297}
-  m_ThinLineSpawnColor: {r: 1, g: 1, b: 1, a: 0.053}
-  m_ThickLineWidth: 0.01
-  m_ThinLineWidth: 0.005
-  m_ThickLineSpacingX: 5
-  m_ThickLineSpacingY: 5
-  m_SpringStiffness: 0.28
-  m_SpringDamping: 0.06
-  m_EdgeSpringStiffness: 0.1
-  m_EdgeSpringDamping: 0.1
+  m_VelocityDamping: 1
+  m_ThickLineSpawnColor: {r: 0, g: 0.041430138, b: 0.31617647, a: 1}
+  m_ThinLineSpawnColor: {r: 0.053416938, g: 0.079883054, b: 0.09558821, a: 1}
+  m_ThickLineWidth: 0.007
+  m_ThinLineWidth: 0.007
+  m_ThickLineSpacingX: 4
+  m_ThickLineSpacingY: 4
+  m_SpringStiffness: 0.14
+  m_SpringDamping: 0.03
+  m_EdgeSpringStiffness: 0.325
+  m_EdgeSpringDamping: 0.325
   m_ClampEdges: 0
-  m_LooseSpringStiffness: 0.002
-  m_LooseSpringDamping: 0.002
-  m_LooseSpringInterval: 4
-  m_RestDistanceScalar: 0.95
-  m_GridSmoothingFactor: 1
+  m_LooseSpringStiffness: 0.001
+  m_LooseSpringDamping: 0.01
+  m_LooseSpringInterval: 2
+  m_RestDistanceScalar: 0.1
+  m_GridSmoothingFactor: 2
   m_DebugDraw: 0
   m_CalculateNormals: 0
-  m_ColorRevertEnabled: 0
-  m_ColorRevertDelay: 3
-  m_ColorRevertSpeed: 0.05
+  m_ColorRevertEnabled: 1
+  m_ColorRevertDelay: 0.5
+  m_ColorRevertSpeed: 0.25
   m_TrackedCamera: {fileID: 0}
   m_ParallaxScroll: {x: 1, y: 1}
   m_AllowHorizontalScroll: 0
