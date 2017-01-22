@@ -73,15 +73,19 @@ public class ShipController : MonoBehaviour
         float rayLength = 0.75f;
         Vector3 rayDirection = transform.up * rayLength;
         Ray ray = new Ray(transform.position, rayDirection);
-        Debug.DrawRay(transform.position, rayDirection);
+//        Debug.DrawRay(transform.position, rayDirection);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, rayLength)) {
-            Vector3 reflectedDir = Vector3.Reflect(ray.direction, hit.normal);
+            Vector3 reflectedDir = Vector3.Reflect(hit.point, hit.normal);
+            if ((Mathf.Abs(reflectedDir.x) < 0.1f) || (Mathf.Abs(reflectedDir.y) < 0.1f)) {
+//                Debug.Log("Updated from (" + reflectedDir.x + ", " + reflectedDir.y + ")");
+                reflectedDir = Vector3.Reflect(hit.point - transform.position, hit.normal);
+            }
             float oldHeading = heading;
             heading = Mathf.Atan2(reflectedDir.x, reflectedDir.y);
             bouncing = true;
             bounceTime = Time.time + 0.25f;
-            Debug.Log(other.gameObject.name + " trigger changed heading changed from " + (oldHeading * Mathf.Rad2Deg) + " to " + (heading * Mathf.Rad2Deg));
+//            Debug.Log(other.gameObject.name + " trigger changed heading changed from " + (oldHeading * Mathf.Rad2Deg) + " to " + (heading * Mathf.Rad2Deg) + " (" + reflectedDir.x + ", " + reflectedDir.y + ")");
         }
     }
 }
