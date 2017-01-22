@@ -1315,8 +1315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490f4039d1fb28145b0fba76cd695216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathExplosionRadius: 2
-  deathExplosionForce: 0.5
+  deathExplosionRadius: 1
+  deathExplosionForce: 0.3
   gameGrid: {fileID: 0}
   UIObject: {fileID: 0}
   northSpawnPoint: {fileID: 0}
