@@ -1432,6 +1432,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  p1Manager: {fileID: 0}
+  p2Manager: {fileID: 0}
+  p3Manager: {fileID: 0}
+  p4Manager: {fileID: 0}
   p1Wins: 0
   p2Wins: 0
   p3Wins: 0

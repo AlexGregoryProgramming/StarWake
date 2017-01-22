@@ -37,6 +37,11 @@ public class PickupScript : MonoBehaviour {
 			int playerNum = col.gameObject.GetComponent<ShipColor> ().playerNumber;
 			collectorColor = GameManager._GAMEMANAGER.GetPlayerColor (playerNum);
 
+			col.gameObject.GetComponent<ShipGridManager>().colorWake.m_VectorGrid.AddGridForce (col.gameObject.GetComponent<Transform> ().position, collectionForce, collectionRadius, col.gameObject.GetComponent<ShipGridManager>().colorWake.m_Color, true);
+			col.gameObject.GetComponent<ShipGridManager>().leftWake.m_VectorGrid.AddGridForce (col.gameObject.GetComponent<Transform> ().position, collectionForce, collectionRadius, col.gameObject.GetComponent<ShipGridManager>().colorWake.m_Color, true);
+			col.gameObject.GetComponent<ShipGridManager>().rightWake.m_VectorGrid.AddGridForce (col.gameObject.GetComponent<Transform> ().position, collectionForce, collectionRadius, col.gameObject.GetComponent<ShipGridManager>().colorWake.m_Color, true);
+
+
 			if (collectorColor == GameManager.PlayerColor.Blue) 
 			{
 				GameManager._GAMEMANAGER.bluePointsScored (value);

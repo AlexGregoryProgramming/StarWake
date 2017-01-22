@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
 
 	public GameObject[] spawnPointArray;
 
+	public ShipGridManager p1Manager;
+	public ShipGridManager p2Manager;
+	public ShipGridManager p3Manager;
+	public ShipGridManager p4Manager;
+
 	public int p1Wins;
 	public int p2Wins;
 	public int p3Wins;
@@ -317,28 +322,36 @@ public class GameManager : MonoBehaviour
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1 && p1Color != PlayerColor.Dead) {
 				tempColor = p1Color;
 				p1Color = PlayerColor.Dead;
-				p1Ship.GetComponent<DirectionalGridForce> ().m_VectorGrid.AddGridForce (p1Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p1Ship.GetComponent<DirectionalGridForce> ().m_Color, true);
+				p1Manager.colorWake.m_VectorGrid.AddGridForce (p1Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p1Manager.colorWake.m_Color, true);
+				p1Manager.leftWake.m_VectorGrid.AddGridForce (p1Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p1Manager.colorWake.m_Color, true);
+				p1Manager.rightWake.m_VectorGrid.AddGridForce (p1Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p1Manager.colorWake.m_Color, true);
 			}
 			//If player 2
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2 && p2Color != PlayerColor.Dead) {
 				tempColor = p2Color;
 				p2Color = PlayerColor.Dead;
-				p2Ship.GetComponent<DirectionalGridForce> ().m_VectorGrid.AddGridForce (p2Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p2Ship.GetComponent<DirectionalGridForce> ().m_Color, true);
 
+				p2Manager.colorWake.m_VectorGrid.AddGridForce (p2Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p2Manager.colorWake.m_Color, true);
+				p2Manager.leftWake.m_VectorGrid.AddGridForce (p2Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p2Manager.colorWake.m_Color, true);
+				p2Manager.rightWake.m_VectorGrid.AddGridForce (p2Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p2Manager.colorWake.m_Color, true);
 			}
 			//If player 3
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3 && p3Color != PlayerColor.Dead) {
 				tempColor = p3Color;
 				p3Color = PlayerColor.Dead;
-				p3Ship.GetComponent<DirectionalGridForce> ().m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Ship.GetComponent<DirectionalGridForce> ().m_Color, true);
 
+				p3Manager.colorWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
+				p3Manager.leftWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
+				p3Manager.rightWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
 			}
 			//If player 4
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4 && p4Color != PlayerColor.Dead) {
 				tempColor = p4Color;
 				p4Color = PlayerColor.Dead;
-				p4Ship.GetComponent<DirectionalGridForce> ().m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Ship.GetComponent<DirectionalGridForce> ().m_Color, true);
 
+				p4Manager.colorWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
+				p4Manager.leftWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
+				p4Manager.rightWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
 			}
 			//wait the timer
 			for (int i = time; i >= 0; i--) {
@@ -475,6 +488,11 @@ public class GameManager : MonoBehaviour
 		p2Ship = Instantiate (p2ShipPrefab, eastSpawnPoint.GetComponent<Transform> ().position, eastSpawnPoint.GetComponent<Transform> ().rotation);
 		p3Ship = Instantiate (p3ShipPrefab, southSpawnPoint.GetComponent<Transform> ().position, southSpawnPoint.GetComponent<Transform> ().rotation);
 		p4Ship = Instantiate (p4ShipPrefab, westSpawnPoint.GetComponent<Transform> ().position, westSpawnPoint.GetComponent<Transform> ().rotation);
+
+		p1Manager = p1Ship.GetComponent<ShipGridManager> ();
+		p2Manager = p2Ship.GetComponent<ShipGridManager> ();
+		p3Manager = p3Ship.GetComponent<ShipGridManager> ();
+		p4Manager = p4Ship.GetComponent<ShipGridManager> ();
 
 		gameGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
 

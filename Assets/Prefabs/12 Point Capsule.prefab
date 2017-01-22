@@ -119,9 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 12
-  fillTime: 3
-  collectionForce: 11
-  collectionRadius: 11
+  fillTime: 2
+  collectionForce: 0.2
+  collectionRadius: 0.2
   pickUP: {fileID: 114037834530611402}
   collectorColor: 0
 --- !u!114 &114401661557378530
@@ -207,7 +207,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1444430593816690}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -124.21098}
   m_LocalScale: {x: 0.10000003, y: 0.10000003, z: 0.1}
   m_Children:
   - {fileID: 224567094022053076}
@@ -216,6 +216,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -15.704746, y: 39.496986}
   m_SizeDelta: {x: 703, y: 439}
   m_Pivot: {x: 0.5, y: 0.5}
