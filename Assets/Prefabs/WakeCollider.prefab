@@ -71,7 +71,7 @@ MonoBehaviour:
   m_ForceDirection: {x: 0, y: 0, z: 0}
   m_Radius: 0.25
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_HasColor: 1
+  m_HasColor: 0
 --- !u!114 &114816128485889052
 MonoBehaviour:
   m_ObjectHideFlags: 1
