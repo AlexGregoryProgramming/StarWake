@@ -26,7 +26,7 @@ public class ResultsScreenScript : MonoBehaviour
 	public Text p4Text;
 	public Text winnerText;
 	public Text continueText;
-
+	public bool isDone;
 	// Use this for initialization
 	void Start () 
 	{
@@ -183,10 +183,8 @@ public class ResultsScreenScript : MonoBehaviour
 		yield return new WaitForSeconds (1);
 
 		continueText.gameObject.SetActive (true);
-		if(Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
-		{
-			UnityEngine.SceneManagement.SceneManager.LoadScene ("alexTestMainMenu");
-		}
+		isDone = true;
+
 
 
 	}
@@ -200,8 +198,11 @@ public class ResultsScreenScript : MonoBehaviour
 			p3Block.GetComponent<VectorGridForce> ().m_VectorGrid.AddGridForce (p3Block.GetComponent<Transform> ().position, 0.2f, 0.2f, p3Block.GetComponent<VectorGridForce> ().m_Color, true);
 			p4Block.GetComponent<VectorGridForce> ().m_VectorGrid.AddGridForce (p4Block.GetComponent<Transform> ().position, 0.2f, 0.2f, p4Block.GetComponent<VectorGridForce> ().m_Color, true);
 		}
-
-
-
+		if (isDone == true) 
+		{
+			if (Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0)) {
+				UnityEngine.SceneManagement.SceneManager.LoadScene ("alexTestMainMenu");
+			}
+		}
 	}
 }

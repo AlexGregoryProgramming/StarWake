@@ -119,9 +119,12 @@ public class TitleGameScripting : MonoBehaviour {
 					}
 				}
 			}
-			//IF START BUTTON IS PRESSED
-			//CALL ATTACH ALL OBJECTS TO PARENT
-			AttachAllObjectsToParent();
+
+			if(Input.GetKeyDown (KeyCode.Joystick1Button7) || Input.GetKeyDown (KeyCode.Joystick2Button7) || Input.GetKeyDown (KeyCode.Joystick3Button7) || Input.GetKeyDown (KeyCode.Joystick4Button7))
+			{
+				AttachAllObjectsToParent();
+			}
+
 		} else if (mystate == MainMenuStates.moveEverythingDown) {
 			accelMovement += Time.deltaTime*125;
 			parentForMovement.localPosition = new Vector3 (parentForMovement.localPosition.x, parentForMovement.localPosition.y - (Time.deltaTime * 50*accelMovement), parentForMovement.localPosition.z);
@@ -141,28 +144,125 @@ public class TitleGameScripting : MonoBehaviour {
 			if (delay == 0) {
 				diamond.gameObject.SetActive (true);
 				mystate = MainMenuStates.playersAbleToJoin;
+				upperLeftCorner.color = Color.red;
+				upperRightCorner.color = Color.red;
+				lowerLeftCorner.color = Color.red;
+				lowerRightCorner.color = Color.red;
 			}
 		} else if (mystate == MainMenuStates.playersAbleToJoin) {
 			//If player one presses A, turn on green sprite upper left. upperLeftCorner.sprite = lit;
 			//Player presses start to go to next screen.
-			AttachAllObjectsToParentPart2();
+
+			if(Input.GetKeyDown (KeyCode.Joystick1Button0))
+			{
+				upperLeftCorner.sprite = lit;
+				upperLeftCorner.color = Color.green;
+				GameManager._GAMEMANAGER.p1Joined = true;
+			}
+
+			if(Input.GetKeyDown (KeyCode.Joystick2Button0))
+			{
+				upperRightCorner.sprite = lit;
+				upperRightCorner.color = Color.green;
+				GameManager._GAMEMANAGER.p2Joined = true;
+			}
+
+			if(Input.GetKeyDown (KeyCode.Joystick3Button0))
+			{
+				lowerLeftCorner.sprite = lit;
+				lowerLeftCorner.color = Color.green;
+				GameManager._GAMEMANAGER.p3Joined = true;
+			}
+
+			if(Input.GetKeyDown (KeyCode.Joystick4Button0))
+			{
+				lowerRightCorner.sprite = lit;
+				lowerRightCorner.color = Color.green;
+				GameManager._GAMEMANAGER.p4Joined = true;
+			}
+
+
+
+			if(Input.GetKeyDown (KeyCode.Joystick1Button1))
+			{
+				upperLeftCorner.sprite = unlit;
+				upperLeftCorner.color = Color.red;
+				GameManager._GAMEMANAGER.p1Joined = false;
+			}
+
+			if(Input.GetKeyDown (KeyCode.Joystick2Button1))
+			{
+				upperRightCorner.sprite = unlit;
+				upperRightCorner.color = Color.red;
+
+				GameManager._GAMEMANAGER.p2Joined = false;
+			}
+
+			if(Input.GetKeyDown (KeyCode.Joystick3Button1))
+			{
+				lowerLeftCorner.sprite = unlit;
+				lowerLeftCorner.color = Color.red;
+				GameManager._GAMEMANAGER.p3Joined = false;
+			}
+
+			if(Input.GetKeyDown (KeyCode.Joystick4Button1))
+			{
+				lowerRightCorner.sprite = unlit;
+				lowerRightCorner.color = Color.red;
+				GameManager._GAMEMANAGER.p4Joined = false;
+			}
+
+			if(Input.GetKeyDown (KeyCode.Joystick1Button7) || Input.GetKeyDown (KeyCode.Joystick2Button7) || Input.GetKeyDown (KeyCode.Joystick3Button7) || Input.GetKeyDown (KeyCode.Joystick4Button7))
+			{
+				AttachAllObjectsToParentPart2();
+			}
+
 			accelMovement = 0;
 		} else if (mystate == MainMenuStates.moveEverythingDown2) {
 			accelMovement += Time.deltaTime*125;
 			parentForMovement.localPosition = new Vector3 (parentForMovement.localPosition.x, parentForMovement.localPosition.y - (Time.deltaTime * 50*accelMovement), parentForMovement.localPosition.z);
 			if (parentForMovement.localPosition.y <= -2000) {
 				mystate = MainMenuStates.roundNum;
+				roundSelecter.SetActive (true);
 			}
 		} else if (mystate == MainMenuStates.roundNum) {
 			if (roundsSelected == false) {
 				ActivateRounds ();
 			}
-			//If they press right, increase
+			if (Input.GetKeyDown (KeyCode.Joystick1Button2) || Input.GetKeyDown (KeyCode.Joystick2Button2) || Input.GetKeyDown (KeyCode.Joystick3Button2) || Input.GetKeyDown (KeyCode.Joystick4Button2)) 
+			{
+				DecreaseRound ();
+			}
+
+			if (Input.GetKeyDown (KeyCode.Joystick1Button1) || Input.GetKeyDown (KeyCode.Joystick2Button1) || Input.GetKeyDown (KeyCode.Joystick3Button1) || Input.GetKeyDown (KeyCode.Joystick4Button1)) 
+			{
+				IncreaseRound ();
+			}
 			//if they press left, decrease
 			//If they press a or start move to next step. int numrounds is the final selection
+
+			if(Input.GetKeyDown (KeyCode.Joystick1Button7) || Input.GetKeyDown (KeyCode.Joystick2Button7) || Input.GetKeyDown (KeyCode.Joystick3Button7) || Input.GetKeyDown (KeyCode.Joystick4Button7))
+			{
+				mystate = MainMenuStates.tutorial;
+			}
+
+			if(Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
+			{
+				mystate = MainMenuStates.tutorial;
+			}
+
+
 		} else if (mystate == MainMenuStates.tutorial) {
 			tutorial.SetActive (true);
 			//Press a to start match
+			if (Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0)) 
+			{
+				GameManager._GAMEMANAGER.winsNeeded = numRounds();
+				GameManager._GAMEMANAGER.resetScores ();
+				GameManager._GAMEMANAGER.setCountdownStart ();
+				GameManager._GAMEMANAGER.winnerFound = false;
+				UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTempTest");
+			}
 		}
 
 	}
