@@ -29,7 +29,7 @@ public class PickupSpawner : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		timeLeft = 36;
+		timeLeft = 53;
 
 	}
 
@@ -37,7 +37,7 @@ public class PickupSpawner : MonoBehaviour
 	void Update ()
 	{
 		timeLeft -= Time.deltaTime;
-		if (timeLeft < nextSpawnTime && timeLeft < 30 && timeLeft > 0)
+		if (timeLeft < nextSpawnTime && timeLeft < 45 && timeLeft > 0)
 		{
 			nextSpawnTime -= spawnInterval;
 			roll = Random.Range (0, 101);

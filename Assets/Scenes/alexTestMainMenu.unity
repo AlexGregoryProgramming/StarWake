@@ -1378,7 +1378,7 @@ MonoBehaviour:
   countdownTimerLength: 3
   countDownTimer: 0
   gameTimeTextObject: {fileID: 0}
-  roundTime: 30
+  roundTime: 45
   playTimer: 0
   endRoundButton: {fileID: 0}
 --- !u!4 &1631302551
