@@ -10,7 +10,11 @@ public class GameManager : MonoBehaviour
 
 	public VectorGrid gameGrid;
 
-	private PlayerColor tempColor;
+	private PlayerColor tempColor1;
+	private PlayerColor tempColor2;
+	private PlayerColor tempColor3;
+	private PlayerColor tempColor4;
+
 	public static GameManager _GAMEMANAGER = null;
 
 	public GameObject UIObject;
@@ -323,7 +327,7 @@ public class GameManager : MonoBehaviour
 
 			//If player 1 is who died
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1 && p1Color != PlayerColor.Dead) {
-				tempColor = p1Color;
+				tempColor1 = p1Color;
 				p1Color = PlayerColor.Dead;
 				p1Manager.colorWake.m_VectorGrid.AddGridForce (p1Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p1Manager.colorWake.m_Color, true);
 				p1Manager.leftWake.m_VectorGrid.AddGridForce (p1Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p1Manager.colorWake.m_Color, true);
@@ -331,7 +335,7 @@ public class GameManager : MonoBehaviour
 			}
 			//If player 2
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2 && p2Color != PlayerColor.Dead) {
-				tempColor = p2Color;
+				tempColor2 = p2Color;
 				p2Color = PlayerColor.Dead;
 
 				p2Manager.colorWake.m_VectorGrid.AddGridForce (p2Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p2Manager.colorWake.m_Color, true);
@@ -340,7 +344,7 @@ public class GameManager : MonoBehaviour
 			}
 			//If player 3
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3 && p3Color != PlayerColor.Dead) {
-				tempColor = p3Color;
+				tempColor3 = p3Color;
 				p3Color = PlayerColor.Dead;
 
 				p3Manager.colorWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
@@ -349,7 +353,7 @@ public class GameManager : MonoBehaviour
 			}
 			//If player 4
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4 && p4Color != PlayerColor.Dead) {
-				tempColor = p4Color;
+				tempColor4 = p4Color;
 				p4Color = PlayerColor.Dead;
 
 				p4Manager.colorWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
@@ -366,34 +370,34 @@ public class GameManager : MonoBehaviour
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1) {
 				deadPlayer.SetActive (true);
 				deadPlayer.GetComponent<Transform> ().position = northSpawnPoint.GetComponent<Transform> ().position;
-				p1Color = tempColor;
+				p1Color = tempColor1;
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
-				Color tempWakeColor;
-				tempWakeColor = deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color;
+				Color tempWakeColor1;
+				tempWakeColor1 = deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color;
 				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = Color.white;
 				for (int i = invulnTime; i > 0; i--)
 				{
 					yield return new WaitForSeconds (1);
 				}
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
-				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = tempWakeColor;
+				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = tempWakeColor1;
 			}
 
 			//If player 2
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2) {
 				deadPlayer.SetActive (true);
 				deadPlayer.GetComponent<Transform> ().position = eastSpawnPoint.GetComponent<Transform> ().position;
-				p2Color = tempColor;
+				p2Color = tempColor2;
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
-				Color tempWakeColor;
-				tempWakeColor = deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color;
+				Color tempWakeColor2;
+				tempWakeColor2 = deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color;
 				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = Color.white;
 				for (int i = invulnTime; i > 0; i--)
 				{
 					yield return new WaitForSeconds (1);
 				}
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
-				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = tempWakeColor;
+				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = tempWakeColor2;
 
 			}
 
@@ -401,34 +405,34 @@ public class GameManager : MonoBehaviour
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3) {
 				deadPlayer.SetActive (true);
 				deadPlayer.GetComponent<Transform> ().position = westSpawnPoint.GetComponent<Transform> ().position;
-				p3Color = tempColor;
+				p3Color = tempColor3;
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
-				Color tempWakeColor;
-				tempWakeColor = deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color;
+				Color tempWakeColor3;
+				tempWakeColor3 = deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color;
 				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = Color.white;
 				for (int i = invulnTime; i > 0; i--)
 				{
 					yield return new WaitForSeconds (1);
 				}
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
-				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = tempWakeColor;
+				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = tempWakeColor3;
 			}
 
 			//If player 4
 			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4) {
 				deadPlayer.SetActive (true);
 				deadPlayer.GetComponent<Transform> ().position = southSpawnPoint.GetComponent<Transform> ().position;
-				p4Color = tempColor;
+				p4Color = tempColor4;
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
-				Color tempWakeColor;
-				tempWakeColor = deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color;
+				Color tempWakeColor4;
+				tempWakeColor4 = deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color;
 				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = Color.white;
 				for (int i = invulnTime; i > 0; i--)
 				{
 					yield return new WaitForSeconds (1);
 				}
 				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
-				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = tempWakeColor;
+				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = tempWakeColor4;
 			}
 			//reactiviate the player and set their color back to what it was.
 

@@ -355,7 +355,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411809338686572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.2163584, y: -0.39875922, z: 9.592176}
   m_LocalScale: {x: 0.035, y: 0.035, z: 0.035}
   m_Children:
   - {fileID: 4407713142514412}
@@ -656,6 +656,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 1.425
   rotationSpeed: 5
+  lh: 0
+  lv: 0
 --- !u!114 &114401993885520314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -718,8 +720,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftWake: {fileID: 114602559107062594}
-  rightWake: {fileID: 114513244605734696}
-  colorWake: {fileID: 114219691983756434}
+  rightWake: {fileID: 114219691983756434}
+  colorWake: {fileID: 114513244605734696}
 --- !u!114 &114762049802221548
 MonoBehaviour:
   m_ObjectHideFlags: 1
