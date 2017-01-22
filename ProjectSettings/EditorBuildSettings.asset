@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Scenes/alexTempTest.unity
   - enabled: 1
     path: Assets/Scenes/alexTestMainMenu.unity
+  - enabled: 1
+    path: Assets/Scenes/resultsScene.unity

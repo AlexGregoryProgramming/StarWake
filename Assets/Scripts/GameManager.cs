@@ -372,7 +372,7 @@ public class GameManager : MonoBehaviour
 			}
 
 			//If player 1 is who died
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1) {
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1 && p1Ship != null) {
 				deadPlayer.SetActive (true);
 				deadPlayer.GetComponent<Transform> ().position = northSpawnPoint.GetComponent<Transform> ().position;
 				p1Color = tempColor1;
@@ -389,7 +389,7 @@ public class GameManager : MonoBehaviour
 			}
 
 			//If player 2
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2) {
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2  && p2Ship != null) {
 				deadPlayer.SetActive (true);
 				deadPlayer.GetComponent<Transform> ().position = eastSpawnPoint.GetComponent<Transform> ().position;
 				p2Color = tempColor2;
@@ -407,7 +407,7 @@ public class GameManager : MonoBehaviour
 			}
 
 			//If player 3
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3) {
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3  && p3Ship != null) {
 				deadPlayer.SetActive (true);
 				deadPlayer.GetComponent<Transform> ().position = westSpawnPoint.GetComponent<Transform> ().position;
 				p3Color = tempColor3;
@@ -424,7 +424,7 @@ public class GameManager : MonoBehaviour
 			}
 
 			//If player 4
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4) {
+			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4  && p4Ship != null) {
 				deadPlayer.SetActive (true);
 				deadPlayer.GetComponent<Transform> ().position = southSpawnPoint.GetComponent<Transform> ().position;
 				p4Color = tempColor4;
@@ -740,30 +740,10 @@ public class GameManager : MonoBehaviour
 
 		if (gameState == GameState.EndOfGameResults)
 		{
-			if (p1Wins > p2Wins && p1Wins > p3Wins && p1Wins > p4Wins)
-			{
-				UIObject.GetComponent<GameUI> ().UpdateTimer ("Player 1 Wins!");
-
-			}
-
-			if (p2Wins > p1Wins && p2Wins > p3Wins && p2Wins > p4Wins)
-			{
-				UIObject.GetComponent<GameUI> ().UpdateTimer ("Player 2 Wins!");
-			}
-
-			if (p3Wins > p2Wins && p3Wins > p1Wins && p3Wins > p4Wins)
-			{
-				UIObject.GetComponent<GameUI> ().UpdateTimer ("Player 3 Wins!");
-			}
-
-			if (p4Wins > p2Wins && p4Wins > p3Wins && p4Wins > p1Wins)
-			{
-				UIObject.GetComponent<GameUI> ().UpdateTimer ("Player 4 Wins!");
-			}
 
 			if(Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
 			{
-				UnityEngine.SceneManagement.SceneManager.LoadScene ("alexTestMainMenu");
+				UnityEngine.SceneManagement.SceneManager.LoadScene ("resultsScene");
 				p1Color = PlayerColor.Yellow;
 				p2Color = PlayerColor.Red;
 				p3Color = PlayerColor.Blue;
