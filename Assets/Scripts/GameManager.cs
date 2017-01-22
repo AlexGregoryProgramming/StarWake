@@ -318,6 +318,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (deadPlayer.GetComponent<ShipColor> ().isInvulnerable == false)
 		{
+			AudioManager._AUDIOMANAGER.playSound ("Explosion");
 			deadPlayer.SetActive (false);
 
 			//If player 1 is who died

@@ -1368,6 +1368,7 @@ MonoBehaviour:
   pickupSpawner: {fileID: 0}
   deathTime: 2
   invulnTime: 2
+  countdown: {fileID: 0}
   gameState: 0
   countDownTextObject: {fileID: 0}
   countdownTimerLength: 3
@@ -1850,6 +1851,34 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 862b28520c10b8946841c50f34bea27f, type: 3}
   - clipName: Intro1
     audioClip: {fileID: 8300000, guid: 37f9a9c8983c85543815527ef23ffe1a, type: 3}
+  - clipName: Explosion
+    audioClip: {fileID: 8300000, guid: 1bc9218b21d23a945be2101a4664f180, type: 3}
+  - clipName: Explosion
+    audioClip: {fileID: 8300000, guid: 3c7ab47566970404dbe5aebb11a5218a, type: 3}
+  - clipName: Explosion
+    audioClip: {fileID: 8300000, guid: c0a0bfbb638f5484f8dfd16022c8f116, type: 3}
+  - clipName: Explosion
+    audioClip: {fileID: 8300000, guid: 4c4bb19764e7fc443bf354cbfbdc4cc3, type: 3}
+  - clipName: Explosion
+    audioClip: {fileID: 8300000, guid: 0c7b08bb468b9bc489d1fe7b8536ee38, type: 3}
+  - clipName: PointCollect1
+    audioClip: {fileID: 8300000, guid: 0d639a8291b32cf4ab213c9fee0dd86d, type: 3}
+  - clipName: PointCollect2
+    audioClip: {fileID: 8300000, guid: 831492f1acdcd4e4d818109b8448fde1, type: 3}
+  - clipName: PointCollect3
+    audioClip: {fileID: 8300000, guid: f237af491452a0340a513ca5f2111219, type: 3}
+  - clipName: PointCollect4
+    audioClip: {fileID: 8300000, guid: f237af491452a0340a513ca5f2111219, type: 3}
+  - clipName: SwapColor
+    audioClip: {fileID: 8300000, guid: 5ef853ed188fcbd46881a6cf4fc4ac37, type: 3}
+  - clipName: SwapColor
+    audioClip: {fileID: 8300000, guid: 0513e21200d9250489d9dc79fab24de0, type: 3}
+  - clipName: SwapColor
+    audioClip: {fileID: 8300000, guid: 2b60306a358a2944ebc5ef5ca63dc983, type: 3}
+  - clipName: SwapColor
+    audioClip: {fileID: 8300000, guid: 0094c40174a72b346bd3d316515c135c, type: 3}
+  - clipName: SwapColor
+    audioClip: {fileID: 8300000, guid: 832588a2a702f7141882bf0b71e83bf9, type: 3}
 --- !u!4 &2082653611
 Transform:
   m_ObjectHideFlags: 0
@@ -1875,7 +1904,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 012ce73a7264ad84cbc2771e12cbbc68, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0

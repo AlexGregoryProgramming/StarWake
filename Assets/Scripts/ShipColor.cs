@@ -51,6 +51,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Green);
 					DisableParticles ();
 					ParticleColors (Color.green);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
+
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick1Button1) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
@@ -60,6 +62,8 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Red);
 					DisableParticles ();
 					ParticleColors (Color.red);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
+
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick1Button2) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
@@ -69,6 +73,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Blue);
 					DisableParticles ();
 					ParticleColors (Color.blue);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick1Button3) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
@@ -78,6 +83,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Yellow);
 					DisableParticles ();
 					ParticleColors (Color.yellow);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 			}
 
@@ -93,6 +99,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Green);
 					DisableParticles ();
 					ParticleColors (Color.green);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick2Button1) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
@@ -102,6 +109,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Red);
 					DisableParticles ();
 					ParticleColors (Color.red);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick2Button2) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
@@ -111,6 +119,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Blue);
 					DisableParticles ();
 					ParticleColors (Color.blue);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick2Button3) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
@@ -120,6 +129,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Yellow);
 					DisableParticles ();
 					ParticleColors (Color.yellow);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 			}
 
@@ -134,6 +144,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Green);
 					DisableParticles ();
 					ParticleColors (Color.green);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick3Button1) && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
@@ -143,6 +154,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Red);
 					DisableParticles ();
 					ParticleColors (Color.red);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick3Button2)  && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
@@ -152,6 +164,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Blue);
 					DisableParticles ();
 					ParticleColors (Color.blue);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick3Button3) && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
@@ -161,6 +174,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Yellow);
 					DisableParticles ();
 					ParticleColors (Color.yellow);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 			}
 
@@ -174,6 +188,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Green);
 					DisableParticles ();
 					ParticleColors (Color.green);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick4Button1) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
@@ -182,6 +197,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Red);
 					DisableParticles ();
 					ParticleColors (Color.red);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick4Button2) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
@@ -190,6 +206,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Blue);
 					DisableParticles ();
 					ParticleColors (Color.blue);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 				if (Input.GetKeyDown (KeyCode.Joystick4Button3) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
@@ -198,6 +215,7 @@ public class ShipColor : MonoBehaviour {
 					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Yellow);
 					DisableParticles ();
 					ParticleColors (Color.yellow);
+					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
 			}
 		}

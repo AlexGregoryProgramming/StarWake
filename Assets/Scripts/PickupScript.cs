@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PickupScript : MonoBehaviour {
 	public int value;
 	public float fillTime;
-
+	public int pickUpTier;
 	public float collectionForce;
 	public float collectionRadius;
 	public Image pickUP;
@@ -32,6 +32,25 @@ public class PickupScript : MonoBehaviour {
 	{
 		if (pickUP.fillAmount == 1 && col.gameObject.GetComponent<ShipColor> () != null) 
 		{
+			if (pickUpTier == 1) 
+			{
+				AudioManager._AUDIOMANAGER.playSound ("PointCollect1");
+			}
+
+			if (pickUpTier == 2) 
+			{
+				AudioManager._AUDIOMANAGER.playSound ("PointCollect2");
+			}
+
+			if (pickUpTier == 3) 
+			{
+				AudioManager._AUDIOMANAGER.playSound ("PointCollect3");
+			}
+
+			if (pickUpTier == 4) 
+			{
+				AudioManager._AUDIOMANAGER.playSound ("PointCollect4");
+			}
 			int playerNum = col.gameObject.GetComponent<ShipColor> ().playerNumber;
 			collectorColor = GameManager._GAMEMANAGER.GetPlayerColor (playerNum);
 
