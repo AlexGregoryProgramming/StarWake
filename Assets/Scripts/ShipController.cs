@@ -39,6 +39,7 @@ public class ShipController : MonoBehaviour
 
         Quaternion targetRotation = Quaternion.Euler(0f, 0f, heading * Mathf.Rad2Deg);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-        transform.position += transform.up * movementSpeed * Time.deltaTime;
+        Vector3 position = transform.up * movementSpeed * Time.deltaTime;
+        transform.position += new Vector3(position.x, position.y, 0.0f);
     }
 }
