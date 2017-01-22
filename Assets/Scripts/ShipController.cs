@@ -8,6 +8,10 @@ public class ShipController : MonoBehaviour
 
     internal float heading = 0.0f;
 
+    private Quaternion targetRotation;
+    private float bounceTime;
+    private bool bouncing = false;
+
     string LeftStickHorizontalAxis = "P1LeftStickHorizontal";
     string LeftStickVerticalAxis = "P1LeftStickVertical";
 
@@ -24,6 +28,11 @@ public class ShipController : MonoBehaviour
             LeftStickHorizontalAxis = string.Format("P{0}LeftStickHorizontal", playerNumber);
             LeftStickVerticalAxis = string.Format("P{0}LeftStickVertical", playerNumber);
         }
+
+        BoxCollider collider = GetComponent<BoxCollider>();
+        if (collider != null) {
+            collider.isTrigger = true;
+        }
     }
 
     /// <summary>
@@ -31,13 +40,20 @@ public class ShipController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        float lh = Input.GetAxis (LeftStickHorizontalAxis);
-        float lv = Input.GetAxis (LeftStickVerticalAxis);
-        if ((lh != 0) || (lv != 0)) {
-            heading = Mathf.Atan2 (-lh, lv);
+        if (bouncing && (Time.time - bounceTime) >= 0.25f) {
+            bouncing = false;
         }
 
-        Quaternion targetRotation = Quaternion.Euler (0f, 0f, heading * Mathf.Rad2Deg);
+        if (!bouncing) {
+            float lh = Input.GetAxis (LeftStickHorizontalAxis);
+            float lv = Input.GetAxis (LeftStickVerticalAxis);
+            if ((lh != 0) || (lv != 0)) {
+                heading = Mathf.Atan2 (-lh, lv);
+            }
+
+        }
+
+        targetRotation = Quaternion.Euler (0f, 0f, heading * Mathf.Rad2Deg);
         transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         Vector3 position = transform.up * movementSpeed * Time.deltaTime;
         transform.position += new Vector3 (position.x, position.y, 0.0f);
@@ -48,13 +64,24 @@ public class ShipController : MonoBehaviour
     /// </summary>
     /// <param name="other">The other Collider involved in this collision.</param>
     void OnTriggerEnter(Collider other) {
-        Vector3 rayLength = transform.up * 0.5f;
-        Ray ray = new Ray(transform.position, rayLength);
-        //Debug.DrawRay(transform.position, rayLength);
+        if (!bouncing && other.GetComponent<Wall>() != null) {
+            Bounce(other);
+        }
+    }
+
+    void Bounce(Collider other) {
+        float rayLength = 0.75f;
+        Vector3 rayDirection = transform.up * rayLength;
+        Ray ray = new Ray(transform.position, rayDirection);
+        Debug.DrawRay(transform.position, rayDirection);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 0.5f)) {
+        if (Physics.Raycast(ray, out hit, rayLength)) {
             Vector3 reflectedDir = Vector3.Reflect(ray.direction, hit.normal);
+            float oldHeading = heading;
             heading = Mathf.Atan2(reflectedDir.x, reflectedDir.y);
+            bouncing = true;
+            bounceTime = Time.time + 0.25f;
+            Debug.Log(other.gameObject.name + " trigger changed heading changed from " + (oldHeading * Mathf.Rad2Deg) + " to " + (heading * Mathf.Rad2Deg));
         }
     }
 }
