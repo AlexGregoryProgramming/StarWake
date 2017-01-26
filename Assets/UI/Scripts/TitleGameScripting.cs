@@ -106,7 +106,7 @@ public class TitleGameScripting : MonoBehaviour {
 				}
 			}
 
-			if(Input.GetKeyDown (KeyCode.Joystick1Button7) || Input.GetKeyDown (KeyCode.Joystick2Button7) || Input.GetKeyDown (KeyCode.Joystick3Button7) || Input.GetKeyDown (KeyCode.Joystick4Button7))
+			if (InputManager.IsStartPressed)
 			{
 				AttachAllObjectsToParent();
 			}
@@ -182,7 +182,7 @@ public class TitleGameScripting : MonoBehaviour {
 				GameManager._GAMEMANAGER.p4Joined = false;
 			}
 
-			if(Input.GetKeyDown (KeyCode.Joystick1Button7) || Input.GetKeyDown (KeyCode.Joystick2Button7) || Input.GetKeyDown (KeyCode.Joystick3Button7) || Input.GetKeyDown (KeyCode.Joystick4Button7))
+			if (InputManager.IsStartPressed)
 			{
 				AttachAllObjectsToParentPart2();
 			}
@@ -199,19 +199,19 @@ public class TitleGameScripting : MonoBehaviour {
 			if (roundsSelected == false) {
 				ActivateRounds ();
 			}
-			if (Input.GetKeyDown (KeyCode.Joystick1Button2) || Input.GetKeyDown (KeyCode.Joystick2Button2) || Input.GetKeyDown (KeyCode.Joystick3Button2) || Input.GetKeyDown (KeyCode.Joystick4Button2)) 
+			if (Input.GetKeyDown (KeyCode.Joystick1Button2) || Input.GetKeyDown (KeyCode.Joystick2Button2) || Input.GetKeyDown (KeyCode.Joystick3Button2) || Input.GetKeyDown (KeyCode.Joystick4Button2))
 			{
 				DecreaseRound ();
 			}
 
-			if (Input.GetKeyDown (KeyCode.Joystick1Button1) || Input.GetKeyDown (KeyCode.Joystick2Button1) || Input.GetKeyDown (KeyCode.Joystick3Button1) || Input.GetKeyDown (KeyCode.Joystick4Button1)) 
+			if (Input.GetKeyDown (KeyCode.Joystick1Button1) || Input.GetKeyDown (KeyCode.Joystick2Button1) || Input.GetKeyDown (KeyCode.Joystick3Button1) || Input.GetKeyDown (KeyCode.Joystick4Button1))
 			{
 				IncreaseRound ();
 			}
 			//if they press left, decrease
 			//If they press a or start move to next step. int numrounds is the final selection
 
-			if(Input.GetKeyDown (KeyCode.Joystick1Button7) || Input.GetKeyDown (KeyCode.Joystick2Button7) || Input.GetKeyDown (KeyCode.Joystick3Button7) || Input.GetKeyDown (KeyCode.Joystick4Button7))
+			if (InputManager.IsStartPressed)
 			{
 				mystate = MainMenuStates.tutorial;
 				currrentTut = 1;
@@ -236,7 +236,7 @@ public class TitleGameScripting : MonoBehaviour {
 				}
 				tutorialScreens [currrentTut - 1].color = new Color (1, 1, 1, delay);
 			} else {
-				if (Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0)) 
+				if (Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
 				{
 					NextTutorialScreen ();
 				}
