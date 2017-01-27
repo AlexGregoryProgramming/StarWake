@@ -298,9 +298,9 @@ public class GameManager : MonoBehaviour
 	void Awake()
 	{
         if (_GAMEMANAGER != null) {
-            Destroy(this);
+            Destroy(gameObject);
         } else {
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(gameObject);
             _GAMEMANAGER = this;
             Initialize();
         }
