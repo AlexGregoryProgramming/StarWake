@@ -204,7 +204,7 @@ public class TitleGameScripting : MonoBehaviour {
 				DecreaseRound ();
 			}
 
-			if (Input.GetKeyDown (KeyCode.Joystick1Button1) || Input.GetKeyDown (KeyCode.Joystick2Button1) || Input.GetKeyDown (KeyCode.Joystick3Button1) || Input.GetKeyDown (KeyCode.Joystick4Button1))
+			if (InputManager.IsCancelPressed)
 			{
 				IncreaseRound ();
 			}
@@ -218,7 +218,7 @@ public class TitleGameScripting : MonoBehaviour {
 				delay = 0;
 			}
 
-			if(Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
+			if (InputManager.IsSubmitPressed)
 			{
 				mystate = MainMenuStates.tutorial;
 				currrentTut = 1;
@@ -236,7 +236,7 @@ public class TitleGameScripting : MonoBehaviour {
 				}
 				tutorialScreens [currrentTut - 1].color = new Color (1, 1, 1, delay);
 			} else {
-				if (Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
+				if (InputManager.IsSubmitPressed)
 				{
 					NextTutorialScreen ();
 				}

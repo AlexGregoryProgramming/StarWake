@@ -512,34 +512,34 @@ public class GameManager : MonoBehaviour
 		p3Score = 0;
 		p4Score = 0;
 
-		if (p1Joined == true) 
+		if (p1Joined == true)
 		{
 			p1Ship = Instantiate (p1ShipPrefab, northSpawnPoint.GetComponent<Transform> ().position, northSpawnPoint.GetComponent<Transform> ().rotation);
 			p1Ship.GetComponent<ShipController> ().heading = northSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
 		}
-		if (p2Joined == true) 
+		if (p2Joined == true)
 		{
 			p2Ship = Instantiate (p2ShipPrefab, eastSpawnPoint.GetComponent<Transform> ().position, eastSpawnPoint.GetComponent<Transform> ().rotation);
 			p2Ship.GetComponent<ShipController> ().heading = eastSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
 		}
-		if (p3Joined == true) 
+		if (p3Joined == true)
 		{
 			p3Ship = Instantiate (p3ShipPrefab, southSpawnPoint.GetComponent<Transform> ().position, southSpawnPoint.GetComponent<Transform> ().rotation);
 			p3Ship.GetComponent<ShipController> ().heading = southSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
 		}
-		if (p4Joined == true) 
+		if (p4Joined == true)
 		{
 			p4Ship = Instantiate (p4ShipPrefab, westSpawnPoint.GetComponent<Transform> ().position, westSpawnPoint.GetComponent<Transform> ().rotation);
 			p4Ship.GetComponent<ShipController> ().heading = westSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
 		}
 
-		if (p1Joined == true) 
+		if (p1Joined == true)
 		p1Manager = p1Ship.GetComponent<ShipGridManager> ();
-		if (p2Joined == true) 
+		if (p2Joined == true)
 		p2Manager = p2Ship.GetComponent<ShipGridManager> ();
-		if (p3Joined == true) 
+		if (p3Joined == true)
 		p3Manager = p3Ship.GetComponent<ShipGridManager> ();
-		if (p4Joined == true) 
+		if (p4Joined == true)
 		p4Manager = p4Ship.GetComponent<ShipGridManager> ();
 
 		gameGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
@@ -715,21 +715,21 @@ public class GameManager : MonoBehaviour
 				winnerFound = true;
 			}
 
-			if (winnerFound == false) 
+			if (winnerFound == false)
 			{
-				if(Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
+				if (InputManager.IsSubmitPressed)
 				{
 					endResults ();
-				}	
+				}
 			}
 
-			if (winnerFound == true) 
+			if (winnerFound == true)
 			{
-				if(Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
+				if (InputManager.IsSubmitPressed)
 				{
 					gameState = GameState.EndOfGameResultsStart;
 					StartCoroutine(EndOfGameDelay());
-				}	
+				}
 			}
 		}
 
@@ -741,7 +741,7 @@ public class GameManager : MonoBehaviour
 		if (gameState == GameState.EndOfGameResults)
 		{
 
-			if(Input.GetKeyDown (KeyCode.Joystick1Button0) || Input.GetKeyDown (KeyCode.Joystick2Button0) || Input.GetKeyDown (KeyCode.Joystick3Button0) || Input.GetKeyDown (KeyCode.Joystick4Button0))
+			if (InputManager.IsSubmitPressed)
 			{
 				UnityEngine.SceneManagement.SceneManager.LoadScene ("resultsScene");
 				p1Color = PlayerColor.Yellow;
