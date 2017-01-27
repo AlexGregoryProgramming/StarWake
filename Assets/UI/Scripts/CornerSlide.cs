@@ -77,12 +77,18 @@ public class CornerSlide : MonoBehaviour {
 
 	public void Corner()
 	{
-		center = false;
-		accel = 0;
+		if (center == true) {
+			center = false;
+			AudioManager._AUDIOMANAGER.playSound ("HighSwap");
+			accel = 0;
+		}
 	}
 
 	public void Center()
 	{
-		center = true;
+		if (center == false) {
+			AudioManager._AUDIOMANAGER.playSound ("LowSwap");
+			center = true;
+		}
 	}
 }

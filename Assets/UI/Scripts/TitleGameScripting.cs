@@ -107,6 +107,7 @@ public class TitleGameScripting : MonoBehaviour {
 			if (InputManager.IsStartPressed)
 			{
 				AttachAllObjectsToParent();
+				AudioManager._AUDIOMANAGER.playSound ("PointCollect3");
 			}
 
 		} else if (mystate == MainMenuStates.moveEverythingDown) {
@@ -183,6 +184,7 @@ public class TitleGameScripting : MonoBehaviour {
 			if (InputManager.IsStartPressed)
 			{
 				AttachAllObjectsToParentPart2();
+				AudioManager._AUDIOMANAGER.playSound ("UISelect");
 			}
 
 			accelMovement = 0;
@@ -200,11 +202,13 @@ public class TitleGameScripting : MonoBehaviour {
 			if (InputManager.IsP1BlueDown || InputManager.IsP2BlueDown || InputManager.IsP3BlueDown || InputManager.IsP4BlueDown)
 			{
 				DecreaseRound ();
+				AudioManager._AUDIOMANAGER.playSound ("PointCollect1");
 			}
 
 			if (InputManager.IsCancelPressed)
 			{
 				IncreaseRound ();
+				AudioManager._AUDIOMANAGER.playSound ("PointCollect1");
 			}
 			//if they press left, decrease
 			//If they press a or start move to next step. int numrounds is the final selection
@@ -212,6 +216,7 @@ public class TitleGameScripting : MonoBehaviour {
 			if (InputManager.IsStartPressed)
 			{
 				mystate = MainMenuStates.tutorial;
+				AudioManager._AUDIOMANAGER.playSound ("UISelect");
 				currrentTut = 1;
 				delay = 0;
 			}
@@ -219,6 +224,7 @@ public class TitleGameScripting : MonoBehaviour {
 			if (InputManager.IsSubmitPressed)
 			{
 				mystate = MainMenuStates.tutorial;
+				AudioManager._AUDIOMANAGER.playSound ("UISelect");
 				currrentTut = 1;
 				delay = 0;
 			}
@@ -251,6 +257,7 @@ public class TitleGameScripting : MonoBehaviour {
 			GameManager._GAMEMANAGER.setCountdownStart ();
 			GameManager._GAMEMANAGER.winnerFound = false;
 			UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTempTest");
+			AudioManager._AUDIOMANAGER.playSound ("UISelect");
 		} else {
 			currrentTut += 1;
 			delay = 0;

@@ -10,7 +10,8 @@ public class EndRoundTrophyRow : MonoBehaviour {
 	public TrophyExplode[] trophiesLit;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+		trophiesLit = new TrophyExplode[4];
 		for(int i = 0; i<trophiesGrey.Length; i++)
 		{
 			trophiesLit [i] = trophiesGrey [i].gameObject.GetComponentInChildren<TrophyExplode> ();
@@ -42,7 +43,7 @@ public class EndRoundTrophyRow : MonoBehaviour {
 		for(int i = 0; i<trophiesGrey.Length; i++)
 		{
 			trophiesLit[i].ResetForWin (newCol, delay);
-			delay += 0.33f;
+			delay += 0.5f;
 		}
 	}
 }

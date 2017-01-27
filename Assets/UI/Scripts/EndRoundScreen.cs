@@ -11,11 +11,15 @@ public class EndRoundScreen : MonoBehaviour {
 	public int numWinsRequired = 1;
 	public bool[] playersInGame = new bool[4];
 	public bool uiStillOnScreen = false;
+	public VectorGridForce[] fireWorksArray;
 
 	public EndRoundTrophyRow[] rows;
 	bool gotStuff;
 	float delay = 0;
 	bool gameOver=false;
+	bool fireworks = false;
+	Color fireworksColor;
+	float fireworkDelay = 0;
 
 	public static EndRoundScreen _EndRoundUI = null;
 
@@ -42,7 +46,7 @@ public class EndRoundScreen : MonoBehaviour {
 			row.TurnOffTrophiesNotInUse (numWins);
 		}
 		for (int i = 0; i < playersInGame.Length; i++) {
-			if (playersInGame [i] == true) {
+			if (playersInGame [i] != true) {
 				rows [i].gameObject.SetActive (false);
 			}
 		}
@@ -52,11 +56,32 @@ public class EndRoundScreen : MonoBehaviour {
 	{
 		if (uiStillOnScreen == true) {
 			delay += Time.deltaTime;
-			if (delay > 1.5f && gameOver==false) {
+			if (delay > 1.5f && gameOver == false) {
 				AButton.color = new Color (1, 1, 1, 1);
 				if (InputManager.IsStartPressed || InputManager.IsSubmitPressed) {
 					uiStillOnScreen = false;
 					AButton.color = new Color (1, 1, 1, 0);
+					this.gameObject.SetActive (false);
+					delay = 0;
+				}
+			} else if (delay > 5.0f && gameOver == true) {
+				AButton.color = new Color (1, 1, 1, 1);
+				if (InputManager.IsStartPressed || InputManager.IsSubmitPressed) {
+					Reset ();
+					AButton.color = new Color (1, 1, 1, 0);
+					this.gameObject.SetActive (false);
+					delay = 0;
+				}
+			}
+		}
+		if (fireworks == true) {
+			fireworkDelay += Time.deltaTime;
+			if (fireworkDelay >= 1f) {
+				fireworkDelay = 0;
+				int rand = Random.Range (3, fireWorksArray.Length);
+				for (int i = 0; i < rand; i++) {
+					int arraySpot = Random.Range (0, fireWorksArray.Length);
+					fireWorksArray [arraySpot].m_VectorGrid.AddGridForce (fireWorksArray [arraySpot].transform.position, Random.Range(0.025f, 0.175f), Random.Range(0.25f, 1.25f), fireworksColor, true);
 				}
 			}
 		}
@@ -74,7 +99,7 @@ public class EndRoundScreen : MonoBehaviour {
 			if (row.numWins >= numWinsRequired) {
 				//Someone won. Do the gameoverthings
 				gameOver=true;
-				Invoke ("SetWinner", 0.25f);
+				Invoke ("SetWinner", 3.0f);
 			}
 		}
 	}
@@ -90,11 +115,13 @@ public class EndRoundScreen : MonoBehaviour {
 
 	public void SetWinner()
 	{
+		fireworks = true;
 		int winner = -1;
 		for (int i = 0; i < rows.Length; i++) {
 			if (rows [i].numWins >= numWinsRequired) {
 				title.text = string.Format("PLAYER {0} WINS!", i+1);
 				winner = i;
+				fireworksColor = rows [i].trophiesLit [0].og;
 			}
 		}
 		for (int i = 0; i < rows.Length; i++) {

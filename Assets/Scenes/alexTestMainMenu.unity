@@ -3441,7 +3441,6 @@ MonoBehaviour:
   endRoundUI: {fileID: 0}
   winnerFound: 0
   winsNeeded: 0
-  incrementalPoints: 12
   matchResults:
     dividedPoints: 0
   pickupSpawner: {fileID: 0}
@@ -3453,7 +3452,7 @@ MonoBehaviour:
   countdownTimerLength: 3
   countDownTimer: 0
   gameTimeTextObject: {fileID: 0}
-  roundTime: 45
+  roundTime: 60
   playTimer: 0
   endRoundButton: {fileID: 0}
 --- !u!4 &1631302551
@@ -3599,7 +3598,7 @@ MonoBehaviour:
   - clipName: PointCollect3
     audioClip: {fileID: 8300000, guid: f237af491452a0340a513ca5f2111219, type: 3}
   - clipName: PointCollect4
-    audioClip: {fileID: 8300000, guid: f237af491452a0340a513ca5f2111219, type: 3}
+    audioClip: {fileID: 8300000, guid: 12dbd22482d9bae4e8f07b34c98d715c, type: 3}
   - clipName: SwapColor
     audioClip: {fileID: 8300000, guid: 5ef853ed188fcbd46881a6cf4fc4ac37, type: 3}
   - clipName: SwapColor
@@ -3610,6 +3609,12 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 0094c40174a72b346bd3d316515c135c, type: 3}
   - clipName: SwapColor
     audioClip: {fileID: 8300000, guid: 832588a2a702f7141882bf0b71e83bf9, type: 3}
+  - clipName: LowSwap
+    audioClip: {fileID: 8300000, guid: 0094c40174a72b346bd3d316515c135c, type: 3}
+  - clipName: HighSwap
+    audioClip: {fileID: 8300000, guid: 832588a2a702f7141882bf0b71e83bf9, type: 3}
+  - clipName: UISelect
+    audioClip: {fileID: 8300000, guid: cfd03bcd2314a324cb7bc7d7908e1e4a, type: 3}
 --- !u!4 &2082653611
 Transform:
   m_ObjectHideFlags: 0

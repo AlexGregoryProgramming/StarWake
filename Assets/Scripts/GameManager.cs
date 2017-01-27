@@ -341,7 +341,7 @@ public class GameManager : MonoBehaviour
 
 		if (gameState == GameState.CoinGameModeStart)
 		{
-			endRoundUI = GameObject.Find ("_EndRoundUI").GetComponent<EndRoundScreen> ();
+			endRoundUI = EndRoundScreen._EndRoundUI;
 			bool[] playersInGame = new bool[4];
 			playersInGame [0] = _players [1].joined;
 			playersInGame [1] = _players [2].joined;
