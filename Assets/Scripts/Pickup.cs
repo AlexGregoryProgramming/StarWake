@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-public class PickupScript : MonoBehaviour {
+
+public class Pickup : MonoBehaviour {
 	public int value;
 	public float fillTime;
 	public int pickUpTier;
@@ -12,45 +11,44 @@ public class PickupScript : MonoBehaviour {
 
 	public GameManager.PlayerColor collectorColor;
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
 		pickUP.fillAmount = 0.0f;
 	}
-	
+
 	// Update is called once per frame
-	void Update () 
+	void Update ()
 	{
-		if (pickUP.fillAmount != 1.0f) 
+		if (pickUP.fillAmount != 1.0f)
 		{
 			pickUP.fillAmount += 1 / fillTime * Time.deltaTime;
 		}
-
-
 	}
 
 	public void OnCollisionEnter(Collision col)
 	{
-		if (pickUP.fillAmount == 1 && col.gameObject.GetComponent<ShipColor> () != null) 
+		if (pickUP.fillAmount == 1 && col.gameObject.GetComponent<ShipColor> () != null)
 		{
-			if (pickUpTier == 1) 
+			if (pickUpTier == 1)
 			{
 				AudioManager._AUDIOMANAGER.playSound ("PointCollect1");
 			}
 
-			if (pickUpTier == 2) 
+			if (pickUpTier == 2)
 			{
 				AudioManager._AUDIOMANAGER.playSound ("PointCollect2");
 			}
 
-			if (pickUpTier == 3) 
+			if (pickUpTier == 3)
 			{
 				AudioManager._AUDIOMANAGER.playSound ("PointCollect3");
 			}
 
-			if (pickUpTier == 4) 
+			if (pickUpTier == 4)
 			{
 				AudioManager._AUDIOMANAGER.playSound ("PointCollect4");
 			}
+
 			int playerNum = col.gameObject.GetComponent<ShipColor> ().playerNumber;
 			collectorColor = GameManager._GAMEMANAGER.GetPlayerColor (playerNum);
 
@@ -59,29 +57,28 @@ public class PickupScript : MonoBehaviour {
 			col.gameObject.GetComponent<ShipGridManager>().rightWake.m_VectorGrid.AddGridForce (col.gameObject.GetComponent<Transform> ().position, collectionForce, collectionRadius, col.gameObject.GetComponent<ShipGridManager>().colorWake.m_Color, true);
 
 
-			if (collectorColor == GameManager.PlayerColor.Blue) 
+			if (collectorColor == GameManager.PlayerColor.Blue)
 			{
 				GameManager._GAMEMANAGER.bluePointsScored (value);
 			}
 
-			if (collectorColor == GameManager.PlayerColor.Green) 
+			if (collectorColor == GameManager.PlayerColor.Green)
 			{
 				GameManager._GAMEMANAGER.greenPointsScored (value);
 			}
 
-			if (collectorColor == GameManager.PlayerColor.Red) 
+			if (collectorColor == GameManager.PlayerColor.Red)
 			{
 				GameManager._GAMEMANAGER.redPointsScored (value);
 			}
 
-			if (collectorColor == GameManager.PlayerColor.Yellow) 
+			if (collectorColor == GameManager.PlayerColor.Yellow)
 			{
 				GameManager._GAMEMANAGER.yellowPointsScored (value);
 			}
 
 			print (collectorColor);
 			Destroy(this.gameObject);
-		
 		}
 	}
 }
