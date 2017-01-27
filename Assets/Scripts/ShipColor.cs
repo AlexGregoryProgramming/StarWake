@@ -23,7 +23,7 @@ public class ShipColor : MonoBehaviour {
 	private bool particlesOn;
 
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
 		if (playerNumber == 1) {
 			ParticleColors (Color.yellow);
@@ -39,7 +39,7 @@ public class ShipColor : MonoBehaviour {
 			WakeParticles (Color.green);
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -47,9 +47,9 @@ public class ShipColor : MonoBehaviour {
 			EnableParticles ();
 		}
 		if (GameManager._GAMEMANAGER.gameState == GameManager.GameState.CoinGameMode) {
-			if (playerNumber == 1 && cooldownTimer <= Time.time) 
+			if (playerNumber == 1 && cooldownTimer <= Time.time)
 			{
-				if (Input.GetKeyDown (KeyCode.Joystick1Button0) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Green) {
+				if (InputManager.IsP1GreenDown && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Green) {
 					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Green;
@@ -61,7 +61,7 @@ public class ShipColor : MonoBehaviour {
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick1Button1) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Red) {
+				if (InputManager.IsP1RedDown && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Red;
@@ -73,7 +73,7 @@ public class ShipColor : MonoBehaviour {
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick1Button2) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Blue) {
+				if (InputManager.IsP1BlueDown && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Blue;
@@ -84,7 +84,7 @@ public class ShipColor : MonoBehaviour {
 					WakeParticles(Color.blue);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick1Button3) && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Yellow) {
+				if (InputManager.IsP1YellowDown && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Yellow;
@@ -98,10 +98,10 @@ public class ShipColor : MonoBehaviour {
 			}
 
 
-			if (playerNumber == 2 && cooldownTimer <= Time.time) 
+			if (playerNumber == 2 && cooldownTimer <= Time.time)
 			{
 
-				if (Input.GetKeyDown (KeyCode.Joystick2Button0) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Green) {
+				if (InputManager.IsP2GreenDown && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Green) {
 					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Green;
@@ -112,7 +112,7 @@ public class ShipColor : MonoBehaviour {
 					WakeParticles (Color.green);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick2Button1) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Red) {
+				if (InputManager.IsP2RedDown && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Red;
@@ -123,7 +123,7 @@ public class ShipColor : MonoBehaviour {
 					WakeParticles(Color.red);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick2Button2) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Blue) {
+				if (InputManager.IsP2BlueDown && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Blue;
@@ -134,7 +134,7 @@ public class ShipColor : MonoBehaviour {
 					WakeParticles(Color.blue);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick2Button3) && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Yellow) {
+				if (InputManager.IsP2YellowDown && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Yellow;
@@ -148,9 +148,9 @@ public class ShipColor : MonoBehaviour {
 			}
 
 
-			if (playerNumber == 3 && cooldownTimer <= Time.time) 
+			if (playerNumber == 3 && cooldownTimer <= Time.time)
 			{
-				if (Input.GetKeyDown (KeyCode.Joystick3Button0) && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Green) {
+				if (InputManager.IsP3GreenDown && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Green) {
 					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Green;
@@ -161,7 +161,7 @@ public class ShipColor : MonoBehaviour {
 					WakeParticles (Color.green);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick3Button1) && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Red) {
+				if (InputManager.IsP3RedDown && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Red;
@@ -172,7 +172,7 @@ public class ShipColor : MonoBehaviour {
 					WakeParticles(Color.red);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick3Button2)  && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Blue) {
+				if (InputManager.IsP3BlueDown && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Blue;
@@ -183,7 +183,7 @@ public class ShipColor : MonoBehaviour {
 					WakeParticles(Color.blue);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick3Button3) && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Yellow) {
+				if (InputManager.IsP3YellowDown && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
 					cooldownTimer = (Time.time + cooldownTimeAmount);
 					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Yellow;
@@ -197,9 +197,9 @@ public class ShipColor : MonoBehaviour {
 			}
 
 
-			if (playerNumber == 4 && cooldownTimer <= Time.time) 
+			if (playerNumber == 4 && cooldownTimer <= Time.time)
 			{
-				if (Input.GetKeyDown (KeyCode.Joystick4Button0) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Green) {
+				if (InputManager.IsP4GreenDown && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Green) {
 					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
 					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Green;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.green;
@@ -209,7 +209,7 @@ public class ShipColor : MonoBehaviour {
 					WakeParticles (Color.green);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick4Button1) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Red) {
+				if (InputManager.IsP4RedDown && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Red) {
 					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
 					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Red;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.red;
@@ -219,7 +219,7 @@ public class ShipColor : MonoBehaviour {
 					WakeParticles(Color.red);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick4Button2) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Blue) {
+				if (InputManager.IsP4BlueDown && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Blue) {
 					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
 					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Blue;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.blue;
@@ -229,7 +229,7 @@ public class ShipColor : MonoBehaviour {
 					WakeParticles(Color.blue);
 					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 				}
-				if (Input.GetKeyDown (KeyCode.Joystick4Button3) && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Yellow) {
+				if (InputManager.IsP4YellowDown && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Yellow) {
 					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
 					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Yellow;
 					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.yellow;

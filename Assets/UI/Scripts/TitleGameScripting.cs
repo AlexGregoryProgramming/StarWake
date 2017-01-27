@@ -132,25 +132,25 @@ public class TitleGameScripting : MonoBehaviour {
 		} else if (mystate == MainMenuStates.playersAbleToJoin) {
 			//If player one presses A, turn on green sprite upper left. upperLeftCorner.sprite = lit;
 			//Player presses start to go to next screen.
-			if(Input.GetKeyDown (KeyCode.Joystick1Button0))
+			if (InputManager.IsP1GreenDown)
 			{
 				corners [0].Corner ();
 				GameManager._GAMEMANAGER.p1Joined = true;
 			}
 
-			if(Input.GetKeyDown (KeyCode.Joystick2Button0))
+			if (InputManager.IsP2GreenDown)
 			{
 				corners [1].Corner ();
 				GameManager._GAMEMANAGER.p2Joined = true;
 			}
 
-			if(Input.GetKeyDown (KeyCode.Joystick3Button0))
+			if (InputManager.IsP3GreenDown)
 			{
 				corners [2].Corner ();
 				GameManager._GAMEMANAGER.p3Joined = true;
 			}
 
-			if(Input.GetKeyDown (KeyCode.Joystick4Button0))
+			if (InputManager.IsP4GreenDown)
 			{
 				corners [3].Corner ();
 				GameManager._GAMEMANAGER.p4Joined = true;
@@ -158,25 +158,25 @@ public class TitleGameScripting : MonoBehaviour {
 
 
 
-			if(Input.GetKeyDown (KeyCode.Joystick1Button1))
+			if (InputManager.IsP1RedDown)
 			{
 				corners [0].Center ();
 				GameManager._GAMEMANAGER.p1Joined = false;
 			}
 
-			if(Input.GetKeyDown (KeyCode.Joystick2Button1))
+			if (InputManager.IsP2RedDown)
 			{
 				corners [1].Center ();
 				GameManager._GAMEMANAGER.p2Joined = false;
 			}
 
-			if(Input.GetKeyDown (KeyCode.Joystick3Button1))
+			if (InputManager.IsP3RedDown)
 			{
 				corners [2].Center ();
 				GameManager._GAMEMANAGER.p3Joined = false;
 			}
 
-			if(Input.GetKeyDown (KeyCode.Joystick4Button1))
+			if (InputManager.IsP4RedDown)
 			{
 				corners [3].Center ();
 				GameManager._GAMEMANAGER.p4Joined = false;
@@ -199,7 +199,7 @@ public class TitleGameScripting : MonoBehaviour {
 			if (roundsSelected == false) {
 				ActivateRounds ();
 			}
-			if (Input.GetKeyDown (KeyCode.Joystick1Button2) || Input.GetKeyDown (KeyCode.Joystick2Button2) || Input.GetKeyDown (KeyCode.Joystick3Button2) || Input.GetKeyDown (KeyCode.Joystick4Button2))
+			if (InputManager.IsP1BlueDown || InputManager.IsP2BlueDown || InputManager.IsP3BlueDown || InputManager.IsP4BlueDown)
 			{
 				DecreaseRound ();
 			}
