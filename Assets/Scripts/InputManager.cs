@@ -13,6 +13,27 @@ public sealed class InputManager : MonoBehaviour {
             return Input.GetButton("Start");
         }
     }
+
+    public static bool IsSubmitPressed {
+        get {
+            if (Platform.IsOSX) {
+                return Input.GetButton("SubmitOSX");
+            }
+
+            return Input.GetButton("Submit");
+        }
+    }
+
+    public static bool IsCancelPressed {
+        get {
+            if (Platform.IsOSX) {
+                return Input.GetButton("CancelOSX");
+            }
+
+            return Input.GetButton("Cancel");
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
 
