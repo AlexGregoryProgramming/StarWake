@@ -5,51 +5,22 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public const int PlayerCount = 4;
+
 	public float deathExplosionRadius;
 	public float deathExplosionForce;
 
 	public VectorGrid gameGrid;
 
-	private PlayerColor tempColor1;
-	private PlayerColor tempColor2;
-	private PlayerColor tempColor3;
-	private PlayerColor tempColor4;
-
 	public static GameManager _GAMEMANAGER = null;
 
 	public GameObject UIObject;
-
-	public GameObject northSpawnPoint;
-	public GameObject eastSpawnPoint;
-	public GameObject southSpawnPoint;
-	public GameObject westSpawnPoint;
 
 	public GameObject p1ShipPrefab;
 	public GameObject p2ShipPrefab;
 	public GameObject p3ShipPrefab;
 	public GameObject p4ShipPrefab;
 
-	public bool p1Joined;
-	public bool p2Joined;
-	public bool p3Joined;
-	public bool p4Joined;
-
-	public GameObject p1Ship;
-	public GameObject p2Ship;
-	public GameObject p3Ship;
-	public GameObject p4Ship;
-
-	public GameObject[] spawnPointArray;
-
-	public ShipGridManager p1Manager;
-	public ShipGridManager p2Manager;
-	public ShipGridManager p3Manager;
-	public ShipGridManager p4Manager;
-
-	public int p1Wins;
-	public int p2Wins;
-	public int p3Wins;
-	public int p4Wins;
 	public bool winnerFound = false;
 	//Game info
 	public int winsNeeded;
@@ -57,402 +28,155 @@ public class GameManager : MonoBehaviour
 	public enum GameState {MainMenu, CountdownStart, Countdown, CoinGameModeStart, CoinGameMode, EndOfRoundResults, EndOfGameResultsStart, EndOfGameResults}
 
 	//Player color info
-	public enum PlayerColor {Red, Blue, Green, Yellow, Dead}
-	public PlayerColor p1Color;
-	public PlayerColor p2Color;
-	public PlayerColor p3Color;
-	public PlayerColor p4Color;
+	public enum PlayerColor {
+        Red,
+        Blue,
+        Green,
+        Yellow,
+        Dead
+    }
 
-	//The color of the points earned
-
-	//Player Score info
-	public float p1Score;
-	public float p2Score;
-	public float p3Score;
-	public float p4Score;
 	public int incrementalPoints = 12;
 	public MatchResults matchResults;
 
+    public class Player {
+        public readonly int playerNumber;
+        public PlayerColor color;
+        public float score;
+        public int wins;
+        public bool joined;
+        public GameObject ship;
+        public GameObject spawnPoint;
+        public ShipGridManager gridManager;
+
+        public Player(int playerNumber_) {
+            playerNumber = playerNumber_;
+        }
+    };
+
+    Dictionary<int, Player> _players;
+
 	public GameObject pickupSpawner;
+
 	//Data for drawing the points split
 	[System.Serializable]
 	public class MatchResults
 	{
-		public bool p1Match;
-		public bool p2Match;
-		public bool p3Match;
-		public bool p4Match;
 		public float dividedPoints;
 	}
+
 	public int deathTime = 5;
 	public int invulnTime = 1;
 	public IntroCountdown countdown;
-    public PlayerColor GetPlayerColor(int playerNumber)
-    {
-        switch (playerNumber) {
-            case 1:
-                return p1Color;
-            case 2:
-                return p2Color;
-            case 3:
-                return p3Color;
-            case 4:
-                return p4Color;
 
-            default:
-                return PlayerColor.Dead;
+    public IEnumerable<Player> Players {
+        get {
+            return _players.Values;
         }
     }
 
-	public MatchResults redPointsScored(int pointsScored)
-	{
+    public static Color PlayerColorToColor(PlayerColor playerColor) {
+        switch (playerColor) {
+            case PlayerColor.Red:
+                return Color.red;
 
-		int scoringPlayers = 0;
+            case PlayerColor.Blue:
+                return Color.blue;
 
-		if (p1Color == PlayerColor.Red)
-		{
-			scoringPlayers++;
-			matchResults.p1Match = true;
-		}
-		if (p2Color == PlayerColor.Red)
-		{
-			scoringPlayers++;
-			matchResults.p2Match = true;
-		}
-		if (p3Color == PlayerColor.Red)
-		{
-			scoringPlayers++;
-			matchResults.p3Match = true;
-		}
-		if (p4Color == PlayerColor.Red)
-		{
-			scoringPlayers++;
-			matchResults.p4Match = true;
-		}
+            case PlayerColor.Green:
+                return Color.green;
 
-		if (p1Color == PlayerColor.Red)
-		{
-			p1Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
-		}
-		if (p2Color == PlayerColor.Red)
-		{
-			p2Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
-		}
-		if (p3Color == PlayerColor.Red)
-		{
-			p3Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
-		}
-		if (p4Color == PlayerColor.Red)
-		{
-			p4Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
-		}
+            case PlayerColor.Yellow:
+                return Color.yellow;
 
-		if (scoringPlayers != 0)
-		{
-			matchResults.dividedPoints = pointsScored / scoringPlayers;
-		}
+            default:
+                return Color.white;
+        }
+    }
 
-		return matchResults;
-	}
+    public PlayerColor GetPlayerColor(int playerNumber)
+    {
+        if (playerNumber > 0 && playerNumber <= PlayerCount) {
+            return _players[playerNumber].color;
+        }
 
-	public MatchResults greenPointsScored(int pointsScored)
-	{
+        return PlayerColor.Dead;
+    }
 
-		int scoringPlayers = 0;
+    public void SetPlayerColor(int playerNumber, PlayerColor playerColor) {
+        if (playerNumber > 0 && playerNumber <= PlayerCount) {
+            _players[playerNumber].color = playerColor;
+        }
+    }
 
-		if (p1Color == PlayerColor.Green)
-		{
-			scoringPlayers++;
-			matchResults.p1Match = true;
-		}
-		if (p2Color == PlayerColor.Green)
-		{
-			scoringPlayers++;
-			matchResults.p2Match = true;
-		}
-		if (p3Color == PlayerColor.Green)
-		{
-			scoringPlayers++;
-			matchResults.p3Match = true;
-		}
-		if (p4Color == PlayerColor.Green)
-		{
-			scoringPlayers++;
-			matchResults.p4Match = true;
-		}
+    public void SetPlayerJoined(int playerNumber, bool joined) {
+        if (playerNumber > 0 && playerNumber <= PlayerCount) {
+            _players[playerNumber].joined = joined;
+        }
+    }
 
-		if (p1Color == PlayerColor.Green)
-		{
-			p1Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
-		}
-		if (p2Color == PlayerColor.Green)
-		{
-			p2Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
-		}
-		if (p3Color == PlayerColor.Green)
-		{
-			p3Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
-		}
-		if (p4Color == PlayerColor.Green)
-		{
-			p4Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
-		}
+    public void ScorePoints(PlayerColor color, int points) {
+        int scoringPlayers = 0;
 
-		if (scoringPlayers != 0)
-		{
-			matchResults.dividedPoints = pointsScored / scoringPlayers;
-		}
-		return matchResults;
-	}
+        foreach (var player in Players) {
+            if (player.color == color) {
+                scoringPlayers++;
+            }
+        }
 
-	public MatchResults bluePointsScored(int pointsScored)
-	{
+        foreach (var player in Players) {
+            if (player.color == color) {
+                player.score += points / scoringPlayers;
+                UIObject.GetComponent<GameUI>().UpdateScore((int)player.score, player.playerNumber);
+            }
+        }
 
-		int scoringPlayers = 0;
-
-		if (p1Color == PlayerColor.Blue)
-		{
-			scoringPlayers++;
-			matchResults.p1Match = true;
-		}
-		if (p2Color == PlayerColor.Blue)
-		{
-			scoringPlayers++;
-			matchResults.p2Match = true;
-		}
-		if (p3Color == PlayerColor.Blue)
-		{
-			scoringPlayers++;
-			matchResults.p3Match = true;
-		}
-		if (p4Color == PlayerColor.Blue)
-		{
-			scoringPlayers++;
-			matchResults.p4Match = true;
-		}
-
-		if (p1Color == PlayerColor.Blue)
-		{
-			p1Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
-		}
-		if (p2Color == PlayerColor.Blue)
-		{
-			p2Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
-		}
-		if (p3Color == PlayerColor.Blue)
-		{
-			p3Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
-		}
-		if (p4Color == PlayerColor.Blue)
-		{
-			p4Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
-		}
-
-		if (scoringPlayers != 0)
-		{
-			matchResults.dividedPoints = pointsScored / scoringPlayers;
-		}
-		return matchResults;
-	}
-
-
-	public MatchResults yellowPointsScored(int pointsScored)
-	{
-
-		int scoringPlayers = 0;
-
-		if (p1Color == PlayerColor.Yellow)
-		{
-			scoringPlayers++;
-			matchResults.p1Match = true;
-		}
-		if (p2Color == PlayerColor.Yellow)
-		{
-			scoringPlayers++;
-			matchResults.p2Match = true;
-		}
-		if (p3Color == PlayerColor.Yellow)
-		{
-			scoringPlayers++;
-			matchResults.p3Match = true;
-		}
-		if (p4Color == PlayerColor.Yellow)
-		{
-			scoringPlayers++;
-			matchResults.p4Match = true;
-		}
-
-		if (p1Color == PlayerColor.Yellow)
-		{
-			p1Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
-		}
-		if (p2Color == PlayerColor.Yellow)
-		{
-			p2Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
-		}
-		if (p3Color == PlayerColor.Yellow)
-		{
-			p3Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
-		}
-		if (p4Color == PlayerColor.Yellow)
-		{
-			p4Score += (pointsScored / scoringPlayers);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
-		}
-
-		if (scoringPlayers != 0)
-		{
-			matchResults.dividedPoints = pointsScored / scoringPlayers;
-		}
-
-		return matchResults;
-	}
+        if (scoringPlayers > 0) {
+            matchResults.dividedPoints = points / scoringPlayers;
+        }
+    }
 
 	public IEnumerator deadPlayerIEnumerator(GameObject deadPlayer, int time)
 	{
-		if (deadPlayer.GetComponent<ShipColor> ().isInvulnerable == false)
-		{
-			AudioManager._AUDIOMANAGER.playSound ("Explosion");
-			deadPlayer.SetActive (false);
+        ShipColor shipColor = deadPlayer.GetComponent<ShipColor>();
+        if ((shipColor != null) && !shipColor.isInvulnerable) {
+            AudioManager._AUDIOMANAGER.playSound("Explosion");
+            deadPlayer.SetActive(false);
 
-			//If player 1 is who died
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1 && p1Color != PlayerColor.Dead) {
-				tempColor1 = p1Color;
-				p1Color = PlayerColor.Dead;
-				p1Manager.colorWake.m_VectorGrid.AddGridForce (p1Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p1Manager.colorWake.m_Color, true);
-				p1Manager.leftWake.m_VectorGrid.AddGridForce (p1Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p1Manager.colorWake.m_Color, true);
-				p1Manager.rightWake.m_VectorGrid.AddGridForce (p1Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p1Manager.colorWake.m_Color, true);
-			}
-			//If player 2
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2 && p2Color != PlayerColor.Dead) {
-				tempColor2 = p2Color;
-				p2Color = PlayerColor.Dead;
+            PlayerColor tempColor = PlayerColor.Dead;
+            Player player = _players[shipColor.playerNumber];
 
-				p2Manager.colorWake.m_VectorGrid.AddGridForce (p2Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p2Manager.colorWake.m_Color, true);
-				p2Manager.leftWake.m_VectorGrid.AddGridForce (p2Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p2Manager.colorWake.m_Color, true);
-				p2Manager.rightWake.m_VectorGrid.AddGridForce (p2Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p2Manager.colorWake.m_Color, true);
-			}
-			//If player 3
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3 && p3Color != PlayerColor.Dead) {
-				tempColor3 = p3Color;
-				p3Color = PlayerColor.Dead;
+            if (player.color != PlayerColor.Dead) {
+                tempColor = player.color;
+                player.color = PlayerColor.Dead;
+                player.gridManager.colorWake.m_VectorGrid.AddGridForce(player.ship.transform.position, deathExplosionForce, deathExplosionRadius, player.gridManager.colorWake.m_Color, true);
+                player.gridManager.leftWake.m_VectorGrid.AddGridForce(player.ship.transform.position, deathExplosionForce, deathExplosionRadius, player.gridManager.colorWake.m_Color, true);
+                player.gridManager.rightWake.m_VectorGrid.AddGridForce(player.ship.transform.position, deathExplosionForce, deathExplosionRadius, player.gridManager.colorWake.m_Color, true);
+            }
 
-				p3Manager.colorWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
-				p3Manager.leftWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
-				p3Manager.rightWake.m_VectorGrid.AddGridForce (p4Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p3Manager.colorWake.m_Color, true);
-			}
-			//If player 4
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4 && p4Color != PlayerColor.Dead) {
-				tempColor4 = p4Color;
-				p4Color = PlayerColor.Dead;
+            //wait the timer
+            for (int i = time; i >= 0; i--) {
+                //update time left on UI
+                yield return new WaitForSeconds(1);
+            }
 
-				p4Manager.colorWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
-				p4Manager.leftWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
-				p4Manager.rightWake.m_VectorGrid.AddGridForce (p3Ship.GetComponent<Transform> ().position, deathExplosionForce, deathExplosionRadius, p4Manager.colorWake.m_Color, true);
-			}
-			//wait the timer
-			for (int i = time; i >= 0; i--) {
-				//update time left on UI
-				yield return new WaitForSeconds (1);
-			}
+            if (player.ship != null) {
+                deadPlayer.SetActive(true);
+                deadPlayer.transform.position = player.spawnPoint.transform.position;
+                player.color = tempColor;
+                shipColor.isInvulnerable = true;
 
-			//If player 1 is who died
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 1 && p1Ship != null) {
-				deadPlayer.SetActive (true);
-				deadPlayer.GetComponent<Transform> ().position = northSpawnPoint.GetComponent<Transform> ().position;
-				p1Color = tempColor1;
-				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
-				Color tempWakeColor1;
-				tempWakeColor1 = deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color;
-				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = Color.white;
-				for (int i = invulnTime; i > 0; i--)
-				{
-					yield return new WaitForSeconds (1);
-				}
-				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
-				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = tempWakeColor1;
-			}
+                Color tempWakeColor = player.gridManager.colorWake.m_Color;
+                player.gridManager.colorWake.m_Color = Color.white;
 
-			//If player 2
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 2  && p2Ship != null) {
-				deadPlayer.SetActive (true);
-				deadPlayer.GetComponent<Transform> ().position = eastSpawnPoint.GetComponent<Transform> ().position;
-				p2Color = tempColor2;
-				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
-				Color tempWakeColor2;
-				tempWakeColor2 = deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color;
-				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = Color.white;
-				for (int i = invulnTime; i > 0; i--)
-				{
-					yield return new WaitForSeconds (1);
-				}
-				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
-				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = tempWakeColor2;
+                yield return new WaitForSeconds(invulnTime);
 
-			}
-
-			//If player 3
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 3  && p3Ship != null) {
-				deadPlayer.SetActive (true);
-				deadPlayer.GetComponent<Transform> ().position = westSpawnPoint.GetComponent<Transform> ().position;
-				p3Color = tempColor3;
-				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
-				Color tempWakeColor3;
-				tempWakeColor3 = deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color;
-				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = Color.white;
-				for (int i = invulnTime; i > 0; i--)
-				{
-					yield return new WaitForSeconds (1);
-				}
-				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
-				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = tempWakeColor3;
-			}
-
-			//If player 4
-			if (deadPlayer.GetComponent<ShipColor> ().playerNumber == 4  && p4Ship != null) {
-				deadPlayer.SetActive (true);
-				deadPlayer.GetComponent<Transform> ().position = southSpawnPoint.GetComponent<Transform> ().position;
-				p4Color = tempColor4;
-				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = true;
-				Color tempWakeColor4;
-				tempWakeColor4 = deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color;
-				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = Color.white;
-				for (int i = invulnTime; i > 0; i--)
-				{
-					yield return new WaitForSeconds (1);
-				}
-				deadPlayer.GetComponent<ShipColor> ().isInvulnerable = false;
-				deadPlayer.GetComponent<ShipGridManager> ().colorWake.m_Color = tempWakeColor4;
-			}
-			//reactiviate the player and set their color back to what it was.
-
-		}
-
-
-
-
-
-
+                shipColor.isInvulnerable = false;
+                player.gridManager.colorWake.m_Color = tempWakeColor;
+            }
+        }
 	}
-	//public void testRadius(GameObject testObject)
-	//{
-		//Collider[] hitColliders = Physics.OverlapSphere(testObject.GetComponent<Transform>();
-	//}
+
 	public void KillPlayer(GameObject playerShip)
 	{
 		StartCoroutine(deadPlayerIEnumerator(playerShip, deathTime));
@@ -482,10 +206,9 @@ public class GameManager : MonoBehaviour
 	//A function to reset the wins of all the players between games
 	public void resetScores()
 	{
-		p1Wins = 0;
-		p2Wins = 0;
-		p3Wins = 0;
-		p4Wins = 0;
+        foreach (Player player in _players.Values) {
+            player.wins = 0;
+        }
 	}
 
 	//Reset to a new round after showing round results
@@ -499,136 +222,94 @@ public class GameManager : MonoBehaviour
 	public IEnumerator CountdownStart(int time)
 	{
 		UIObject = GameObject.FindGameObjectWithTag ("inGameUI");
-		northSpawnPoint = GameObject.FindGameObjectWithTag ("northSpawnPoint");
-		eastSpawnPoint = GameObject.FindGameObjectWithTag ("eastSpawnPoint");
-		southSpawnPoint = GameObject.FindGameObjectWithTag ("southSpawnPoint");
-		westSpawnPoint = GameObject.FindGameObjectWithTag ("westSpawnPoint");
-		spawnPointArray [0] = GameObject.FindGameObjectWithTag ("northSpawnPoint");
-		spawnPointArray [1] = GameObject.FindGameObjectWithTag ("eastSpawnPoint");
-		spawnPointArray [2] = GameObject.FindGameObjectWithTag ("southSpawnPoint");
-		spawnPointArray [3] = GameObject.FindGameObjectWithTag ("westSpawnPoint");
-		p1Score = 0;
-		p2Score = 0;
-		p3Score = 0;
-		p4Score = 0;
 
-		if (p1Joined == true)
-		{
-			p1Ship = Instantiate (p1ShipPrefab, northSpawnPoint.GetComponent<Transform> ().position, northSpawnPoint.GetComponent<Transform> ().rotation);
-			p1Ship.GetComponent<ShipController> ().heading = northSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
-		}
-		if (p2Joined == true)
-		{
-			p2Ship = Instantiate (p2ShipPrefab, eastSpawnPoint.GetComponent<Transform> ().position, eastSpawnPoint.GetComponent<Transform> ().rotation);
-			p2Ship.GetComponent<ShipController> ().heading = eastSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
-		}
-		if (p3Joined == true)
-		{
-			p3Ship = Instantiate (p3ShipPrefab, southSpawnPoint.GetComponent<Transform> ().position, southSpawnPoint.GetComponent<Transform> ().rotation);
-			p3Ship.GetComponent<ShipController> ().heading = southSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
-		}
-		if (p4Joined == true)
-		{
-			p4Ship = Instantiate (p4ShipPrefab, westSpawnPoint.GetComponent<Transform> ().position, westSpawnPoint.GetComponent<Transform> ().rotation);
-			p4Ship.GetComponent<ShipController> ().heading = westSpawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
-		}
+        _players[1].spawnPoint = GameObject.FindGameObjectWithTag("northSpawnPoint");
+        _players[2].spawnPoint = GameObject.FindGameObjectWithTag("eastSpawnPoint");
+        _players[3].spawnPoint = GameObject.FindGameObjectWithTag("southSpawnPoint");
+        _players[4].spawnPoint = GameObject.FindGameObjectWithTag("westSpawnPoint");
 
-		if (p1Joined == true)
-		p1Manager = p1Ship.GetComponent<ShipGridManager> ();
-		if (p2Joined == true)
-		p2Manager = p2Ship.GetComponent<ShipGridManager> ();
-		if (p3Joined == true)
-		p3Manager = p3Ship.GetComponent<ShipGridManager> ();
-		if (p4Joined == true)
-		p4Manager = p4Ship.GetComponent<ShipGridManager> ();
+        _players[1].score = _players[2].score = _players[3].score = _players[4].score = 0;
 
-		gameGrid = GameObject.FindGameObjectWithTag ("VectorGrid").GetComponent<VectorGrid>();
+        GameObject[] shipPrefabs = new[] { p1ShipPrefab, p2ShipPrefab, p3ShipPrefab, p4ShipPrefab };
 
-//		for (int i = time; i >= 0; i--)
-//		{
-//			countDownTextObject.text = i.ToString();
-//			print (countDownTimer);
-//			countDownTimer -= 1;
-//			yield return new WaitForSeconds (1);
-//
-//		}
+        foreach (Player player in _players.Values) {
+            if (player.joined) {
+                GameObject prefab = shipPrefabs[player.playerNumber - 1];
+                player.ship = Instantiate(prefab, player.spawnPoint.transform.position, player.spawnPoint.transform.rotation);
+                player.ship.GetComponent<ShipController>().heading = player.spawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+                player.gridManager = player.ship.GetComponent<ShipGridManager>();
+            }
+        }
+
+		gameGrid = GameObject.FindGameObjectWithTag("VectorGrid").GetComponent<VectorGrid>();
+
 		UIObject.GetComponent<GameUI>().countdown.StartCountdown();
-		yield return new WaitForSeconds (8);
+		yield return new WaitForSeconds(8);
 		countDownTextObject.text = "";
 		gameState = GameState.CoinGameModeStart;
-
 	}
 
 	//The game timer countdown
 	public IEnumerator CoinGameModeStart(int time)
 	{
-		for(int i = time; i >= 0; i--)
-			{
-			UIObject.GetComponent<GameUI> ().UpdateTimer (i.ToString());
-			redPointsScored (incrementalPoints);
-			bluePointsScored(incrementalPoints);
-			greenPointsScored(incrementalPoints);
-			yellowPointsScored(incrementalPoints);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p1Score,1);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p2Score,2);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p3Score,3);
-			UIObject.GetComponent<GameUI> ().UpdateScore ((int)p4Score,4);
+		for (int i = time; i >= 0; i--) {
+			UIObject.GetComponent<GameUI>().UpdateTimer(i.ToString());
 
-			yield return new WaitForSeconds (1);
-			}
+            ScorePoints(PlayerColor.Red, incrementalPoints);
+            ScorePoints(PlayerColor.Blue, incrementalPoints);
+            ScorePoints(PlayerColor.Green, incrementalPoints);
+            ScorePoints(PlayerColor.Yellow, incrementalPoints);
+
+            foreach (Player player in _players.Values) {
+			    UIObject.GetComponent<GameUI>().UpdateScore((int)player.score, player.playerNumber);
+            }
+
+			yield return new WaitForSeconds(1);
+        }
+
 		//Temporary Random Player winning:
+        Player highestScoringPlayer = null;
+        float highestScore = 0;
 
-		if (p1Score > p2Score && p1Score > p3Score && p1Score > p4Score)
-		{
-			p1Wins++;
-			UIObject.GetComponent<GameUI> ().UpdateTimer ("Round Winner: P1");
-		}
+        foreach (Player player in _players.Values) {
+            if (player.score > highestScore) {
+                highestScore = player.score;
+                highestScoringPlayer = player;
+            }
+        }
 
-		if (p2Score > p1Score && p2Score > p3Score && p2Score > p4Score)
-		{
-			p2Wins++;
-			UIObject.GetComponent<GameUI> ().UpdateTimer ("Round Winner: P2");
-		}
+        if (highestScoringPlayer != null) {
+            highestScoringPlayer.wins++;
+            string winText = string.Format("Round Winner: P{0}", highestScoringPlayer.playerNumber);
+			UIObject.GetComponent<GameUI>().UpdateTimer(winText);
+        }
 
-		if (p3Score > p2Score && p3Score > p1Score && p3Score > p4Score)
-		{
-			p3Wins++;
-			UIObject.GetComponent<GameUI> ().UpdateTimer ("Round Winner: P3");
-		}
-
-		if (p4Score > p2Score && p4Score > p3Score && p4Score > p1Score)
-		{
-			p4Wins++;
-			UIObject.GetComponent<GameUI> ().UpdateTimer ("Round Winner: P4");
-		}
 		gameState = GameState.EndOfRoundResults;
 	}
 
 	public IEnumerator EndOfGameDelay()
 	{
-		yield return new WaitForSeconds (0);
+		yield return new WaitForSeconds(0);
 		gameState = GameState.EndOfGameResults;
 	}
 
 	void Awake()
 	{
-		//Check if instance already exists
-		if (_GAMEMANAGER == null)
-
-			//if not, set instance to this
-			_GAMEMANAGER = this;
-
-		//If instance already exists and it's not this:
-		else if (_GAMEMANAGER != this)
-
-			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-			Destroy(gameObject);
-
-		//Sets this to not be destroyed when reloading scene
-		DontDestroyOnLoad(gameObject);
-	// Use this for initialization
+        if (_GAMEMANAGER != null) {
+            Destroy(this);
+        } else {
+            DontDestroyOnLoad(this);
+            _GAMEMANAGER = this;
+            Initialize();
+        }
 	}
 
+    void Initialize() {
+        _players = new Dictionary<int, Player>(PlayerCount);
+        for (int playerNumber = 1; playerNumber <= PlayerCount; ++playerNumber) {
+            _players[playerNumber] = new Player(playerNumber);
+        }
+    }
 
 	void Start ()
 	{
@@ -645,81 +326,73 @@ public class GameManager : MonoBehaviour
 
 		if (gameState == GameState.CountdownStart)
 		{
-			countDownTextObject = GameObject.FindGameObjectWithTag ("CountdownText").GetComponent<Text>();
+			countDownTextObject = GameObject.FindGameObjectWithTag("CountdownText").GetComponent<Text>();
 			StartCoroutine (CountdownStart (countdownTimerLength));
 
-			if(p1Joined == true)
-            p1Ship.GetComponent<ShipController>().enabled = false;
-			if(p2Joined == true)
-            p2Ship.GetComponent<ShipController>().enabled = false;
-			if(p3Joined == true)
-            p3Ship.GetComponent<ShipController>().enabled = false;
-			if(p4Joined == true)
-            p4Ship.GetComponent<ShipController>().enabled = false;
+            foreach (Player player in _players.Values) {
+                if (player.joined) {
+                    player.ship.GetComponent<ShipController>().enabled = false;
+                }
+            }
 
 			gameState = GameState.Countdown;
 		}
 
 		if (gameState == GameState.CoinGameModeStart)
 		{
-			gameTimeTextObject = GameObject.FindGameObjectWithTag ("GameTimeText").GetComponent<Text>();
+			gameTimeTextObject = GameObject.FindGameObjectWithTag("GameTimeText").GetComponent<Text>();
 
-			StartCoroutine (CoinGameModeStart (roundTime));
+			StartCoroutine(CoinGameModeStart(roundTime));
 
 			gameState = GameState.CoinGameMode;
 		}
 
 		if (gameState == GameState.CoinGameMode)
 		{
-			if (Input.GetKeyDown (KeyCode.Alpha1))
+			if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
-				redPointsScored (1200);
-				KillPlayer (p1Ship);
+				KillPlayer(_players[1].ship);
 			}
 
-			if (Input.GetKeyDown (KeyCode.Alpha2))
+			if (Input.GetKeyDown(KeyCode.Alpha2))
 			{
-				greenPointsScored (1200);
-				KillPlayer (p2Ship);
+				KillPlayer(_players[2].ship);
 			}
 
-			if (Input.GetKeyDown (KeyCode.Alpha3))
+			if (Input.GetKeyDown(KeyCode.Alpha3))
 			{
-				bluePointsScored (1200);
-				KillPlayer (p3Ship);
+				KillPlayer(_players[3].ship);
 			}
 
-			if (Input.GetKeyDown (KeyCode.Alpha4))
+			if (Input.GetKeyDown(KeyCode.Alpha4))
 			{
-				yellowPointsScored (1200);
-				KillPlayer (p4Ship);
+				KillPlayer(_players[4].ship);
 			}
 
 			if (Time.timeSinceLevelLoad > 8.1)
 			{
-				if(p1Joined == true)
-                p1Ship.GetComponent<ShipController>().enabled = true;
-				if(p2Joined == true)
-                p2Ship.GetComponent<ShipController>().enabled = true;
-				if(p3Joined == true)
-                p3Ship.GetComponent<ShipController>().enabled = true;
-				if(p4Joined == true)
-                p4Ship.GetComponent<ShipController>().enabled = true;
+                foreach (Player player in _players.Values) {
+                    if (player.joined) {
+                        player.ship.GetComponent<ShipController>().enabled = true;
+                    }
+                }
             }
 		}
 
 		if (gameState == GameState.EndOfRoundResults)
 		{
-			if (p1Wins == winsNeeded || p2Wins == winsNeeded || p3Wins == winsNeeded || p4Wins == winsNeeded)
-			{
-				winnerFound = true;
-			}
+            foreach (Player player in _players.Values) {
+                if (player.wins >= winsNeeded) {
+                    winnerFound = true;
+                    break;
+                }
+            }
 
 			if (winnerFound == false)
 			{
 				if (InputManager.IsSubmitPressed)
 				{
-					endResults ();
+					endResults();
 				}
 			}
 
@@ -743,11 +416,13 @@ public class GameManager : MonoBehaviour
 
 			if (InputManager.IsSubmitPressed)
 			{
-				UnityEngine.SceneManagement.SceneManager.LoadScene ("resultsScene");
-				p1Color = PlayerColor.Yellow;
-				p2Color = PlayerColor.Red;
-				p3Color = PlayerColor.Blue;
-				p4Color = PlayerColor.Green;
+				UnityEngine.SceneManagement.SceneManager.LoadScene("resultsScene");
+
+				_players[1].color = PlayerColor.Yellow;
+				_players[2].color = PlayerColor.Red;
+				_players[3].color = PlayerColor.Blue;
+				_players[4].color = PlayerColor.Green;
+
 				gameState = GameState.MainMenu;
 			}
 		}

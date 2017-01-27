@@ -56,23 +56,7 @@ public class Pickup : MonoBehaviour {
             }
 
 			GameManager.PlayerColor collectorColor = GameManager._GAMEMANAGER.GetPlayerColor(shipColor.playerNumber);
-            switch (collectorColor) {
-                case GameManager.PlayerColor.Blue:
-                    GameManager._GAMEMANAGER.bluePointsScored(value);
-                    break;
-
-			    case GameManager.PlayerColor.Green:
-				    GameManager._GAMEMANAGER.greenPointsScored(value);
-                    break;
-
-			    case GameManager.PlayerColor.Red:
-				    GameManager._GAMEMANAGER.redPointsScored(value);
-                    break;
-
-                case GameManager.PlayerColor.Yellow:
-				    GameManager._GAMEMANAGER.yellowPointsScored(value);
-                    break;
-            }
+            GameManager._GAMEMANAGER.ScorePoints(collectorColor, value);
 
 			Destroy(gameObject);
 		}

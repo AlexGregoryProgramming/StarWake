@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShipColor : MonoBehaviour {
 	public int playerNumber;
@@ -22,6 +20,70 @@ public class ShipColor : MonoBehaviour {
 	public ParticleSystem wakeParticleBurst;
 	private bool particlesOn;
 
+    GameManager.PlayerColor GetInputPlayerColor(int playerNumber) {
+        switch (playerNumber) {
+            case 1:
+                if (InputManager.IsP1GreenDown) {
+                    return GameManager.PlayerColor.Green;
+                } else if (InputManager.IsP1RedDown) {
+                    return GameManager.PlayerColor.Red;
+                } else if (InputManager.IsP1BlueDown) {
+                    return GameManager.PlayerColor.Blue;
+                } else if (InputManager.IsP1YellowDown) {
+                    return GameManager.PlayerColor.Yellow;
+                }
+                break;
+
+            case 2:
+                if (InputManager.IsP2GreenDown) {
+                    return GameManager.PlayerColor.Green;
+                } else if (InputManager.IsP2RedDown) {
+                    return GameManager.PlayerColor.Red;
+                } else if (InputManager.IsP2BlueDown) {
+                    return GameManager.PlayerColor.Blue;
+                } else if (InputManager.IsP2YellowDown) {
+                    return GameManager.PlayerColor.Yellow;
+                }
+                break;
+
+            case 3:
+                if (InputManager.IsP3GreenDown) {
+                    return GameManager.PlayerColor.Green;
+                } else if (InputManager.IsP3RedDown) {
+                    return GameManager.PlayerColor.Red;
+                } else if (InputManager.IsP3BlueDown) {
+                    return GameManager.PlayerColor.Blue;
+                } else if (InputManager.IsP3YellowDown) {
+                    return GameManager.PlayerColor.Yellow;
+                }
+                break;
+
+            case 4:
+                if (InputManager.IsP4GreenDown) {
+                    return GameManager.PlayerColor.Green;
+                } else if (InputManager.IsP4RedDown) {
+                    return GameManager.PlayerColor.Red;
+                } else if (InputManager.IsP4BlueDown) {
+                    return GameManager.PlayerColor.Blue;
+                } else if (InputManager.IsP4YellowDown) {
+                    return GameManager.PlayerColor.Yellow;
+                }
+                break;
+        }
+
+        return GameManager.PlayerColor.Dead;
+    }
+
+    bool CheckColorChanged(int playerNumber, out GameManager.PlayerColor newPlayerColor) {
+        newPlayerColor = GetInputPlayerColor(playerNumber);
+
+        if ((newPlayerColor != GameManager.PlayerColor.Dead) && (newPlayerColor != GameManager._GAMEMANAGER.GetPlayerColor(playerNumber))) {
+            return true;
+        }
+
+        return false;
+    }
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -41,206 +103,32 @@ public class ShipColor : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update ()
-	{
+	void Update() {
 		if (cooldownTimer <= Time.time) {
 			EnableParticles ();
 		}
-		if (GameManager._GAMEMANAGER.gameState == GameManager.GameState.CoinGameMode) {
-			if (playerNumber == 1 && cooldownTimer <= Time.time)
-			{
-				if (InputManager.IsP1GreenDown && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Green) {
-					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
-					cooldownTimer = (Time.time + cooldownTimeAmount);
-					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Green;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color = Color.green;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Green);
-					DisableParticles ();
-					ParticleColors (Color.green);
-					WakeParticles (Color.green);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
 
-				}
-				if (InputManager.IsP1RedDown && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Red) {
-					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
-					cooldownTimer = (Time.time + cooldownTimeAmount);
-					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Red;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.red;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Red);
-					DisableParticles ();
-					ParticleColors (Color.red);
-					WakeParticles(Color.red);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
+        if (GameManager._GAMEMANAGER.gameState != GameManager.GameState.CoinGameMode) {
+            return;
+        }
 
-				}
-				if (InputManager.IsP1BlueDown && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Blue) {
-					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
-					cooldownTimer = (Time.time + cooldownTimeAmount);
-					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Blue;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.blue;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Blue);
-					DisableParticles ();
-					ParticleColors (Color.blue);
-					WakeParticles(Color.blue);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-				if (InputManager.IsP1YellowDown && GameManager._GAMEMANAGER.p1Color != GameManager.PlayerColor.Yellow) {
-					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
-					cooldownTimer = (Time.time + cooldownTimeAmount);
-					GameManager._GAMEMANAGER.p1Color = GameManager.PlayerColor.Yellow;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.yellow;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (1, GameManager.PlayerColor.Yellow);
-					DisableParticles ();
-					ParticleColors (Color.yellow);
-					WakeParticles(Color.yellow);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-			}
+        if (cooldownTimer > Time.time) {
+            return;
+        }
 
-
-			if (playerNumber == 2 && cooldownTimer <= Time.time)
-			{
-
-				if (InputManager.IsP2GreenDown && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Green) {
-					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
-					cooldownTimer = (Time.time + cooldownTimeAmount);
-					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Green;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.green;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Green);
-					DisableParticles ();
-					ParticleColors (Color.green);
-					WakeParticles (Color.green);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-				if (InputManager.IsP2RedDown && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Red) {
-					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
-					cooldownTimer = (Time.time + cooldownTimeAmount);
-					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Red;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.red;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Red);
-					DisableParticles ();
-					ParticleColors (Color.red);
-					WakeParticles(Color.red);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-				if (InputManager.IsP2BlueDown && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Blue) {
-					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
-					cooldownTimer = (Time.time + cooldownTimeAmount);
-					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Blue;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.blue;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Blue);
-					DisableParticles ();
-					ParticleColors (Color.blue);
-					WakeParticles(Color.blue);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-				if (InputManager.IsP2YellowDown && GameManager._GAMEMANAGER.p2Color != GameManager.PlayerColor.Yellow) {
-					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
-					cooldownTimer = (Time.time + cooldownTimeAmount);
-					GameManager._GAMEMANAGER.p2Color = GameManager.PlayerColor.Yellow;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.yellow;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (2, GameManager.PlayerColor.Yellow);
-					DisableParticles ();
-					ParticleColors (Color.yellow);
-					WakeParticles(Color.yellow);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-			}
-
-
-			if (playerNumber == 3 && cooldownTimer <= Time.time)
-			{
-				if (InputManager.IsP3GreenDown && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Green) {
-					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
-					cooldownTimer = (Time.time + cooldownTimeAmount);
-					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Green;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.green;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Green);
-					DisableParticles ();
-					ParticleColors (Color.green);
-					WakeParticles (Color.green);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-				if (InputManager.IsP3RedDown && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Red) {
-					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
-					cooldownTimer = (Time.time + cooldownTimeAmount);
-					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Red;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.red;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Red);
-					DisableParticles ();
-					ParticleColors (Color.red);
-					WakeParticles(Color.red);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-				if (InputManager.IsP3BlueDown && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Blue) {
-					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
-					cooldownTimer = (Time.time + cooldownTimeAmount);
-					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Blue;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.blue;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Blue);
-					DisableParticles ();
-					ParticleColors (Color.blue);
-					WakeParticles(Color.blue);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-				if (InputManager.IsP3YellowDown && GameManager._GAMEMANAGER.p3Color != GameManager.PlayerColor.Yellow) {
-					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
-					cooldownTimer = (Time.time + cooldownTimeAmount);
-					GameManager._GAMEMANAGER.p3Color = GameManager.PlayerColor.Yellow;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.yellow;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (3, GameManager.PlayerColor.Yellow);
-					DisableParticles ();
-					ParticleColors (Color.yellow);
-					WakeParticles(Color.yellow);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-			}
-
-
-			if (playerNumber == 4 && cooldownTimer <= Time.time)
-			{
-				if (InputManager.IsP4GreenDown && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Green) {
-					Prims.GetComponent<MeshRenderer> ().material = GreenPrism;
-					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Green;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.green;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Green);
-					DisableParticles ();
-					ParticleColors (Color.green);
-					WakeParticles (Color.green);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-				if (InputManager.IsP4RedDown && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Red) {
-					Prims.GetComponent<MeshRenderer> ().material = RedPrism;
-					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Red;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.red;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Red);
-					DisableParticles ();
-					ParticleColors (Color.red);
-					WakeParticles(Color.red);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-				if (InputManager.IsP4BlueDown && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Blue) {
-					Prims.GetComponent<MeshRenderer> ().material = BluePrism;
-					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Blue;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.blue;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Blue);
-					DisableParticles ();
-					ParticleColors (Color.blue);
-					WakeParticles(Color.blue);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-				if (InputManager.IsP4YellowDown && GameManager._GAMEMANAGER.p4Color != GameManager.PlayerColor.Yellow) {
-					Prims.GetComponent<MeshRenderer> ().material = YellowPrism;
-					GameManager._GAMEMANAGER.p4Color = GameManager.PlayerColor.Yellow;
-					this.gameObject.GetComponent<ShipGridManager> ().colorWake.m_Color= Color.yellow;
-					GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI> ().UpdateColor (4, GameManager.PlayerColor.Yellow);
-					DisableParticles ();
-					ParticleColors (Color.yellow);
-					WakeParticles(Color.yellow);
-					AudioManager._AUDIOMANAGER.playSound ("SwapColor");
-				}
-			}
-		}
+        GameManager.PlayerColor newPlayerColor;
+        if (CheckColorChanged(playerNumber, out newPlayerColor)) {
+            Prims.GetComponent<MeshRenderer>().material = GreenPrism;
+            cooldownTimer = (Time.time + cooldownTimeAmount);
+            GameManager._GAMEMANAGER.SetPlayerColor(playerNumber, newPlayerColor);
+            Color newColor = GameManager.PlayerColorToColor(newPlayerColor);
+            GetComponent<ShipGridManager>().colorWake.m_Color = newColor;
+            GameManager._GAMEMANAGER.UIObject.GetComponent<GameUI>().UpdateColor(playerNumber, newPlayerColor);
+            DisableParticles();
+            ParticleColors(newColor);
+            WakeParticles(newColor);
+            AudioManager._AUDIOMANAGER.playSound("SwapColor");
+        }
 	}
 
 	public void ParticleColors(Color allButThisColor)

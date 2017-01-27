@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class ResultsScreenScript : MonoBehaviour
 {
 	public GameObject p1Block;
@@ -9,11 +9,6 @@ public class ResultsScreenScript : MonoBehaviour
 	public GameObject p3Block;
 	public GameObject p4Block;
 	public GameObject winnerBlock;
-
-	public int p1Wins;
-	public int p2Wins;
-	public int p3Wins;
-	public int p4Wins;
 
 	public Color p1Color;
 	public Color p2Color;
@@ -27,171 +22,91 @@ public class ResultsScreenScript : MonoBehaviour
 	public Text winnerText;
 	public Text continueText;
 	public bool isDone;
+
+    struct PlayerResults {
+        public int playerNumber;
+        public GameObject block;
+        public int wins;
+        public Color color;
+        public Text text;
+    };
+
+    PlayerResults[] _playerResults;
+
 	// Use this for initialization
-	void Start ()
-	{
-		p1Wins = GameManager._GAMEMANAGER.p1Wins;
-		p2Wins = GameManager._GAMEMANAGER.p2Wins;
-		p3Wins = GameManager._GAMEMANAGER.p3Wins;
-		p4Wins = GameManager._GAMEMANAGER.p4Wins;
+	void Start() {
+        _playerResults = new PlayerResults[GameManager.PlayerCount];
 
-		if (GameManager._GAMEMANAGER.GetPlayerColor (1) == GameManager.PlayerColor.Red)
-		{
-			p1Block.GetComponent<VectorGridForce> ().m_Color = Color.red;
-		}
+        foreach (var player in GameManager._GAMEMANAGER.Players) {
+            var playerResult = _playerResults[player.playerNumber - 1];
 
-		if (GameManager._GAMEMANAGER.GetPlayerColor (1) == GameManager.PlayerColor.Blue)
-		{
-			p1Block.GetComponent<VectorGridForce> ().m_Color = Color.blue;
-		}
+            playerResult.playerNumber = player.playerNumber;
+            playerResult.wins = player.wins;
 
-		if (GameManager._GAMEMANAGER.GetPlayerColor (1) == GameManager.PlayerColor.Green)
-		{
-			p1Block.GetComponent<VectorGridForce> ().m_Color = Color.green;
-		}
+            switch (player.playerNumber) {
+                case 1:
+                    playerResult.block = p1Block;
+                    playerResult.color = p1Color;
+                    playerResult.text = p1Text;
+                    break;
 
-		if (GameManager._GAMEMANAGER.GetPlayerColor (1) == GameManager.PlayerColor.Yellow)
-		{
-			p1Block.GetComponent<VectorGridForce> ().m_Color = Color.yellow;
-		}
+                case 2:
+                    playerResult.block = p2Block;
+                    playerResult.color = p2Color;
+                    playerResult.text = p2Text;
+                    break;
 
+                case 3:
+                    playerResult.block = p3Block;
+                    playerResult.color = p3Color;
+                    playerResult.text = p3Text;
+                    break;
 
+                case 4:
+                    playerResult.block = p4Block;
+                    playerResult.color = p4Color;
+                    playerResult.text = p4Text;
+                    break;
+            }
 
+            playerResult.block.GetComponent<VectorGridForce>().m_Color = GameManager.PlayerColorToColor(player.color);
+        }
 
-		if (GameManager._GAMEMANAGER.GetPlayerColor (2) == GameManager.PlayerColor.Red)
-		{
-			p2Block.GetComponent<VectorGridForce> ().m_Color = Color.red;
-		}
-
-		if (GameManager._GAMEMANAGER.GetPlayerColor (2) == GameManager.PlayerColor.Blue)
-		{
-			p2Block.GetComponent<VectorGridForce> ().m_Color = Color.blue;
-		}
-
-		if (GameManager._GAMEMANAGER.GetPlayerColor (2) == GameManager.PlayerColor.Green)
-		{
-			p2Block.GetComponent<VectorGridForce> ().m_Color = Color.green;
-		}
-
-		if (GameManager._GAMEMANAGER.GetPlayerColor (2) == GameManager.PlayerColor.Yellow)
-		{
-			p2Block.GetComponent<VectorGridForce> ().m_Color = Color.yellow;
-		}
-
-
-		if (GameManager._GAMEMANAGER.GetPlayerColor (3) == GameManager.PlayerColor.Red)
-		{
-			p3Block.GetComponent<VectorGridForce> ().m_Color = Color.red;
-		}
-
-		if (GameManager._GAMEMANAGER.GetPlayerColor (3) == GameManager.PlayerColor.Blue)
-		{
-			p3Block.GetComponent<VectorGridForce> ().m_Color = Color.blue;
-		}
-
-		if (GameManager._GAMEMANAGER.GetPlayerColor (3) == GameManager.PlayerColor.Green)
-		{
-			p3Block.GetComponent<VectorGridForce> ().m_Color = Color.green;
-		}
-
-		if (GameManager._GAMEMANAGER.GetPlayerColor (3) == GameManager.PlayerColor.Yellow)
-		{
-			p3Block.GetComponent<VectorGridForce> ().m_Color = Color.yellow;
-		}
-
-
-		if (GameManager._GAMEMANAGER.GetPlayerColor (4) == GameManager.PlayerColor.Red)
-		{
-			p4Block.GetComponent<VectorGridForce> ().m_Color = Color.red;
-		}
-
-		if (GameManager._GAMEMANAGER.GetPlayerColor (4) == GameManager.PlayerColor.Blue)
-		{
-			p4Block.GetComponent<VectorGridForce> ().m_Color = Color.blue;
-		}
-
-		if (GameManager._GAMEMANAGER.GetPlayerColor (4) == GameManager.PlayerColor.Green)
-		{
-			p4Block.GetComponent<VectorGridForce> ().m_Color = Color.green;
-		}
-
-		if (GameManager._GAMEMANAGER.GetPlayerColor (4) == GameManager.PlayerColor.Yellow)
-		{
-			p4Block.GetComponent<VectorGridForce> ().m_Color = Color.yellow;
-		}
-
-
-		StartCoroutine (results ());
-
+		StartCoroutine(results());
 	}
-
 
 	public IEnumerator results()
 	{
-		yield return new WaitForSeconds (1);
-		p1Text.gameObject.SetActive (true);
-		p1Text.text = p1Wins.ToString();
-		p1Block.GetComponent<VectorGridForce> ().m_VectorGrid.AddGridForce (p1Block.GetComponent<Transform> ().position, 0.8f * p1Wins / GameManager._GAMEMANAGER.winsNeeded, 0.8f * p1Wins / GameManager._GAMEMANAGER.winsNeeded, Color.yellow , true);
+        foreach (var playerResult in _playerResults) {
+            yield return new WaitForSeconds(1);
 
-		yield return new WaitForSeconds (1);
-		p2Text.gameObject.SetActive (true);
-		p2Text.text = p2Wins.ToString();
-		p2Block.GetComponent<VectorGridForce> ().m_VectorGrid.AddGridForce (p2Block.GetComponent<Transform> ().position, 0.8f * p2Wins / GameManager._GAMEMANAGER.winsNeeded , 0.8f * p2Wins / GameManager._GAMEMANAGER.winsNeeded, Color.red , true);
+            playerResult.text.gameObject.SetActive(true);
+            playerResult.text.text = playerResult.wins.ToString();
+            playerResult.block.GetComponent<VectorGridForce>().m_VectorGrid.AddGridForce(playerResult.block.transform.position, 0.8f * playerResult.wins / GameManager._GAMEMANAGER.winsNeeded, 0.8f * playerResult.wins / GameManager._GAMEMANAGER.winsNeeded, playerResult.color, true);
+        }
 
-		yield return new WaitForSeconds (1);
-		p3Text.gameObject.SetActive (true);
-		p3Text.text = p3Wins.ToString();
-		p3Block.GetComponent<VectorGridForce> ().m_VectorGrid.AddGridForce (p3Block.GetComponent<Transform> ().position, 0.8f * p3Wins / GameManager._GAMEMANAGER.winsNeeded, 0.8f * p3Wins / GameManager._GAMEMANAGER.winsNeeded, Color.blue , true);
+		yield return new WaitForSeconds(1);
 
-		yield return new WaitForSeconds (1);
-		p4Text.gameObject.SetActive (true);
-		p4Text.text = p4Wins.ToString();
-		p4Block.GetComponent<VectorGridForce> ().m_VectorGrid.AddGridForce (p4Block.GetComponent<Transform> ().position, 0.8f * p4Wins / GameManager._GAMEMANAGER.winsNeeded, 0.8f * p4Wins / GameManager._GAMEMANAGER.winsNeeded, Color.green , true);
-		yield return new WaitForSeconds (1);
-		if (p1Wins == GameManager._GAMEMANAGER.winsNeeded)
-		{
-			winnerBlock.GetComponent<VectorGridForce> ().m_Color = p1Color;
-			winnerText.color = Color.yellow;
-			winnerText.text = "Player 1 Wins";
-			winnerBlock.GetComponent<VectorGridForce> ().m_VectorGrid.AddGridForce (winnerBlock.GetComponent<Transform> ().position, 1, 1, winnerBlock.GetComponent<VectorGridForce> ().m_Color, true);
-		}
+        foreach (var playerResult in _playerResults) {
+            if (playerResult.wins == GameManager._GAMEMANAGER.winsNeeded) {
+                winnerBlock.GetComponent<VectorGridForce>().m_Color = playerResult.color;
+                winnerText.color = playerResult.color;
+                winnerText.text = string.Format("Player {0} Wins", playerResult.playerNumber);
+                winnerBlock.GetComponent<VectorGridForce>().m_VectorGrid.AddGridForce(winnerBlock.GetComponent<Transform>().position, 1, 1, winnerBlock.GetComponent<VectorGridForce>().m_Color, true);
+                break;
+            }
+        }
 
-		if (p2Wins == GameManager._GAMEMANAGER.winsNeeded)
-		{
-			winnerBlock.GetComponent<VectorGridForce> ().m_Color = p2Color;
-			winnerText.color = Color.red;
-			winnerText.text = "Player 2 Wins";
-			winnerBlock.GetComponent<VectorGridForce> ().m_VectorGrid.AddGridForce (winnerBlock.GetComponent<Transform> ().position, 1, 1, winnerBlock.GetComponent<VectorGridForce> ().m_Color, true);
+		yield return new WaitForSeconds(1);
 
-		}
-
-		if (p3Wins == GameManager._GAMEMANAGER.winsNeeded)
-		{
-			winnerBlock.GetComponent<VectorGridForce> ().m_Color = p3Color;
-			winnerText.color = Color.blue;
-			winnerText.text = "Player 3 Wins";
-			winnerBlock.GetComponent<VectorGridForce> ().m_VectorGrid.AddGridForce (winnerBlock.GetComponent<Transform> ().position, 1, 1, winnerBlock.GetComponent<VectorGridForce> ().m_Color, true);
-		}
-
-		if (p4Wins == GameManager._GAMEMANAGER.winsNeeded)
-		{
-			winnerBlock.GetComponent<VectorGridForce> ().m_Color = p4Color;
-			winnerText.color = Color.green;
-			winnerText.text = "Player 4 Wins";
-			winnerBlock.GetComponent<VectorGridForce> ().m_VectorGrid.AddGridForce (winnerBlock.GetComponent<Transform> ().position, 1, 1, winnerBlock.GetComponent<VectorGridForce> ().m_Color, true);
-		}
-		yield return new WaitForSeconds (1);
-
-		continueText.gameObject.SetActive (true);
+		continueText.gameObject.SetActive(true);
 		isDone = true;
-
-
-
 	}
+
 	// Update is called once per frame
-	void Update ()
+	void Update()
 	{
-		if (Input.GetKeyDown (KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			p1Block.GetComponent<VectorGridForce> ().m_VectorGrid.AddGridForce (p1Block.GetComponent<Transform> ().position, 0.2f, 0.2f, p1Block.GetComponent<VectorGridForce> ().m_Color , true);
 			p2Block.GetComponent<VectorGridForce> ().m_VectorGrid.AddGridForce (p2Block.GetComponent<Transform> ().position, 0.2f, 0.2f, p2Block.GetComponent<VectorGridForce> ().m_Color, true);

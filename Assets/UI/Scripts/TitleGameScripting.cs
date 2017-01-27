@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
@@ -135,25 +133,25 @@ public class TitleGameScripting : MonoBehaviour {
 			if (InputManager.IsP1GreenDown)
 			{
 				corners [0].Corner ();
-				GameManager._GAMEMANAGER.p1Joined = true;
+                GameManager._GAMEMANAGER.SetPlayerJoined(1, true);
 			}
 
 			if (InputManager.IsP2GreenDown)
 			{
 				corners [1].Corner ();
-				GameManager._GAMEMANAGER.p2Joined = true;
+                GameManager._GAMEMANAGER.SetPlayerJoined(2, true);
 			}
 
 			if (InputManager.IsP3GreenDown)
 			{
 				corners [2].Corner ();
-				GameManager._GAMEMANAGER.p3Joined = true;
+                GameManager._GAMEMANAGER.SetPlayerJoined(3, true);
 			}
 
 			if (InputManager.IsP4GreenDown)
 			{
 				corners [3].Corner ();
-				GameManager._GAMEMANAGER.p4Joined = true;
+                GameManager._GAMEMANAGER.SetPlayerJoined(4, true);
 			}
 
 
@@ -161,25 +159,25 @@ public class TitleGameScripting : MonoBehaviour {
 			if (InputManager.IsP1RedDown)
 			{
 				corners [0].Center ();
-				GameManager._GAMEMANAGER.p1Joined = false;
+                GameManager._GAMEMANAGER.SetPlayerJoined(1, false);
 			}
 
 			if (InputManager.IsP2RedDown)
 			{
 				corners [1].Center ();
-				GameManager._GAMEMANAGER.p2Joined = false;
+                GameManager._GAMEMANAGER.SetPlayerJoined(2, false);
 			}
 
 			if (InputManager.IsP3RedDown)
 			{
 				corners [2].Center ();
-				GameManager._GAMEMANAGER.p3Joined = false;
+                GameManager._GAMEMANAGER.SetPlayerJoined(3, false);
 			}
 
 			if (InputManager.IsP4RedDown)
 			{
 				corners [3].Center ();
-				GameManager._GAMEMANAGER.p4Joined = false;
+                GameManager._GAMEMANAGER.SetPlayerJoined(4, false);
 			}
 
 			if (InputManager.IsStartPressed)
