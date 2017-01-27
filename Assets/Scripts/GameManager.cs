@@ -224,6 +224,11 @@ public class GameManager : MonoBehaviour
 	{
 		UIObject = GameObject.FindGameObjectWithTag ("inGameUI");
 
+        _players[1].color = PlayerColor.Yellow;
+        _players[2].color = PlayerColor.Red;
+        _players[3].color = PlayerColor.Blue;
+        _players[4].color = PlayerColor.Green;
+
         _players[1].spawnPoint = GameObject.FindGameObjectWithTag("northSpawnPoint");
         _players[2].spawnPoint = GameObject.FindGameObjectWithTag("eastSpawnPoint");
         _players[3].spawnPoint = GameObject.FindGameObjectWithTag("southSpawnPoint");
