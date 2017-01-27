@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 	public GameObject p3ShipPrefab;
 	public GameObject p4ShipPrefab;
 
+	public EndRoundScreen endRoundUI;
+
 	public bool winnerFound = false;
 	//Game info
 	public int winsNeeded;
@@ -279,8 +281,8 @@ public class GameManager : MonoBehaviour
         }
 
         if (highestScoringPlayer != null) {
-            highestScoringPlayer.wins++;
-            string winText = string.Format("Round Winner: P{0}", highestScoringPlayer.playerNumber);
+			endRoundUI.RoundComplete(highestScoringPlayer.playerNumber);
+            string winText = string.Format("Wave Winner: P{0}", highestScoringPlayer.playerNumber);
 			UIObject.GetComponent<GameUI>().UpdateTimer(winText);
         }
 
@@ -340,6 +342,14 @@ public class GameManager : MonoBehaviour
 
 		if (gameState == GameState.CoinGameModeStart)
 		{
+			endRoundUI = GameObject.Find ("_EndRoundUI").GetComponent<EndRoundScreen> ();
+			bool[] playersInGame = new bool[4];
+			playersInGame [0] = _players [1].joined;
+			playersInGame [1] = _players [2].joined;
+			playersInGame [2] = _players [3].joined;
+			playersInGame [3] = _players [4].joined;
+			endRoundUI.GiveMeInformationYum (winsNeeded, playersInGame);
+
 			gameTimeTextObject = GameObject.FindGameObjectWithTag("GameTimeText").GetComponent<Text>();
 
 			StartCoroutine(CoinGameModeStart(roundTime));
@@ -381,28 +391,9 @@ public class GameManager : MonoBehaviour
 
 		if (gameState == GameState.EndOfRoundResults)
 		{
-            foreach (Player player in _players.Values) {
-                if (player.wins >= winsNeeded) {
-                    winnerFound = true;
-                    break;
-                }
-            }
 
-			if (winnerFound == false)
-			{
-				if (InputManager.IsSubmitPressed)
-				{
-					endResults();
-				}
-			}
-
-			if (winnerFound == true)
-			{
-				if (InputManager.IsSubmitPressed)
-				{
-					gameState = GameState.EndOfGameResultsStart;
-					StartCoroutine(EndOfGameDelay());
-				}
+			if (endRoundUI.uiStillOnScreen == false) {
+				endResults ();
 			}
 		}
 
