@@ -81,7 +81,7 @@ public class ShipController : MonoBehaviour
 //                Debug.Log("Updated from (" + reflectedDir.x + ", " + reflectedDir.y + ")");
                 reflectedDir = Vector3.Reflect(hit.point - transform.position, hit.normal);
             }
-            float oldHeading = heading;
+//            float oldHeading = heading;
             heading = Mathf.Atan2(reflectedDir.x, reflectedDir.y);
             bouncing = true;
             bounceTime = Time.time + 0.25f;

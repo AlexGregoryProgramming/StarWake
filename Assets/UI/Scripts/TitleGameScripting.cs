@@ -324,9 +324,9 @@ public class TitleGameScripting : MonoBehaviour {
 		int returnedRounds = 1;
 		for (int i = 0; i < rounds.Length; i++) {
 			if (i == currentSelectedRounds) {
-				returnedRounds= i + 1;
+				returnedRounds = i + 1;
 			}
 		}
-		return returnedRounds = 1;
+		return returnedRounds;
 	}
 }
