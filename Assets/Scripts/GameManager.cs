@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
         Dead
     }
 
-	public int incrementalPoints = 12;
 	public MatchResults matchResults;
 
     public class Player {
@@ -256,11 +255,6 @@ public class GameManager : MonoBehaviour
 	{
 		for (int i = time; i >= 0; i--) {
 			UIObject.GetComponent<GameUI>().UpdateTimer(i.ToString());
-
-            ScorePoints(PlayerColor.Red, incrementalPoints);
-            ScorePoints(PlayerColor.Blue, incrementalPoints);
-            ScorePoints(PlayerColor.Green, incrementalPoints);
-            ScorePoints(PlayerColor.Yellow, incrementalPoints);
 
             foreach (Player player in _players.Values) {
 			    UIObject.GetComponent<GameUI>().UpdateScore((int)player.score, player.playerNumber);
