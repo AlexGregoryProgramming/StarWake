@@ -5,20 +5,44 @@ using UnityEngine.UI;
 
 public class EndRoundTrophyRow : MonoBehaviour {
 
-	public int numWins;
-	public Image[] trophies;
-	private ParticleSystem[] particles;
+	public int numWins=0;
+	public Image[] trophiesGrey;
+	public TrophyExplode[] trophiesLit;
 
 	// Use this for initialization
 	void Start () {
-		for(int i = 0; i<trophies.Length; i++)
+		for(int i = 0; i<trophiesGrey.Length; i++)
 		{
-			particles [i] = trophies [i].gameObject.GetComponent<ParticleSystem> ();
+			trophiesLit [i] = trophiesGrey [i].gameObject.GetComponentInChildren<TrophyExplode> ();
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void TurnOffTrophiesNotInUse(int numUsed)
+	{
+		if (numUsed < 4) {
+			trophiesGrey [3].gameObject.SetActive (false);
+		}
+		if (numUsed < 3) {
+			trophiesGrey [2].gameObject.SetActive (false);
+		}
+		if (numUsed < 2) {
+			trophiesGrey [1].gameObject.SetActive (false);
+		}
+	}
+
+	public void AwardATrophy()
+	{
+		trophiesLit [numWins].Explode ();
+		numWins += 1;
+	}
+
+	public void Winner(Color newCol)
+	{
+		float delay = 0.25f;
+		for(int i = 0; i<trophiesGrey.Length; i++)
+		{
+			trophiesLit[i].ResetForWin (newCol, delay);
+			delay += 0.33f;
+		}
 	}
 }

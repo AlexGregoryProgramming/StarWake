@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EndRoundScreen : MonoBehaviour {
+
+	public Text title;
+	public Image AButton;
 
 	public int numWinsRequired = 1;
 	public bool[] playersInGame = new bool[4];
@@ -10,11 +14,21 @@ public class EndRoundScreen : MonoBehaviour {
 
 	public EndRoundTrophyRow[] rows;
 	bool gotStuff;
+	float delay = 0;
+	bool gameOver=false;
+
+	public static EndRoundScreen _EndRoundUI = null;
 
 	void Awake()
 	{
+		AButton.color = new Color (1, 1, 1, 0);
+		if (_EndRoundUI != null) {
+			Destroy(this);
+		} else {
+			DontDestroyOnLoad(this);
+			_EndRoundUI = this;
+		}
 		this.gameObject.SetActive (false);
-		this.gameObject.name = "_EndRoundUI";
 	}
 
 	public void GiveMeInformationYum(int numWins, bool[]players)
@@ -24,10 +38,9 @@ public class EndRoundScreen : MonoBehaviour {
 			playersInGame = players;
 			gotStuff = true;
 		}
-	}
-
-	// Use this for initialization
-	void Start () {
+		foreach (EndRoundTrophyRow row in rows) {
+			row.TurnOffTrophiesNotInUse (numWins);
+		}
 		for (int i = 0; i < playersInGame.Length; i++) {
 			if (playersInGame [i] == true) {
 				rows [i].gameObject.SetActive (false);
@@ -38,8 +51,13 @@ public class EndRoundScreen : MonoBehaviour {
 	public void Update()
 	{
 		if (uiStillOnScreen == true) {
-			if (InputManager.IsStartPressed || InputManager.IsSubmitPressed) {
-				uiStillOnScreen = false;
+			delay += Time.deltaTime;
+			if (delay > 1.5f && gameOver==false) {
+				AButton.color = new Color (1, 1, 1, 1);
+				if (InputManager.IsStartPressed || InputManager.IsSubmitPressed) {
+					uiStillOnScreen = false;
+					AButton.color = new Color (1, 1, 1, 0);
+				}
 			}
 		}
 	}
@@ -47,16 +65,42 @@ public class EndRoundScreen : MonoBehaviour {
 
 	public void RoundComplete(int playerWhoWon)
 	{
+		this.gameObject.SetActive (true);
 		uiStillOnScreen = true;
+		delay = 0;
 		//1 based
-
+		rows[playerWhoWon-1].AwardATrophy();
+		foreach (EndRoundTrophyRow row in rows) {
+			if (row.numWins >= numWinsRequired) {
+				//Someone won. Do the gameoverthings
+				gameOver=true;
+				Invoke ("SetWinner", 0.25f);
+			}
+		}
 	}
 
 	public void Reset()
 	{
 		//Needs to be called when we are returning to the main menu
 		Destroy(GameManager._GAMEMANAGER.gameObject);
+		_EndRoundUI = null;
 		UnityEngine.SceneManagement.SceneManager.LoadScene ("AlexTestMainMenu");
 		Destroy (this.gameObject);
+	}
+
+	public void SetWinner()
+	{
+		int winner = -1;
+		for (int i = 0; i < rows.Length; i++) {
+			if (rows [i].numWins >= numWinsRequired) {
+				title.text = string.Format("PLAYER {0} WINS!", i+1);
+				winner = i;
+			}
+		}
+		for (int i = 0; i < rows.Length; i++) {
+			if (i != winner) {
+				rows [i].Winner (rows [winner].trophiesLit [0].og);
+			}
+		}
 	}
 }
