@@ -9,17 +9,17 @@ public class Pickup : MonoBehaviour {
 	public float collectionRadius;
 	public Image pickUP;
 
-	public GameManager.PlayerColor collectorColor;
 	// Use this for initialization
-	void Start ()
+	void Start()
 	{
+        GetComponent<Collider>().isTrigger = true;
 		pickUP.fillAmount = 0.0f;
 	}
 
 	// Update is called once per frame
-	void Update ()
+	void Update()
 	{
-		if (pickUP.fillAmount != 1.0f)
+		if (pickUP.fillAmount < 1.0f)
 		{
 			pickUP.fillAmount += 1 / fillTime * Time.deltaTime;
 		}
@@ -27,58 +27,54 @@ public class Pickup : MonoBehaviour {
 
 	public void OnCollisionEnter(Collision col)
 	{
-		if (pickUP.fillAmount == 1 && col.gameObject.GetComponent<ShipColor> () != null)
-		{
-			if (pickUpTier == 1)
-			{
-				AudioManager._AUDIOMANAGER.playSound ("PointCollect1");
-			}
-
-			if (pickUpTier == 2)
-			{
-				AudioManager._AUDIOMANAGER.playSound ("PointCollect2");
-			}
-
-			if (pickUpTier == 3)
-			{
-				AudioManager._AUDIOMANAGER.playSound ("PointCollect3");
-			}
-
-			if (pickUpTier == 4)
-			{
-				AudioManager._AUDIOMANAGER.playSound ("PointCollect4");
-			}
-
-			int playerNum = col.gameObject.GetComponent<ShipColor> ().playerNumber;
-			collectorColor = GameManager._GAMEMANAGER.GetPlayerColor (playerNum);
-
-			col.gameObject.GetComponent<ShipGridManager>().colorWake.m_VectorGrid.AddGridForce (col.gameObject.GetComponent<Transform> ().position, collectionForce, collectionRadius, col.gameObject.GetComponent<ShipGridManager>().colorWake.m_Color, true);
-			col.gameObject.GetComponent<ShipGridManager>().leftWake.m_VectorGrid.AddGridForce (col.gameObject.GetComponent<Transform> ().position, collectionForce, collectionRadius, col.gameObject.GetComponent<ShipGridManager>().colorWake.m_Color, true);
-			col.gameObject.GetComponent<ShipGridManager>().rightWake.m_VectorGrid.AddGridForce (col.gameObject.GetComponent<Transform> ().position, collectionForce, collectionRadius, col.gameObject.GetComponent<ShipGridManager>().colorWake.m_Color, true);
-
-
-			if (collectorColor == GameManager.PlayerColor.Blue)
-			{
-				GameManager._GAMEMANAGER.bluePointsScored (value);
-			}
-
-			if (collectorColor == GameManager.PlayerColor.Green)
-			{
-				GameManager._GAMEMANAGER.greenPointsScored (value);
-			}
-
-			if (collectorColor == GameManager.PlayerColor.Red)
-			{
-				GameManager._GAMEMANAGER.redPointsScored (value);
-			}
-
-			if (collectorColor == GameManager.PlayerColor.Yellow)
-			{
-				GameManager._GAMEMANAGER.yellowPointsScored (value);
-			}
-
-			print (collectorColor);
-			Destroy(this.gameObject);
-		}
+        CheckContact(col.gameObject);
 	}
+
+    /// <summary>
+    /// OnTriggerEnter is called when the Collider other enters the trigger.
+    /// </summary>
+    /// <param name="other">The other Collider involved in this collision.</param>
+    void OnTriggerEnter(Collider other)
+    {
+        CheckContact(other.gameObject);
+    }
+
+    private void CheckContact(GameObject otherGameObject) {
+        if (pickUP.fillAmount < 1f) {
+            return;
+        }
+
+        ShipColor shipColor = otherGameObject.GetComponent<ShipColor>();
+		if (shipColor != null)
+		{
+            string sfxName = string.Format("PointCollect{0}", pickUpTier);
+            AudioManager._AUDIOMANAGER.playSound(sfxName);
+
+            ShipGridManager shipGridManager = otherGameObject.GetComponent<ShipGridManager>();
+            if (shipGridManager != null) {
+                shipGridManager.colorWake.m_VectorGrid.AddGridForce(otherGameObject.transform.position, collectionForce, collectionRadius, shipGridManager.colorWake.m_Color, true);
+            }
+
+			GameManager.PlayerColor collectorColor = GameManager._GAMEMANAGER.GetPlayerColor(shipColor.playerNumber);
+            switch (collectorColor) {
+                case GameManager.PlayerColor.Blue:
+                    GameManager._GAMEMANAGER.bluePointsScored(value);
+                    break;
+
+			    case GameManager.PlayerColor.Green:
+				    GameManager._GAMEMANAGER.greenPointsScored(value);
+                    break;
+
+			    case GameManager.PlayerColor.Red:
+				    GameManager._GAMEMANAGER.redPointsScored(value);
+                    break;
+
+                case GameManager.PlayerColor.Yellow:
+				    GameManager._GAMEMANAGER.yellowPointsScored(value);
+                    break;
+            }
+
+			Destroy(gameObject);
+		}
+    }
 }
