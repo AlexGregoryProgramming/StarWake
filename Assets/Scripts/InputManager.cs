@@ -4,33 +4,43 @@ using UnityEngine;
 
 public sealed class InputManager : MonoBehaviour {
 
+    /// <summary>
+    /// Returns true while the Start button is held down on any connected controller.
+    /// </summary>
     public static bool IsStartPressed {
         get {
             if (Platform.IsOSX) {
-                return Input.GetButton("StartOSX");
+                return Input.GetButtonDown("StartOSX");
             }
 
-            return Input.GetButton("Start");
+            return Input.GetButtonDown("Start");
         }
     }
 
+    /// <summary>
+    /// Returns true while the Submit button (usually A or the Return key) is held down on any connected controller.
+    /// </summary>
     public static bool IsSubmitPressed {
         get {
             if (Platform.IsOSX) {
-                return Input.GetButton("SubmitOSX");
+                return Input.GetButtonDown("SubmitOSX");
             }
 
-            return Input.GetButton("Submit");
+            return Input.GetButtonDown("Submit");
         }
     }
 
+    /// <summary>
+    /// Returns true while the Cancel button (usually B or the Escape key) is held down on any connected controller.
+    /// </summary>
+    /// <returns></returns>
     public static bool IsCancelPressed {
         get {
             if (Platform.IsOSX) {
-                return Input.GetButton("CancelOSX");
+                return Input.GetButtonDown("CancelOSX");
             }
 
-            return Input.GetButton("Cancel");
+            return Input.GetButtonDown("Cancel");
         }
     }
 
