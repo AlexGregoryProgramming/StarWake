@@ -50,6 +50,15 @@ public class EndRoundScreen : MonoBehaviour {
 				rows [i].gameObject.SetActive (false);
 			}
 		}
+
+        // TODO: MRB@HV: This is a workaround for the game scene being destroyed/reloaded after the result screen finishes.
+        int index = 0;
+        foreach (var go in GameObject.Find("PickupSpawnObject").GetComponent<PickupSpawner>().spawnerArray) {
+            var vgf = go.GetComponent<VectorGridForce>();
+            if (vgf != null) {
+                fireWorksArray[index++] = vgf;
+            }
+        }
 	}
 
 	public void Update()
@@ -86,7 +95,7 @@ public class EndRoundScreen : MonoBehaviour {
 			}
 		}
 	}
-	
+
 
 	public void RoundComplete(int playerWhoWon)
 	{
