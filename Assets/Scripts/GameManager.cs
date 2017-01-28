@@ -285,6 +285,12 @@ public class GameManager : MonoBehaviour
         }
 
         if (highestScoringPlayer != null) {
+            foreach (Player player in _players.Values) {
+                if (player.joined) {
+                    player.ship.GetComponent<ShipController>().enabled = false;
+                }
+            }
+
 			endRoundUI.RoundComplete(highestScoringPlayer.playerNumber);
             string winText = string.Format("Wave Winner: P{0}", highestScoringPlayer.playerNumber);
 			UIObject.GetComponent<GameUI>().UpdateTimer(winText);
