@@ -13,6 +13,7 @@ public class GameUI : MonoBehaviour {
 	public Color[] green;
 	public Color[] blue;
 	public Color[] yellow;
+    public Color[] white;
 	public float cycleSpeed;
 
 	public IntroCountdown countdown;
@@ -27,7 +28,7 @@ public class GameUI : MonoBehaviour {
 
 	public void UpdateColor(int player, GameManager.PlayerColor color)
 	{
-		Color[] temp = red;
+		Color[] temp = white;
 		switch (color) {
 		case GameManager.PlayerColor.Red:
 			temp = red;
@@ -65,6 +66,6 @@ public class GameUI : MonoBehaviour {
 	{
 		timer.text = time;
 	}
-	
+
 
 }
