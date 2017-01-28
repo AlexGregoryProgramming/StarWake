@@ -14,9 +14,9 @@ public class CornerCycleColor : MonoBehaviour {
 	public Text scoreText;
 	public ParticleSystem particlesH;
 	public ParticleSystem particlesV;
-    
-    private int currentDisplayScore;
-    private int currentActualScore;
+
+    private float currentDisplayScore;
+    private float currentActualScore;
 
 	public void Awake()
 	{
@@ -79,7 +79,7 @@ public class CornerCycleColor : MonoBehaviour {
 		}
         if(currentDisplayScore+10<currentActualScore)
         {
-            currentDisplayScore+=((currentActualScore-currentDisplayScore)/Time.deltaTime);
+            currentDisplayScore += ((currentActualScore - currentDisplayScore) * Time.deltaTime);
             if(currentDisplayScore>=currentActualScore)
             {
              currentDisplayScore=currentActualScore;
@@ -91,7 +91,7 @@ public class CornerCycleColor : MonoBehaviour {
              currentDisplayScore=currentActualScore;
             }
         }
-        scoreText.text = currentDisplayScore.ToString ();
+        scoreText.text = ((int)currentDisplayScore).ToString();
 	}
 
 	public void Score(int score)
