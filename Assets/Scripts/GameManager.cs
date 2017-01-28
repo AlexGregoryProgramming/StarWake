@@ -248,6 +248,7 @@ public class GameManager : MonoBehaviour
                 player.gridManager = player.ship.GetComponent<ShipGridManager>();
             } else {
                 player.color = PlayerColor.Dead;
+                UIObject.GetComponent<GameUI>().UpdateColor(player.playerNumber, player.color);
             }
         }
 
