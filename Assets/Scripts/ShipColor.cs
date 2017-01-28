@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ShipColor : MonoBehaviour {
 	public int playerNumber;
@@ -19,6 +20,8 @@ public class ShipColor : MonoBehaviour {
 	public ParticleSystem wakeParticles;
 	public ParticleSystem wakeParticleBurst;
 	private bool particlesOn;
+
+    private Dictionary<GameManager.PlayerColor, Material> _materialsByPlayerColor;
 
     GameManager.PlayerColor GetInputPlayerColor(int playerNumber) {
         switch (playerNumber) {
@@ -85,20 +88,31 @@ public class ShipColor : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start ()
+	void Start()
 	{
+        _materialsByPlayerColor = new Dictionary<GameManager.PlayerColor, Material>() {
+            { GameManager.PlayerColor.Red, RedPrism },
+            { GameManager.PlayerColor.Blue, BluePrism },
+            { GameManager.PlayerColor.Green, GreenPrism },
+            { GameManager.PlayerColor.Yellow, YellowPrism },
+        };
+
 		if (playerNumber == 1) {
 			ParticleColors (Color.yellow);
 			WakeParticles (Color.yellow);
+            Prims.GetComponent<MeshRenderer>().material = YellowPrism;
 		} else if (playerNumber == 2) {
 			ParticleColors (Color.red);
 			WakeParticles (Color.red);
+            Prims.GetComponent<MeshRenderer>().material = RedPrism;
 		} else if (playerNumber == 3) {
 			ParticleColors (Color.blue);
 			WakeParticles (Color.blue);
+            Prims.GetComponent<MeshRenderer>().material = BluePrism;
 		} else if (playerNumber == 4) {
 			ParticleColors (Color.green);
 			WakeParticles (Color.green);
+            Prims.GetComponent<MeshRenderer>().material = GreenPrism;
 		}
 	}
 
@@ -118,7 +132,7 @@ public class ShipColor : MonoBehaviour {
 
         GameManager.PlayerColor newPlayerColor;
         if (CheckColorChanged(playerNumber, out newPlayerColor)) {
-            Prims.GetComponent<MeshRenderer>().material = GreenPrism;
+            Prims.GetComponent<MeshRenderer>().material = _materialsByPlayerColor[newPlayerColor];
             cooldownTimer = (Time.time + cooldownTimeAmount);
             GameManager._GAMEMANAGER.SetPlayerColor(playerNumber, newPlayerColor);
             Color newColor = GameManager.PlayerColorToColor(newPlayerColor);
