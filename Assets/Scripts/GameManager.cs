@@ -198,6 +198,8 @@ public class GameManager : MonoBehaviour
 
 	public GameObject endRoundButton;
 
+    public int wakeKillAwardPoints = 36;
+
 	//Sets the state to countdownStart
 	public void setCountdownStart()
 	{

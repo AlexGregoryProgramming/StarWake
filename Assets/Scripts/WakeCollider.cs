@@ -40,7 +40,7 @@ public class WakeCollider : MonoBehaviour {
             GameManager.PlayerColor shipPlayerColor = GameManager._GAMEMANAGER.GetPlayerColor(shipColor.playerNumber);
             if ((shipPlayerColor != playerColor) && (shipColor.playerNumber != playerNumber)) {
                 GameManager._GAMEMANAGER.KillPlayer(other.gameObject);
-                GameManager._GAMEMANAGER.ScorePoints(playerColor, 300);
+                GameManager._GAMEMANAGER.ScorePoints(playerColor, GameManager._GAMEMANAGER.wakeKillAwardPoints);
                 Debug.Log(string.Format("Player {0} {1} wake killed player {2} {3}", playerNumber, playerColor, shipColor.playerNumber, shipPlayerColor));
                 Destroy(gameObject);
             }
