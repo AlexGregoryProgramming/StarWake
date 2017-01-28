@@ -244,6 +244,8 @@ public class GameManager : MonoBehaviour
                 player.ship = Instantiate(prefab, player.spawnPoint.transform.position, player.spawnPoint.transform.rotation);
                 player.ship.GetComponent<ShipController>().heading = player.spawnPoint.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
                 player.gridManager = player.ship.GetComponent<ShipGridManager>();
+            } else {
+                player.color = PlayerColor.Dead;
             }
         }
 
